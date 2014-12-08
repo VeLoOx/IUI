@@ -2,7 +2,10 @@ package pl.iui.services.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ResourceBundle;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +14,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+
+
 
 
 
@@ -29,8 +35,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	 * @return true if success
 	 */
 	public boolean createUser(UserEntity userEntity) {
-		userDao.save(userEntity);
-		return true;
+		if (!userDao.checkAvailable(userEntity.getUserName())) {
+            FacesMessage message = constructErrorMessage(String.format("User name '%s' is not available", userEntity.getUserName()), null);
+            getFacesContext().addMessage(null, message);
+           
+            return false;
+    }
+   
+    try {
+            userDao.save(userEntity);
+    } catch(Exception e) {
+            FacesMessage message = constructFatalMessage(e.getMessage(), null);
+            getFacesContext().addMessage(null, message);
+           
+            return false;
+    }
+   
+    return true;
+
 
 	}
 	
@@ -74,6 +96,27 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	 protected FacesMessage constructErrorMessage(String message, String detail){
+         return new FacesMessage(FacesMessage.SEVERITY_ERROR, message, detail);
+ }
+
+ protected FacesMessage constructInfoMessage(String message, String detail) {
+         return new FacesMessage(FacesMessage.SEVERITY_INFO, message, detail);
+ }
+
+ protected FacesMessage constructFatalMessage(String message, String detail) {
+         return new FacesMessage(FacesMessage.SEVERITY_FATAL, message, detail);
+ }
+
+ protected FacesContext getFacesContext() {
+         return FacesContext.getCurrentInstance();
+ }
+
+ protected ResourceBundle getMessageBundle() {
+         return ResourceBundle.getBundle("message-labels");
+ }
+
 
 	
 

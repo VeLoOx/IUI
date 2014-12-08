@@ -4,10 +4,17 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-	<secured attributes="ROLE_USER"/>
-	
-	<view-state id="home" view="accountHome.xhtml">
-        </view-state>
+	<secured attributes="ROLE_USER" />
 
+	<on-start>
+		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
+			result="flowScope.user" />
+	</on-start>
+
+	<view-state id="home" view="accountHome.xhtml">
+		<transition on="logOut" to="logout" />
+	</view-state>
+
+	<end-state id="logout" view="externalRedirect:logout" />
 
 </flow>
