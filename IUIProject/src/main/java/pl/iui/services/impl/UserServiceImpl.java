@@ -113,9 +113,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
          return FacesContext.getCurrentInstance();
  }
 
- protected ResourceBundle getMessageBundle() {
-         return ResourceBundle.getBundle("message-labels");
- }
 
 
 	
