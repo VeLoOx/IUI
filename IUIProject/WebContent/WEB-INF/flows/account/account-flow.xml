@@ -5,6 +5,7 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<secured attributes="ROLE_USER,ROLE_ADMIN" />
+	<var name="user" class="pl.iui.domain.UserEntity"/>
 
 	<on-start>
 		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
