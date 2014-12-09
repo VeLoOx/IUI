@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
        
         Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
        
         User userDetails = new User(user.getUserName(), user.getPassword(), authorities);
        
