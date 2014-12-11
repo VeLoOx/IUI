@@ -10,17 +10,13 @@
         <ui:define name="header"><h:outputText value="My Account Home" /></ui:define>          
 
         <ui:define name="content">
-               <f:metadata>
+                <f:metadata>
+<!--                 <f:event type="postAddToView" listener="#{uiUtils.greetOnViewLoad}" update="growlMessages" /> -->
                 <f:attribute name="firstName" value="#{user.firstName}" />
                 <f:attribute name="lastName" value="#{user.lastName}" />
                 </f:metadata>
        
-                <h1>Welcome #{firstName} #{lastName}</h1>
-
-				<h:form id="logOutButton">
-				<p:commandButton id="logOutButton" action="logOut"
-						immediate="true" icon="ui-icon-minus" value="Log Out" />
-				</h:form>	
+                <h1>Account for #{user.firstName} #{user.lastName}</h1>
         </ui:define>
 
 </ui:composition>

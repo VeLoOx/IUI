@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.component.inputtext.InputText;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,101 +21,122 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 
+
 import pl.iui.dao.UserDao;
 import pl.iui.domain.UserEntity;
 import pl.iui.services.UserService;
 
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-	private UserDao userDao;
-
-	/**
-	 * Create user - persist to database
-	 *
-	 * @param userEntity
-	 * @return true if success
-	 */
-	public boolean createUser(UserEntity userEntity) {
-		if (!userDao.checkAvailable(userEntity.getUserName())) {
-            FacesMessage message = constructErrorMessage(String.format("User name '%s' is not available", userEntity.getUserName()), null);
-            getFacesContext().addMessage(null, message);
+    private UserDao userDao;
+   
+    /**
+     * Create user - persist to database
+     *
+     * @param userEntity
+     * @return true if success
+     */
+    public boolean createUser(UserEntity userEntity) {
            
-            return false;
+            if (!userDao.checkAvailable(userEntity.getUserName())) {
+                    FacesMessage message = constructErrorMessage(String.format(getMessageBundle().getString("userExistsMsg"), userEntity.getUserName()), null);
+                    getFacesContext().addMessage(null, message);
+                   
+                    return false;
+            }
+           
+            try {
+                    userDao.save(userEntity);
+            } catch(Exception e) {
+                    FacesMessage message = constructFatalMessage(e.getMessage(), null);
+                    getFacesContext().addMessage(null, message);
+                   
+                    return false;
+            }
+           
+            return true;
     }
    
-    try {
-            userDao.save(userEntity);
-    } catch(Exception e) {
-            FacesMessage message = constructFatalMessage(e.getMessage(), null);
-            getFacesContext().addMessage(null, message);
+    /**
+     * Check user name availability. UI ajax use.
+     *
+     * @param ajax event
+     * @return
+     */
+    public boolean checkAvailable(AjaxBehaviorEvent event) {
            
-            return false;
+            InputText inputText = (InputText) event.getSource();
+            String value = (String) inputText.getValue();
+           
+            boolean available = userDao.checkAvailable(value);
+           
+            if (!available) {
+                    FacesMessage message = constructErrorMessage(null, String.format(getMessageBundle().getString("userExistsMsg"), value));
+                    getFacesContext().addMessage(event.getComponent().getClientId(), message);
+            } else {
+                    FacesMessage message = constructInfoMessage(null, String.format(getMessageBundle().getString("userAvailableMsg"), value));
+                    getFacesContext().addMessage(event.getComponent().getClientId(), message);
+            }
+           
+            return available;
     }
-   
-    return true;
 
-
-	}
-	
-	/**
+    /**
      * Construct UserDetails instance required by spring security
      */
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+           
+            UserEntity user = userDao.loadUserByUserName(userName);
+           
+            if (user == null) {
+                    throw new UsernameNotFoundException(String.format(getMessageBundle().getString("badCredentials"), userName));
+            }
+           
+            Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+           
+            User userDetails = new User(user.getUserName(), user.getPassword(), authorities);
+           
+            return userDetails;
+    }
+   
+    /**
+     * Retrieves full User record from database by user name
+     *
+     * @param userName
+     * @return UserEntity
+     */
+    public UserEntity loadUserEntityByUsername(String userName) {
+            return userDao.loadUserByUserName(userName);
+    }
 
-	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		UserEntity user = userDao.loadUserByUserName(userName);
-        
-        if (user == null) {
-                throw new UsernameNotFoundException(String.format("No such user with name provided '%s'", userName));
-        }
-       
-        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-       
-        User userDetails = new User(user.getUserName(), user.getPassword(), authorities);
-       
-        return userDetails;
+    protected FacesMessage constructErrorMessage(String message, String detail){
+            return new FacesMessage(FacesMessage.SEVERITY_ERROR, message, detail);
+    }
+   
+    protected FacesMessage constructInfoMessage(String message, String detail) {
+            return new FacesMessage(FacesMessage.SEVERITY_INFO, message, detail);
+    }
+   
+    protected FacesMessage constructFatalMessage(String message, String detail) {
+            return new FacesMessage(FacesMessage.SEVERITY_FATAL, message, detail);
+    }
+   
+    protected FacesContext getFacesContext() {
+            return FacesContext.getCurrentInstance();
+    }
+   
+    protected ResourceBundle getMessageBundle() {
+            return ResourceBundle.getBundle("message-labels");
+    }
 
-	}
+    public UserDao getUserDao() {
+            return userDao;
+    }
 
-	public UserDao getUserDao() {
-		return userDao;
-	}
-
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-
-	@Override
-	public boolean checkAvailable(AjaxBehaviorEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public UserEntity loadUserEntityByUsername(String userName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	 protected FacesMessage constructErrorMessage(String message, String detail){
-         return new FacesMessage(FacesMessage.SEVERITY_ERROR, message, detail);
- }
-
- protected FacesMessage constructInfoMessage(String message, String detail) {
-         return new FacesMessage(FacesMessage.SEVERITY_INFO, message, detail);
- }
-
- protected FacesMessage constructFatalMessage(String message, String detail) {
-         return new FacesMessage(FacesMessage.SEVERITY_FATAL, message, detail);
- }
-
- protected FacesContext getFacesContext() {
-         return FacesContext.getCurrentInstance();
- }
-
-
-
-	
+    public void setUserDao(UserDao userDao) {
+            this.userDao = userDao;
+    }
 
 }
+
