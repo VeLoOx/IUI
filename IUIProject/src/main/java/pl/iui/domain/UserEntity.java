@@ -1,5 +1,9 @@
 package pl.iui.domain;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -13,7 +17,7 @@ import pl.iui.commons.domain.BaseEntity;
  *
  */
 @Entity
-@Table(name="appuser")
+@Table(name="appUser")
 public class UserEntity extends BaseEntity {
         private static final long serialVersionUID = -8789920463809744548L;
 
@@ -21,6 +25,10 @@ public class UserEntity extends BaseEntity {
         private String lastName;
         private String userName;
         private String password;
+        
+        @OneToOne  
+        @JoinColumn(name="id")  
+        private UserDataEntity userData;
        
         public String getFirstName() {
                 return firstName;
@@ -53,7 +61,15 @@ public class UserEntity extends BaseEntity {
         public void setPassword(String password) {
                 PasswordEncoder crypto = new Md5PasswordEncoder();
                 this.password = crypto.encodePassword(password, null);
-//        	this.password=password;
         }
+        
+//        @OneToOne(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
+		public UserDataEntity getUserData() {
+			return userData;
+		}
+
+		public void setUserData(UserDataEntity userData) {
+			this.userData = userData;
+		}
        
 }
