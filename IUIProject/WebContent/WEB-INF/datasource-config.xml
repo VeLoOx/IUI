@@ -21,10 +21,15 @@
                         <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                                 <property name="showSql" value="true" />
                                 <property name="generateDdl" value="true" />
-                                <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect" />
+                                <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect" />                   
                         </bean>
+                        
                 </property>
-               
+             <property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+			</props>
+		</property>
                 <property name="dataSource" ref="dataSource" />
         </bean>
        

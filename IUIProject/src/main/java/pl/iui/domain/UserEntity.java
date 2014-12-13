@@ -64,7 +64,7 @@ public class UserEntity extends BaseEntity {
         
 //        @OneToOne(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
         @OneToOne(cascade={CascadeType.ALL})
-    	@JoinColumn(name="dane_id_fk") 
+    	@JoinColumn(name="data_id_fk") 
 		public UserDataEntity getUserData() {
 			return userData;
 		}
