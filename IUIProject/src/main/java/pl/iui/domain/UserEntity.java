@@ -17,7 +17,7 @@ import pl.iui.commons.domain.BaseEntity;
  *
  */
 @Entity
-@Table(name="appUser")
+@Table(name="appuser")
 public class UserEntity extends BaseEntity {
         private static final long serialVersionUID = -8789920463809744548L;
 
@@ -26,8 +26,7 @@ public class UserEntity extends BaseEntity {
         private String userName;
         private String password;
         
-        @OneToOne  
-        @JoinColumn(name="id")  
+        
         private UserDataEntity userData;
        
         public String getFirstName() {
@@ -64,6 +63,8 @@ public class UserEntity extends BaseEntity {
         }
         
 //        @OneToOne(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
+        @OneToOne(cascade={CascadeType.ALL})
+    	@JoinColumn(name="dane_id_fk") 
 		public UserDataEntity getUserData() {
 			return userData;
 		}

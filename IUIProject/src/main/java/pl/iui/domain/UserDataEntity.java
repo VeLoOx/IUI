@@ -1,5 +1,6 @@
 package pl.iui.domain;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -22,16 +23,16 @@ import pl.iui.commons.domain.BaseEntity;
  *
  */
 @Entity
-@Table(name = "appUserData")
+@Table(name = "appuserdata")
 public class UserDataEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	//	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "stock"))
+//	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "stock"))
 //	@Id
 //	@GeneratedValue(generator = "generator")
 //	@Column(name = "userData_ID", unique = true, nullable = false)
 //	private long id;
-//	private UserEntity userEntity;
+	private UserEntity userEntity;
 	private int yearOfBirth;
 	private String sex;
 	private String city;
@@ -39,14 +40,15 @@ public class UserDataEntity extends BaseEntity {
 
 //	@OneToOne(fetch = FetchType.LAZY)
 //	@PrimaryKeyJoinColumn
-	/*public UserEntity getUserEntity() {
+	@Transient //nie mapowane do bazy - ale zostawile w razie co
+	public UserEntity getUserEntity() {
 		return userEntity;
 	}
 
 	public void setUserEntity(UserEntity userEntity) {
 		this.userEntity = userEntity;
 	}
-*/
+
 	public int getYearOfBirth() {
 		return yearOfBirth;
 	}

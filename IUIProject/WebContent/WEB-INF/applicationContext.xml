@@ -9,6 +9,7 @@
 
 <!-- 	DAO declarations -->
 	<bean id="userDao" class="pl.iui.dao.UserJpaDao" />
+	<bean id="userDataDao" class="pl.iui.dao.UserDataJpaDao" />
 
 <!-- 	Services declarations -->
 	<bean id="userService" class="pl.iui.services.impl.UserServiceImpl">
@@ -19,5 +20,11 @@
 		class="pl.iui.services.impl.UserAuthenticationProviderServiceImpl">
 		<property name="authenticationManager" ref="authenticationManager" />
 	</bean>
+	
+	<bean id="userDataService" class="pl.iui.services.impl.UserDataServiceImpl">
+		<property name="userDataDao" ref="userDataDao" />
+	</bean>
+
+	
 
 </beans>

@@ -10,12 +10,17 @@
         <ui:define name="header"><h:outputText value="My Account Home" /></ui:define>          
 
         <ui:define name="content">
-                <f:metadata>
-                <f:attribute name="firstName" value="#{user.firstName}" />
-                <f:attribute name="lastName" value="#{user.lastName}" />
-                </f:metadata>
+<!--                 <f:metadata> -->
+<!--                 <f:attribute name="firstName" value="#{user.firstName}" /> -->
+<!--                 <f:attribute name="lastName" value="#{user.lastName}" /> -->
+<!--                 </f:metadata> -->
        
                 <h1>Account for #{user.firstName} #{user.lastName}</h1>
+                #{userData.yearOfBirth}
+                #{userData.sex}
+                 <h:form id="accountForm">
+                 <p:commandButton id="editUserData" action="editUserData" icon="ui-icon-check" value="Edit data" />
+                 </h:form>
         </ui:define>
 
 </ui:composition>

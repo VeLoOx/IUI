@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
         <var name="user" class="pl.iui.domain.UserEntity"/>
-        <var name="userData" class="pl.iui.domain.UserDataEntity"/>
+        
 
         <view-state id="welcome" view="welcome.xhtml" model="user">
                 <transition on="newUser" to="signUp" />
