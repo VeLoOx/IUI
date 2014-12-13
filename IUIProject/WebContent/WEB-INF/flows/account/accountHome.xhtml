@@ -16,8 +16,8 @@
 <!--                 </f:metadata> -->
        
                 <h1>Account for #{user.firstName} #{user.lastName}</h1>
-                #{userData.yearOfBirth}
-                #{userData.sex}
+                #{user.userData.yearOfBirth}
+                #{user.userData.sex}
                  <h:form id="accountForm">
                  <p:commandButton id="editUserData" action="editUserData" icon="ui-icon-check" value="Edit data" />
                  </h:form>

@@ -22,7 +22,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 
+
 import pl.iui.dao.UserDao;
+import pl.iui.domain.UserDataEntity;
 import pl.iui.domain.UserEntity;
 import pl.iui.services.UserService;
 
@@ -56,6 +58,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
            
             return true;
     }
+    
+    
+    public boolean updateUserData (UserEntity userEntity, UserDataEntity udataEntity){
+    	
+    	 
+    
+     try {
+    	 	 userEntity.setUserData(udataEntity);
+             userDao.update(userEntity);
+     } catch(Exception e) {
+             FacesMessage message = constructFatalMessage(e.getMessage(), null);
+             getFacesContext().addMessage(null, message);
+            
+             return false;
+     }
+    	
+    	return true;
+    }
+    
    
     /**
      * Check user name availability. UI ajax use.

@@ -18,7 +18,7 @@
 	<view-state id="editUserData" view="accountDetails.xhtml">
 		 <transition on="backToAccount" to="home" />
 		 <transition on="confirmUserData" to="home">
-		 <evaluate expression="userDataService.createUserData(userData)" />
+		 <evaluate expression="userService.updateUserData(flowScope.user,userData)" />
 		 </transition>
 	</view-state>
 

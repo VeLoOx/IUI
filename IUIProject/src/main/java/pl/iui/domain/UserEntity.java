@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
@@ -18,6 +19,7 @@ import pl.iui.commons.domain.BaseEntity;
  */
 @Entity
 @Table(name="appuser")
+@Proxy(lazy=false)
 public class UserEntity extends BaseEntity {
         private static final long serialVersionUID = -8789920463809744548L;
 
@@ -26,7 +28,8 @@ public class UserEntity extends BaseEntity {
         private String userName;
         private String password;
         
-        
+        @OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.LAZY)
+    	@JoinColumn(name="id_ud") 
         private UserDataEntity userData;
        
         public String getFirstName() {
@@ -63,8 +66,7 @@ public class UserEntity extends BaseEntity {
         }
         
 //        @OneToOne(fetch = FetchType.LAZY, mappedBy = "userEntity", cascade = CascadeType.ALL)
-        @OneToOne(cascade={CascadeType.ALL})
-    	@JoinColumn(name="data_id_fk") 
+        
 		public UserDataEntity getUserData() {
 			return userData;
 		}

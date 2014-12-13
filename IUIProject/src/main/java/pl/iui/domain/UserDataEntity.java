@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Proxy;
 
 import pl.iui.commons.domain.BaseEntity;
 
@@ -24,6 +25,7 @@ import pl.iui.commons.domain.BaseEntity;
  */
 @Entity
 @Table(name = "appuserdata")
+@Proxy(lazy=false)
 public class UserDataEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -32,7 +34,7 @@ public class UserDataEntity extends BaseEntity {
 //	@GeneratedValue(generator = "generator")
 //	@Column(name = "userData_ID", unique = true, nullable = false)
 //	private long id;
-	private UserEntity userEntity;
+	//private UserEntity userEntity;
 	private int yearOfBirth;
 	private String sex;
 	private String city;
@@ -40,14 +42,15 @@ public class UserDataEntity extends BaseEntity {
 
 //	@OneToOne(fetch = FetchType.LAZY)
 //	@PrimaryKeyJoinColumn
-	@Transient //nie mapowane do bazy - ale zostawile w razie co
+	
+	/*@Transient //nie mapowane do bazy - ale zostawile w razie co
 	public UserEntity getUserEntity() {
 		return userEntity;
 	}
 
 	public void setUserEntity(UserEntity userEntity) {
 		this.userEntity = userEntity;
-	}
+	}*/
 
 	public int getYearOfBirth() {
 		return yearOfBirth;

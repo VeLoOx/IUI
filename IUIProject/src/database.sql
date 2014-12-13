@@ -12,3 +12,4 @@ create table appuser (
 );
 /
 select * from appuser;
+select * from appuserdata;

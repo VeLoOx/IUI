@@ -1,6 +1,7 @@
 package pl.iui.services;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import pl.iui.domain.UserDataEntity;
 import pl.iui.domain.UserEntity;
 
 
@@ -26,6 +27,8 @@ public interface UserService {
      * @return
      */
     boolean checkAvailable(AjaxBehaviorEvent event);
+    
+    boolean updateUserData (UserEntity userEntity, UserDataEntity udataEntity);
    
     /**
      * Retrieves full User record from database by user name

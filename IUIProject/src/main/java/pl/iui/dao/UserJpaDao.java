@@ -43,6 +43,7 @@ public class UserJpaDao extends GenericJpaDao<UserEntity, Long> implements UserD
          * @return User entity
          */
         public UserEntity loadUserByUserName(String userName) {
+        	
                 Assert.notNull(userName);
                
                 UserEntity user = null;
