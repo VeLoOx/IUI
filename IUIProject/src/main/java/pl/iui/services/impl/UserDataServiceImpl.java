@@ -3,7 +3,6 @@ package pl.iui.services.impl;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import pl.iui.dao.UserDao;
 import pl.iui.dao.UserDataDao;
 import pl.iui.domain.UserDataEntity;
 import pl.iui.services.UserDataService;
