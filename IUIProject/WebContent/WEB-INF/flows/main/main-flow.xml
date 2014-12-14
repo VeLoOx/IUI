@@ -8,13 +8,13 @@
         
 
         <view-state id="welcome" view="welcome.xhtml" model="user">
-                <transition on="newUser" to="signUp" />
+                <transition on="newUser" to="register" />
                 <transition on="confirmSignIn" to="finish">
                         <evaluate expression="userAuthenticationProviderService.processUserAuthentication(user)" />
                 </transition>
         </view-state>
 
-        <view-state id="signUp" view="signUp.xhtml" model="user">
+        <view-state id="register" view="register.xhtml" model="user">
                 <transition on="backToSignIn" to="welcome" />
                 <transition on="confirmSignUp" to="authentication">
                         <evaluate expression="userService.createUser(user)" />

@@ -6,6 +6,7 @@
 
 	<secured attributes="ROLE_USER,ROLE_ADMIN" />
 	<var name="userData" class="pl.iui.domain.UserDataEntity" />
+	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
 	<on-start>
 		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
 			result="flowScope.user" />

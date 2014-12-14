@@ -15,58 +15,43 @@
                                 <p:focus />
                                 <p:messages id="messages" globalOnly="true" />
                        
-                                <h:panelGrid id="regPanelGrid" style="margin: 0 auto; margin-top: 25px; text-align: right" cellspacing="8" columns="3">
+<!--                                 <h:panelGrid id="dataPanelGrid" columns="2" style="margin-bottom:10px; margin-top:25px" cellpadding="3"> -->
+                               		 <h:panelGrid id="dataPanelGrid" columns="2" style="margin: 0 auto; margin-top: 25px; text-align: left" cellspacing="3" cellpadding="3" >
 
-                                        <h:panelGroup>
-                                                <h:outputText value="Year of birth:" />
-                                                <h:outputText style="color:red" value="*  " />
-                                        </h:panelGroup>
-                                        <p:inputText id="yearOfBirth" label="Yeaor of birth" value="#{userData.yearOfBirth}" required="false">
-                                                <f:validateLength minimum="4" />
-<!--                                                 <p:ajax event="keyup" update="firstNameMsg" global="false"/> -->
-                                        </p:inputText>
-<!--                                         <h:panelGroup> -->
-<!--                                                 <p:message id="firstNameMsg" for="firstName" /> -->
-<!--                                                 <p:tooltip for="firstName" styleClass="tooltip" showEvent="focus" hideEvent="blur" /> -->
-<!--                                         </h:panelGroup> -->
-                                       
-                                        <h:panelGroup>
-                                                <h:outputText value="Sex:" />
-                                                <h:outputText style="color:red" value="*  " />
-                                        </h:panelGroup>
-                                        <p:inputText id="sex" label="Sex" value="#{userData.sex}" required="false">
-                                                <f:validateLength minimum="1" />
-<!--                                                 <p:ajax event="keyup" update="lastNameMsg" global="false"/> -->
-                                        </p:inputText>
-<!--                                         <h:panelGroup> -->
-<!--                                                 <p:message id="lastNameMsg" for="lastName" /> -->
-<!--                                                 <p:tooltip for="lastName" styleClass="tooltip" showEvent="focus" hideEvent="blur" /> -->
-<!--                                         </h:panelGroup> -->
-                                       
-                                        <h:panelGroup>
-                                                <h:outputText value="City:" />
-                                                <h:outputText style="color:red" value="*  " />
-                                        </h:panelGroup>
-                                        <p:inputText id="city" value="#{userData.city}" required="false" label="City">
-                                                <f:validateLength minimum="2" />
-                                        </p:inputText>
-<!--                                         <h:panelGroup> -->
-<!--                                                 <p:message id="userNameMsg" for="userName" /> -->
-<!--                                                 <p:tooltip for="userName" styleClass="tooltip" showEvent="focus" hideEvent="blur" /> -->
-<!--                                         </h:panelGroup> -->
-                                       
-<!--                                         <h:panelGroup> -->
-<!--                                                 <h:outputText value="Hobbies" /> -->
-<!--                                                 <h:outputText style="color:red" value="*  " /> -->
-<!--                                         </h:panelGroup> -->
-<!--                                         <p:inputText id="hobbies" value="#{userData.hobbies}" required="true" label="Hobbies"> -->
-<!--                                                 <f:validateLength minimum="2" /> -->
-<!--                                         </p:inputText> -->
-<!--                                         <p:message id="pass1Msg" for="pass1" /> -->
-                                     
+											<h:outputText for="yearOfBirth" value="Year of birth:" />
+	       									 <p:selectOneMenu id="yearOfBirth" value="#{userData.yearOfBirth}" style="width:125px">
+<!-- 									            <f:selectItems itemLabel="#{uiUtils.years}" itemValue="#{uiUtils.years}" /> -->
+									            	<f:selectItems value="#{uiUtils.years}" />		
+									        </p:selectOneMenu>
+									        
+										                                   
+	                                        <p:outputLabel for="sex" value="Sex:" />
+									        <p:selectOneRadio id="sex" value="#{userData.sex}" style="width:125px">
+									            <f:selectItem itemLabel="Male" itemValue="M" />
+									            <f:selectItem itemLabel="Female" itemValue="F" />
+									            <f:selectItem itemLabel="Do not know yet" itemValue="D" />
+									        </p:selectOneRadio>
+								   
+								 
+	                                        <p:outputLabel for="city" value="City:" />
+	       									 <p:selectOneMenu id="city" value="#{userData.city}" style="width:125px">
+									            <f:selectItem itemLabel="Select City" itemValue="" />
+									            <f:selectItem itemLabel="Kielce" itemValue="Kielce" />
+									            <f:selectItem itemLabel="Kraków" itemValue="Kraków" />
+									            <f:selectItem itemLabel="Łódź kurwa" itemValue="Łódz kurwa" />
+									        </p:selectOneMenu>
+
+										     <h:outputText for="hobbies" value="Hobbies:" />
+										        <p:selectManyCheckbox id="hobbies" value="#{userData.hobbies}" layout="grid" columns="2">
+											        <f:selectItem itemLabel="Lubię placki" itemValue="Lubię placki" />
+										            <f:selectItem itemLabel="Bułeczki" itemValue="Bułeczki" />
+										            <f:selectItem itemLabel="na Wałbrzych" itemValue="na Wałbrzych" />
+										        </p:selectManyCheckbox>
+								         
+                       
                                         <p:commandButton id="backToAccount" action="backToAccount" immediate="true" icon="ui-icon-arrowreturnthick-1-w" value="Back to Account" />
-                                        <p:commandButton id="submitButton" action="confirmUserData" update="regPanelGrid,messages" icon="ui-icon-check" value="Sava data" />
-                                       
+                                        <p:commandButton id="submitButton" action="confirmUserData" icon="ui-icon-check" value="Sava data" />
+
                                 </h:panelGrid>
                         </p:fieldset>
                 </h:form>
