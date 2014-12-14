@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import pl.iui.domain.UserEntity;
+import pl.iui.domain.user.UserEntity;
 import pl.iui.services.UserAuthenticationProviderService;
 
 

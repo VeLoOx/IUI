@@ -1,4 +1,4 @@
-package pl.iui.domain;
+package pl.iui.domain.user;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

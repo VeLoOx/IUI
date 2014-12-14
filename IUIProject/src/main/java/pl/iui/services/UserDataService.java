@@ -1,6 +1,6 @@
 package pl.iui.services;
 
-import pl.iui.domain.UserDataEntity;
+import pl.iui.domain.user.UserDataEntity;
 
 public interface UserDataService {
 

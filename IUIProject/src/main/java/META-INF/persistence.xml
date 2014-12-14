@@ -3,7 +3,7 @@
 
  <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
                
-                <class>pl.iui.domain.UserEntity</class>
+                <class>pl.iui.domain.user.UserEntity</class>
         </persistence-unit>
 <!-- 	 <persistence-unit name="IUIProject" transaction-type="RESOURCE_LOCAL"> -->
 <!-- 	 <description> -->

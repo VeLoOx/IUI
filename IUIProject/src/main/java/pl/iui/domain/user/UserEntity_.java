@@ -1,4 +1,4 @@
-package pl.iui.domain;
+package pl.iui.domain.user;
 
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;

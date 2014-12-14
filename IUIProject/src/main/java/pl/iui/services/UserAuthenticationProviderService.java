@@ -1,6 +1,6 @@
 package pl.iui.services;
 
-import pl.iui.domain.UserEntity;
+import pl.iui.domain.user.UserEntity;
 
 /**
  * Provides processing service to set user authentication session

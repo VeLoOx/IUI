@@ -1,8 +1,8 @@
 package pl.iui.services;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import pl.iui.domain.UserDataEntity;
-import pl.iui.domain.UserEntity;
+import pl.iui.domain.user.UserDataEntity;
+import pl.iui.domain.user.UserEntity;
 
 
 

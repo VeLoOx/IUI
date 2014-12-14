@@ -1,4 +1,4 @@
-package pl.iui.dao;
+package pl.iui.dao.user.implementation;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -6,7 +6,8 @@ import javax.persistence.Query;
 import org.springframework.util.Assert;
 
 import pl.iui.commons.dao.GenericJpaDao;
-import pl.iui.domain.UserEntity;
+import pl.iui.dao.user.UserDao;
+import pl.iui.domain.user.UserEntity;
 
 /**
  * Data access object JPA impl to work with User entity database operations.

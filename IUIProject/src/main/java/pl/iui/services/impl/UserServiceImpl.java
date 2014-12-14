@@ -23,9 +23,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 
-import pl.iui.dao.UserDao;
-import pl.iui.domain.UserDataEntity;
-import pl.iui.domain.UserEntity;
+
+
+import pl.iui.dao.user.UserDao;
+import pl.iui.domain.user.UserDataEntity;
+import pl.iui.domain.user.UserEntity;
 import pl.iui.services.UserService;
 
 public class UserServiceImpl implements UserService, UserDetailsService {

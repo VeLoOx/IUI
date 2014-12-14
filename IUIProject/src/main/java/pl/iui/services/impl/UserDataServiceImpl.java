@@ -3,8 +3,8 @@ package pl.iui.services.impl;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import pl.iui.dao.UserDataDao;
-import pl.iui.domain.UserDataEntity;
+import pl.iui.dao.user.UserDataDao;
+import pl.iui.domain.user.UserDataEntity;
 import pl.iui.services.UserDataService;
 
 public class UserDataServiceImpl implements UserDataService {

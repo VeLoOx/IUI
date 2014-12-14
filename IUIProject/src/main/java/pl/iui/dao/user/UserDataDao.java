@@ -1,7 +1,7 @@
-package pl.iui.dao;
+package pl.iui.dao.user;
 
 import pl.iui.commons.dao.GenericDao;
-import pl.iui.domain.UserDataEntity;
+import pl.iui.domain.user.UserDataEntity;
 
 /**
  * Data access object interface to work with UserData entity database operations.

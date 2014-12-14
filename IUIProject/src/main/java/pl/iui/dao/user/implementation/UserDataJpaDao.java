@@ -1,7 +1,8 @@
-package pl.iui.dao;
+package pl.iui.dao.user.implementation;
 
 import pl.iui.commons.dao.GenericJpaDao;
-import pl.iui.domain.UserDataEntity;
+import pl.iui.dao.user.UserDataDao;
+import pl.iui.domain.user.UserDataEntity;
 
 public class UserDataJpaDao extends GenericJpaDao<UserDataEntity, Long> implements UserDataDao {
 

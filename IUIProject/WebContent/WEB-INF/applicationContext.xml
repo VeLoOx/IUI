@@ -8,8 +8,9 @@
 	<import resource="security-config.xml" />
 
 <!-- 	DAO declarations -->
-	<bean id="userDao" class="pl.iui.dao.UserJpaDao" />
-	<bean id="userDataDao" class="pl.iui.dao.UserDataJpaDao" />
+	<bean id="userDao" class="pl.iui.dao.user.implementation.UserJpaDao" />
+	<bean id="userDataDao" class="pl.iui.dao.user.implementation.UserDataJpaDao" />
+	<bean id="hobbiesDao" class="pl.iui.dao.user.implementation.HobbiesJpaDao" />
 
 <!-- 	Services declarations -->
 	<bean id="userService" class="pl.iui.services.impl.UserServiceImpl">
@@ -23,6 +24,10 @@
 	
 	<bean id="userDataService" class="pl.iui.services.impl.UserDataServiceImpl">
 		<property name="userDataDao" ref="userDataDao" />
+	</bean>
+	
+	<bean id="hobbiesService" class="pl.iui.services.impl.HobbiesServiceImpl">
+		<property name="hobbiesDao" ref="hobbiesDao" />
 	</bean>
 
 	
