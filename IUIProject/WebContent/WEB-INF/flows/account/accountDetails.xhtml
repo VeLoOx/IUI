@@ -43,9 +43,11 @@
 
 										     <h:outputText for="hobbies" value="Hobbies:" />
 										        <p:selectManyCheckbox id="hobbies" value="#{userData.hobbies}" layout="grid" columns="2">
-											        <f:selectItem itemLabel="Lubię placki" itemValue="Lubię placki" />
+											        <!-- <f:selectItem itemLabel="Lubię placki" itemValue="Lubię placki" />
 										            <f:selectItem itemLabel="Bułeczki" itemValue="Bułeczki" />
-										            <f:selectItem itemLabel="na Wałbrzych" itemValue="na Wałbrzych" />
+										            <f:selectItem itemLabel="na Wałbrzych" itemValue="na Wałbrzych" /> -->
+										            
+										           <f:selectItems itemLabel ="#{hobbiesService.getAllHobbies()}" value="#{hobbiesService.getAllHobbies()}" />
 										        </p:selectManyCheckbox>
 								         
                        

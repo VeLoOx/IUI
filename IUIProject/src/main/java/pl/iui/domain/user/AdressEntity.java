@@ -1,8 +1,20 @@
 package pl.iui.domain.user;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Proxy;
+
 import pl.iui.commons.domain.BaseEntity;
 
+@Entity
+@Table(name="appuseradress")
+@Proxy(lazy=false)
 public class AdressEntity extends BaseEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String city;
 	private String postCode;
 	private String street;

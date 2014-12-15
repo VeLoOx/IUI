@@ -1,4 +1,7 @@
 drop table appuser;
+drop table appuserdata;
+drop table appuseradress;
+drop table apphobbies;
 /
 
 create table appuser (
@@ -13,3 +16,8 @@ create table appuser (
 /
 select * from appuser;
 select * from appuserdata;
+
+insert into apphobbies (id,name) values (1,'Gry');
+insert into apphobbies (id,name) values (2,'Film');
+insert into apphobbies (id,name) values (3,'Jedzenie');
+insert into apphobbies (id,name) values (4,'Zakupy');
