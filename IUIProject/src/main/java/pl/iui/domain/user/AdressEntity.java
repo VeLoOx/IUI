@@ -20,6 +20,7 @@ public class AdressEntity extends BaseEntity {
 	private String street;
 	private String number;
 	
+	private String coordinate;
 	
 	public String getCity() {
 		return city;
@@ -44,6 +45,12 @@ public class AdressEntity extends BaseEntity {
 	}
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	public String getCoordinate() {
+		return coordinate;
+	}
+	public void setCoordinate(String coordinate) {
+		this.coordinate = coordinate;
 	}
 	
 	
