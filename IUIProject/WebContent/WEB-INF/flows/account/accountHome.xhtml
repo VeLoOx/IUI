@@ -37,6 +37,21 @@
 
 			
 		</h:panelGrid>
+		
+		<p:dataTable  var="topic" value="#{topicService.getAllTopic()}">
+			<p:column width="200" headerText="Category">
+				<h:outputText value="#{topic.category}" />
+			</p:column>
+
+			<p:column  width="200" headerText="Name">
+				<h:outputText value="#{topic.name}" />
+			</p:column>
+
+			<p:column  width="200" headerText="Miasto">
+				<h:outputText value="#{topic.adress.city}" />
+			</p:column>
+		</p:dataTable>
+		
 		<h:form id="accountForm">
 				<p:commandButton id="editUserData" action="editUserData"
 					icon="ui-icon-check" value="Edit data" />

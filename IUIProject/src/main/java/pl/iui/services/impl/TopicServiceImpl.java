@@ -2,10 +2,9 @@ package pl.iui.services.impl;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-
 import pl.iui.dao.topic.TopicDao;
 import pl.iui.domain.topic.TopicEntity;
+import pl.iui.domain.user.AdressEntity;
 import pl.iui.domain.user.UserEntity;
 import pl.iui.services.TopicService;
 
@@ -14,11 +13,11 @@ public class TopicServiceImpl extends FacesMessagesProvider implements TopicServ
 	private TopicDao topicDao;
 
 	@Override
-	public boolean addTopic(TopicEntity topic, UserEntity user) {
+	public boolean addTopic(TopicEntity topic, UserEntity user, AdressEntity adress) {
 		// TODO Auto-generated method stub
-		topic.setAutor("ALALA");
-		//System.out.println(topic.get);
-		topicDao.update(topic);
+		topic.setAutor(user.getUserName());
+		topic.setAdress(adress);
+		topicDao.save(topic);
 		
 		return true;
 	}

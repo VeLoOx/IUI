@@ -7,6 +7,7 @@
 	<secured attributes="ROLE_USER,ROLE_ADMIN" />
 	<var name="userData" class="pl.iui.domain.user.UserDataEntity" />
 	<var name="newTopic" class="pl.iui.domain.topic.TopicEntity" />
+	<var name="adressTopic" class="pl.iui.domain.user.AdressEntity" />
 	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
 	<on-start>
 		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
@@ -28,7 +29,7 @@
 	<view-state id="editUserTopic" view="topicDetails.xhtml">
 		 <transition on="backToAccount" to="home" />
 		 <transition on="confirmNewUserTopic" to="home">
-		 <evaluate expression="topicService.addTopic(flowScope.user,userData)" />
+		 	<evaluate  expression="topicService.addTopic(newTopic,flowScope.user, adressTopic)" />
 		 </transition>
 	</view-state>
 

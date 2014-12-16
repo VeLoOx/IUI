@@ -21,6 +21,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
+import org.springframework.core.style.ToStringCreator;
 
 import pl.iui.commons.domain.BaseEntity;
 import pl.iui.domain.user.AdressEntity;
@@ -50,9 +51,8 @@ public class TopicEntity implements Serializable {
 	@JoinColumn(name="idadress") 
 	private AdressEntity adress;
 	
-	@OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
-	@JoinColumn(name="idcategory") 
-	private TopicCategoryEntity category;
+	
+	private String category;
 
 	public String getName() {
 		return name;
@@ -112,14 +112,17 @@ public class TopicEntity implements Serializable {
 		this.id = id;
 	}
 
-	public TopicCategoryEntity getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(TopicCategoryEntity category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
-	
+	@Override
+	public String toString (){
+		return name + "   " + category + "   " +adress.getCity();
+	}
 	
 }

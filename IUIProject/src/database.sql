@@ -9,13 +9,14 @@ drop table apptopic_appcomments cascade constraints;
 drop table apphobbies_appuserdata cascade constraints;
 drop table appuserdata_apphobbies cascade constraints;
 drop table TB_HOBBY_USER cascade constraints;
+drop table udatahobbies cascade constraints;
 
 drop table person;
 
 
 select * from appuser;
 select * from appuserdata;
-select * from apptopics;
+select * from apptopic;
 select * from apptopiccategory;
 select * from appuadress;
 
