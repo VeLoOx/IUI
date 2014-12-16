@@ -15,9 +15,9 @@ import org.hibernate.annotations.Type;
 import pl.iui.commons.domain.BaseEntity;
 import pl.iui.domain.topic.TopicEntity;
 
-@Entity
+/*@Entity
 @Table(name="appcomments")
-@Proxy(lazy=false)
+@Proxy(lazy=false)*/
 public class CommentsEntity extends BaseEntity {
 
 	private String autor;
@@ -47,8 +47,8 @@ public class CommentsEntity extends BaseEntity {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_topic")
+	/*@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_topic")*/
 	public TopicEntity getTopic() {
 		return topic;
 	}

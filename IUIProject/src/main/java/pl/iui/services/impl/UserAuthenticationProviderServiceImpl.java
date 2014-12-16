@@ -28,6 +28,8 @@ public class UserAuthenticationProviderServiceImpl implements UserAuthentication
          * @return
          */
         public boolean processUserAuthentication(UserEntity user) {
+        	
+        	System.out.println(user.getUserName() + user.getPassword()+"!!!!!!!!!");
                
                 try {
                         Authentication request = new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());

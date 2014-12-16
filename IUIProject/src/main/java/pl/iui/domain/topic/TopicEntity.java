@@ -1,12 +1,18 @@
 package pl.iui.domain.topic;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,16 +30,29 @@ import pl.iui.domain.user.CommentsEntity;;
 @Entity
 @Table(name="apptopic")
 @Proxy(lazy=false)
-public class TopicEntity extends BaseEntity {
+public class TopicEntity implements Serializable {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
+	
 	private String name;
-	private UserEntity autor;
+	private String autor;
 	private String describe;
 	private String photo;
+	
+	@Column
+	@Type(type="date")
 	private Date data;
 	
+	@OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.LAZY)
+	@JoinColumn(name="idadress") 
 	private AdressEntity adress;
-	private List<CommentsEntity> comments;
+	
+	@OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
+	@JoinColumn(name="idcategory") 
+	private TopicCategoryEntity category;
 
 	public String getName() {
 		return name;
@@ -43,11 +62,11 @@ public class TopicEntity extends BaseEntity {
 		this.name = name;
 	}
 
-	public UserEntity getAutor() {
+	public String getAutor() {
 		return autor;
 	}
 
-	public void setAutor(UserEntity autor) {
+	public void setAutor(String autor) {
 		this.autor = autor;
 	}
 
@@ -67,8 +86,7 @@ public class TopicEntity extends BaseEntity {
 		this.photo = photo;
 	}
 	
-	@OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.LAZY)
-	@JoinColumn(name="id_adress") 
+	
 	public AdressEntity getAdress() {
 		return adress;
 	}
@@ -77,8 +95,7 @@ public class TopicEntity extends BaseEntity {
 		this.adress = adress;
 	}
 
-	@Column
-	@Type(type="date")
+	
 	public Date getData() {
 		return data;
 	}
@@ -87,14 +104,22 @@ public class TopicEntity extends BaseEntity {
 		this.data = data;
 	}
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@OrderColumn(name="id_comments")
-	public List<CommentsEntity> getComments() {
-		return comments;
+	public Long getId() {
+		return id;
 	}
 
-	public void setComments(List<CommentsEntity> comments) {
-		this.comments = comments;
+	public void setId(Long id) {
+		this.id = id;
 	}
+
+	public TopicCategoryEntity getCategory() {
+		return category;
+	}
+
+	public void setCategory(TopicCategoryEntity category) {
+		this.category = category;
+	}
+
+	
 	
 }

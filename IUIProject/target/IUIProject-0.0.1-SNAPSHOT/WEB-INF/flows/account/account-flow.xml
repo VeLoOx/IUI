@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<secured attributes="ROLE_USER,ROLE_ADMIN" />
+	<var name="userData" class="pl.iui.domain.user.UserDataEntity" />
+	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
+	<on-start>
+		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
+			result="flowScope.user" />
+	</on-start>
+
+	<view-state id="home" view="accountHome.xhtml">
+		 <transition on="editUserData" to="editUserData" />
+	</view-state>
+	
+	<view-state id="editUserData" view="accountDetails.xhtml">
+		 <transition on="backToAccount" to="home" />
+		 <transition on="confirmUserData" to="home">
+		 <evaluate expression="userService.updateUserData(flowScope.user,userData)" />
+		 </transition>
+	</view-state>
+
+</flow>

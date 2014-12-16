@@ -11,6 +11,7 @@
 	<bean id="userDao" class="pl.iui.dao.user.implementation.UserJpaDao" />
 	<bean id="userDataDao" class="pl.iui.dao.user.implementation.UserDataJpaDao" />
 	<bean id="hobbiesDao" class="pl.iui.dao.user.implementation.HobbiesJpaDao" />
+	<bean id="topicCatDao" class="pl.iui.dao.topic.implementation.TopicCategoryJpaDao" />
 
 <!-- 	Services declarations -->
 	<bean id="userService" class="pl.iui.services.impl.UserServiceImpl">
@@ -28,6 +29,10 @@
 	
 	<bean id="hobbiesService" class="pl.iui.services.impl.HobbiesServiceImpl">
 		<property name="hobbiesDao" ref="hobbiesDao" />
+	</bean>
+	
+	<bean id="topicCategoryService" class="pl.iui.services.impl.TopicCategoryServiceImpl">
+		<property name="topicCategoryDao" ref="topicCatDao" />
 	</bean>
 
 	
