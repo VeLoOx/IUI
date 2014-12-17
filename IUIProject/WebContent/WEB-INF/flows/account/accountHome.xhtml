@@ -38,7 +38,7 @@
 			
 		</h:panelGrid>
 		
-		<p:dataTable  var="topic" value="#{topicService.getAllTopic()}">
+		<p:dataTable  var="topic" value="#{topicService.getAllTopicForUser(flowScope.user.userName)}">
 			<p:column width="200" headerText="Category">
 				<h:outputText value="#{topic.category}" />
 			</p:column>

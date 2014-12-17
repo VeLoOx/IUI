@@ -27,6 +27,11 @@ public class TopicServiceImpl extends FacesMessagesProvider implements TopicServ
 		// TODO Auto-generated method stub
 		return topicDao.findAll();
 	}
+	
+	public List<TopicEntity> getAllTopicForUser(String name) {
+		// TODO Auto-generated method stub
+		return topicDao.findUserTopic(name);
+	}
 
 	public TopicDao getTopicDao() {
 		return topicDao;
