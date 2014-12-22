@@ -6,8 +6,12 @@
 
         <var name="user" class="pl.iui.domain.user.UserEntity"/>
         
+        <view-state id="main" view="main.xhtml">
+                <transition on="login" to="login" />
+                <transition on="register" to="register"/>
+        </view-state>
 
-        <view-state id="welcome" view="welcome.xhtml" model="user">
+        <view-state id="login" view="login.xhtml" model="user">
                 <transition on="newUser" to="register" />
                 <transition on="confirmSignIn" to="finish">
                         <evaluate expression="userAuthenticationProviderService.processUserAuthentication(user)" />
@@ -15,7 +19,7 @@
         </view-state>
 
         <view-state id="register" view="register.xhtml" model="user">
-                <transition on="backToSignIn" to="welcome" />
+                <transition on="backToLogIn" to="login" />
                 <transition on="confirmSignUp" to="authentication">
                         <evaluate expression="userService.createUser(user)" />
                 </transition>
