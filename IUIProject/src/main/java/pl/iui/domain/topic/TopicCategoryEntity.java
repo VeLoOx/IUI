@@ -10,8 +10,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
 
-import pl.iui.commons.domain.BaseEntity;
-
 @Entity
 @Table(name = "apptopiccategory")
 @Proxy(lazy = false)

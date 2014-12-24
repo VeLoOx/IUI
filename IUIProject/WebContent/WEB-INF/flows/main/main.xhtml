@@ -11,32 +11,44 @@
 	</ui:define>
 	<ui:define name="greeting">
 					<h:form>
-						<h:commandLink action="login">Login</h:commandLink>
+						<h:commandLink action="login">Login
+						
+						</h:commandLink>
 						|
 						<h:commandLink action="register">Register</h:commandLink>
 					</h:form>
 				
 	</ui:define>
 	<ui:define name="header">
-		<h:outputText value="Main Page" />
+		<h:outputText value="Strona główna" />
 	</ui:define>
 
+	
 	<ui:define name="content">
-	Strona głowna<br></br>
-	Tu buttonem<br></br>
-		<h:form>
-			<p:commandButton id="login" action="login" immediate="true"
-				icon="ui-icon-arrowreturnthick-1-w" value="Log in" />
-			<p:commandButton id="register" action="register" icon="ui-icon-check"
-				value="Register" />
+	<h:outputText>Co cię moze zainteresować</h:outputText>
+	
+	<h:outputText> Tematy </h:outputText>
+	<h:form id="topics">
+		<p:dataTable var="topic" value="#{topicService.getAllTopic()}" selectionMode="single" rowKey="#{topic.id}">
 			
+
+			<p:column  width="200" headerText="Name">
+				
+				<h:commandLink id="top" value="#{topic.name}" action="showTopicDetails" >
+					 	<f:setPropertyActionListener value="#{topic}" target="#{topicService.selectedTopic}"></f:setPropertyActionListener>			  
+				</h:commandLink>
+				
+			</p:column>
+			
+			<p:column width="200" headerText="Category">
+				<h:outputText value="#{topic.category}" />
+			</p:column>
+
+			<p:column  width="200" headerText="Miasto">
+				<h:outputText value="#{topic.adress.city}" />
+			</p:column>
+		</p:dataTable>
 		</h:form>
-	a tu linkiem<br></br>
-	<h:form>
-	<h:commandLink action="login">Login</h:commandLink>
-	<br/>
-	<h:commandLink action="register">Register</h:commandLink>
-	</h:form>
 	</ui:define>
 
 </ui:composition>

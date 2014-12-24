@@ -5,12 +5,14 @@ import java.util.List;
 import pl.iui.dao.topic.TopicDao;
 import pl.iui.domain.topic.TopicEntity;
 import pl.iui.domain.user.AdressEntity;
+import pl.iui.domain.user.CommentsEntity;
 import pl.iui.domain.user.UserEntity;
 import pl.iui.services.TopicService;
 
 public class TopicServiceImpl extends FacesMessagesProvider implements TopicService {
 	
 	private TopicDao topicDao;
+	private TopicEntity selectedTopic;
 
 	@Override
 	public boolean addTopic(TopicEntity topic, UserEntity user, AdressEntity adress) {
@@ -39,6 +41,26 @@ public class TopicServiceImpl extends FacesMessagesProvider implements TopicServ
 
 	public void setTopicDao(TopicDao topicDao) {
 		this.topicDao = topicDao;
+	}
+
+	public TopicEntity getSelectedTopic() {
+		return selectedTopic;
+	}
+
+	public void setSelectedTopic(TopicEntity selectedTopic) {
+		this.selectedTopic = selectedTopic;
+	}
+	
+	public void addComment(TopicEntity topic, CommentsEntity comm, UserEntity user){
+		comm.setAutor(user.getUserName());
+		topic.getComments().add(comm);
+		topicDao.update(topic);
+	}
+
+	@Override
+	public List<CommentsEntity> getAllCommentsForTopic(long id) {
+		
+		return topicDao.findById(id).getComments();
 	}
 
 }

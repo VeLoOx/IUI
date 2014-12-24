@@ -15,9 +15,9 @@ import org.hibernate.annotations.Type;
 import pl.iui.commons.domain.BaseEntity;
 import pl.iui.domain.topic.TopicEntity;
 
-/*@Entity
+@Entity
 @Table(name="appcomments")
-@Proxy(lazy=false)*/
+@Proxy(lazy=false)
 public class CommentsEntity extends BaseEntity {
 
 	private String autor;

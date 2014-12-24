@@ -45,7 +45,7 @@ public class UserDataEntity implements Serializable {
 	private int yearOfBirth;
 	private String sex;
 
-	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER, targetEntity=pl.iui.domain.user.AdressEntity.class)
 	@JoinColumn(name = "idadress")
 	private AdressEntity adress = new AdressEntity();
 	

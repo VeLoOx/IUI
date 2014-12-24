@@ -14,8 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
 
-@Entity
-@Table(name = "appuseradress")
+@Entity 
+@Table(name = "appadress")
 @Access(AccessType.FIELD)
 @Proxy(lazy = false)
 public class AdressEntity implements Serializable {

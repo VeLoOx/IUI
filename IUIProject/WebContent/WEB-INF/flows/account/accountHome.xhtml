@@ -37,21 +37,27 @@
 
 			
 		</h:panelGrid>
-		
-		<p:dataTable var="topic" value="#{topicService.getAllTopicForUser(flowScope.user.userName)}">
-			<p:column width="200" headerText="Category">
-				<h:outputText value="#{topic.category}" />
-			</p:column>
+		<h:form id="topics">
+		<p:dataTable var="topic" value="#{topicService.getAllTopicForUser(flowScope.user.userName)}" selectionMode="single" rowKey="#{topic.id}">
+			
 
 			<p:column  width="200" headerText="Name">
-				<h:outputText value="#{topic.name}" />
+				
+				<h:commandLink id="top" value="#{topic.name}" action="showTopicDetails" >
+					 	<f:setPropertyActionListener value="#{topic}" target="#{topicService.selectedTopic}"></f:setPropertyActionListener>			  
+				</h:commandLink>
+				
+			</p:column>
+			
+			<p:column width="200" headerText="Category">
+				<h:outputText value="#{topic.category}" />
 			</p:column>
 
 			<p:column  width="200" headerText="Miasto">
 				<h:outputText value="#{topic.adress.city}" />
 			</p:column>
 		</p:dataTable>
-		
+		</h:form>
 		<div style="margin-left: auto; margin-right: auto">
 		<p:gmap center="50.86607, 20.628567" zoom="25" type="terrain" style="margin-left: auto; margin-right: auto;width:600px;height:400px" />
 		</div>
