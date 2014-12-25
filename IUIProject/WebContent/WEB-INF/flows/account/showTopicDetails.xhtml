@@ -46,7 +46,11 @@
 		</h:panelGrid>
 	</p:fieldset>
 	</p:fieldset>
-	
+	<!-- MAP -->
+		<p:gmap id="gmap" center="36.890257,30.707417" zoom="13" type="HYBRID" style="width:100%;height:400px"
+    model="#{topicService.mapModel}" widgetVar="map">
+<!--     <p:ajax event="markerDrag" listener="#{markersUtils.onMarkerDrag}" update="" /> -->
+    </p:gmap>
 	<h:form>
 	<h:outputLabel>Komentarz</h:outputLabel>
 	<h:inputTextarea  value="#{newComm.text}"/>

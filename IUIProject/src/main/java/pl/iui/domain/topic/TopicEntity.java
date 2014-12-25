@@ -16,17 +16,21 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 
 import pl.iui.domain.user.AdressEntity;
 import pl.iui.domain.user.CommentsEntity;
+import pl.iui.ui.utils.MarkersUtils;
+
+import org.primefaces.model.map.Marker;
 
 @Entity
 @Table(name="apptopic")
 @Proxy(lazy=false)
-public class TopicEntity implements Serializable {
+public class TopicEntity  implements Serializable  {
 
 	@Id
 	@GeneratedValue
@@ -37,6 +41,11 @@ public class TopicEntity implements Serializable {
 	private String autor;
 	private String describe;
 	private String photo;
+	
+	
+	private double lat;
+	private double lng;
+	private String title;
 	
 	@Column
 	@Type(type="date")
@@ -138,5 +147,31 @@ public class TopicEntity implements Serializable {
 	public String toString (){
 		return name + "   " + category + "   " +adress.getCity();
 	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public double getLng() {
+		return lng;
+	}
+
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	
 	
 }

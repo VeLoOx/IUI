@@ -11,46 +11,50 @@
 	<var name="adressTopic" class="pl.iui.domain.user.AdressEntity" />
 	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
 	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
-	
+
 	<on-start>
 		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
 			result="flowScope.user" />
 	</on-start>
 
 	<view-state id="home" view="accountHome.xhtml">
-		 <transition on="editUserData" to="editUserData" />
-		 <transition on="editUserTopic" to="editUserTopic" />
-		 <transition on="showTopicDetails" to="showTopic">
-		 
-		 	
-		 </transition>
+		<transition on="editUserData" to="editUserData" />
+		<transition on="editUserTopic" to="editUserTopic">
+		<evaluate expression="topicService.createMarker()" />
+		</transition>
+		<transition on="showTopicDetails" to="showTopic">
+
+
+		</transition>
 	</view-state>
-	
+
 	<view-state id="editUserData" view="accountDetails.xhtml">
-		 <transition on="backToAccount" to="home" >
-		
-		 </transition>
-		 <transition on="confirmUserData" to="home">
-		 <evaluate expression="userService.updateUserData(flowScope.user,userData)" />
-		 </transition>
-		 
-		 
+		<transition on="backToAccount" to="home">
+
+		</transition>
+		<transition on="confirmUserData" to="home">
+			<evaluate expression="userService.updateUserData(flowScope.user,userData)" />
+		</transition>
+
+
 	</view-state>
-	
+
 	<view-state id="editUserTopic" view="topicDetails.xhtml">
-		 <transition on="backToAccount" to="home" />
-		 <transition on="confirmNewUserTopic" to="home">
-		 	<evaluate  expression="topicService.addTopic(newTopic,flowScope.user, adressTopic)" />
-		 </transition>
+		<transition on="backToAccount" to="home" />
+		<transition on="confirmNewUserTopic" to="home">
+			<evaluate
+				expression="topicService.addTopic(newTopic,flowScope.user, adressTopic)" />
+			
+		</transition>
 	</view-state>
-	
+
 	<view-state id="showTopic" view="showTopicDetails.xhtml">
-	 <on-render>
-	 	<set name="showTopic" value="topicService.selectedTopic" ></set>
-	</on-render> 
+		<on-render>
+			<set name="showTopic" value="topicService.selectedTopic"></set>
+		</on-render>
 		<transition on="addComment" to="showTopic">
-		 	<evaluate  expression="topicService.addComment(showTopic,newComm,flowScope.user)" />
-		 </transition>
+			<evaluate expression="topicService.addComment(showTopic,newComm,flowScope.user)" />
+		</transition>
 	</view-state>
 
 </flow>

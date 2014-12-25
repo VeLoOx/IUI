@@ -12,6 +12,8 @@ drop table TB_HOBBY_USER cascade constraints;
 drop table udatahobbies cascade constraints;
 drop table top_comm cascade constraints;
 
+drop table appadress;
+
 drop table person;
 
 
