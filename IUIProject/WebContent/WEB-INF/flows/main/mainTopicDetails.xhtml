@@ -29,6 +29,8 @@
 
 				<p:outputLabel value="Opis:" />
 				<h:outputText value="#{showTopic.describe}" />
+				
+				
 
 
 			</h:panelGrid>
@@ -57,16 +59,12 @@
 <!--     <p:ajax event="markerDrag" listener="#{markersUtils.onMarkerDrag}" update="" /> -->
     </p:gmap>
 
-		<c:if test="${not empty currentUser.name}">
-			<h:form>
-				<h:outputLabel>Komentarz</h:outputLabel>
-				<h:inputTextarea value="#{newComm.text}" />
-				<p:commandButton id="addComment" value="Dodaj" action="addComment" />
-			</h:form>
-		</c:if>
-		<c:otherwise>
+		
+		
+		
+		
 			<h:outputLabel>Musisz sie zalogować aby dodać komentarz</h:outputLabel>
-		</c:otherwise>
+		
 		<p:dataTable var="comm"
 			value="#{topicService.getAllCommentsForTopic(showTopic.id)}">
 

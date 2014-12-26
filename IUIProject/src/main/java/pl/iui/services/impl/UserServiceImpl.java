@@ -161,5 +161,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             this.userDao = userDao;
     }
 
+
+	@Override
+	public void addRatedTopic(long id, UserEntity ue) {
+		// TODO Auto-generated method stub
+		
+		/*ue.getUserData().getRatedTopics().add(id);
+		userDao.update(ue);*/
+		
+	}
+
 }
 

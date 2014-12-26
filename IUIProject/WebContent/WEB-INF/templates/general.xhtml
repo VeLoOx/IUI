@@ -33,7 +33,9 @@
 			<div id="greeting">
 				<c:if test="${not empty currentUser.name}">
 					<b>Welcome,</b> ${user.firstName} ${user.lastName} | <a
-						href="${request.contextPath}/app/logout">Logout</a>
+						href="${request.contextPath}/app/logout">Wyloguj</a>
+						<a
+						href="${request.contextPath}/app/main">Strona główna</a>
 				</c:if>
 				<c:otherwise>
 					<ui:insert name="greeting" />

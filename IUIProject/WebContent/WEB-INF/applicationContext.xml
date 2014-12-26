@@ -38,6 +38,7 @@
 	
 	<bean id="topicService" class="pl.iui.services.impl.TopicServiceImpl">
 		<property name="topicDao" ref="topicDao" />
+		<property name="userService" ref="userService"/>
 	</bean>
 
 	

@@ -6,13 +6,14 @@
 
         <var name="user" class="pl.iui.domain.user.UserEntity"/>
         <var name="showTopic" class="pl.iui.domain.topic.TopicEntity" />
-        <var name="markersUtils" class="pl.iui.ui.utils.MarkersUtils"/>
+       
 	
 	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
         
         <view-state id="main" view="main.xhtml">
                 <transition on="login" to="login" />
                 <transition on="register" to="register"/>
+                
                 <transition on="showTopicDetails" to="topicDeails">
                 <evaluate expression="topicService.createMarker()" />
                 </transition>
@@ -24,6 +25,8 @@
                         <evaluate expression="userAuthenticationProviderService.processUserAuthentication(user)" />
                 </transition>
         </view-state>
+        
+       
 
         <view-state id="register" view="register.xhtml" model="user">
                 <transition on="backToLogIn" to="login" />

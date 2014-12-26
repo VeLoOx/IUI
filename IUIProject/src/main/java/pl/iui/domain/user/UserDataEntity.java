@@ -53,6 +53,21 @@ public class UserDataEntity implements Serializable {
 	@CollectionTable(name="udatahobbies", joinColumns=@JoinColumn(name="userdataid"))
 	@Column(name="hobby")
 	private List<String> hobbies = new ArrayList<String>();
+	
+	@ElementCollection (fetch = FetchType.EAGER)
+	@CollectionTable(name="udataratedtopics", joinColumns=@JoinColumn(name="userdataid"))
+	@Column(name="ratedtopic")
+	private List<Long> ratedTopics = new ArrayList<Long>();
+	
+	@ElementCollection (fetch = FetchType.EAGER)
+	@CollectionTable(name="udatafavoritetopics", joinColumns=@JoinColumn(name="userdataid"))
+	@Column(name="favoritetopic")
+	private List<Long> favoriteTopics = new ArrayList<Long>();
+	
+	@ElementCollection (fetch = FetchType.EAGER)
+	@CollectionTable(name="udatafavoriteusers", joinColumns=@JoinColumn(name="userdataid"))
+	@Column(name="favoriteuser")
+	private List<Long> favoriteUsers = new ArrayList<Long>();
 
 	public Long getId() {
 		return id;
@@ -92,6 +107,30 @@ public class UserDataEntity implements Serializable {
 
 	public void setHobbies(List<String> hobbies) {
 		this.hobbies = hobbies;
+	}
+
+	public List<Long> getRatedTopics() {
+		return ratedTopics;
+	}
+
+	public void setRatedTopics(List<Long> ratedTopics) {
+		this.ratedTopics = ratedTopics;
+	}
+
+	public List<Long> getFavoriteTopics() {
+		return favoriteTopics;
+	}
+
+	public void setFavoriteTopics(List<Long> favoriteTopics) {
+		this.favoriteTopics = favoriteTopics;
+	}
+
+	public List<Long> getFavoriteUsers() {
+		return favoriteUsers;
+	}
+
+	public void setFavoriteUsers(List<Long> favoriteUsers) {
+		this.favoriteUsers = favoriteUsers;
 	}
 
 }

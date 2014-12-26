@@ -2,7 +2,6 @@ package pl.iui.services.impl;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -18,12 +17,17 @@ import pl.iui.domain.user.AdressEntity;
 import pl.iui.domain.user.CommentsEntity;
 import pl.iui.domain.user.UserEntity;
 import pl.iui.services.TopicService;
+import pl.iui.services.UserService;
 
 public class TopicServiceImpl extends FacesMessagesProvider implements
 		TopicService {
 
 	private TopicDao topicDao;
 	private TopicEntity selectedTopic;
+	
+	private UserService userService;
+	
+	private String selectedRate;
 
 	private MapModel mapModel;
 
@@ -177,6 +181,46 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 	public List<CommentsEntity> getAllCommentsForTopic(long id) {
 
 		return topicDao.findById(id).getComments();
+	}
+
+	@Override
+	public double getRate(TopicEntity top) {
+		// TODO Auto-generated method stub
+		
+		double val = top.getRate()/top.getNumberRate();
+		
+		return Math.round(val*100.0)/100.0;
+	}
+
+	public String getSelectedRate() {
+		return selectedRate;
+	}
+
+	public void setSelectedRate(String selectedRate) {
+		this.selectedRate = selectedRate;
+	}
+
+	@Override
+	public void addRate(TopicEntity top, String rateS, UserEntity ue) {
+		// TODO Auto-generated method stub
+		
+		double rate = Double.parseDouble(rateS);
+		
+		top.setRate(top.getRate()+rate);
+		top.setNumberRate(top.getNumberRate()+1);
+		
+		topicDao.update(top);
+		
+		userService.addRatedTopic(top.getId(), ue);
+		
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 }

@@ -37,5 +37,8 @@ public interface UserService {
      * @return UserEntity
      */
     UserEntity loadUserEntityByUsername(String userName);
+    
+    public void addRatedTopic(long id, UserEntity ue);
+    	
 }
 

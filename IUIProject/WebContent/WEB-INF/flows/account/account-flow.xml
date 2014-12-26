@@ -11,6 +11,7 @@
 	<var name="adressTopic" class="pl.iui.domain.user.AdressEntity" />
 	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
 	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
+	<var name="rate" class="java.lang.String"/>
 
 	<on-start>
 		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
@@ -54,6 +55,9 @@
 		</on-render>
 		<transition on="addComment" to="showTopic">
 			<evaluate expression="topicService.addComment(showTopic,newComm,flowScope.user)" />
+		</transition>
+		<transition on="addRate" to="showTopic">
+			<evaluate expression="topicService.addRate(showTopic,rate,flowScope.user)" />
 		</transition>
 	</view-state>
 

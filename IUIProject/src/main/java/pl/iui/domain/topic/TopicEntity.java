@@ -23,7 +23,7 @@ import org.hibernate.annotations.Type;
 
 import pl.iui.domain.user.AdressEntity;
 import pl.iui.domain.user.CommentsEntity;
-import pl.iui.ui.utils.MarkersUtils;
+/*import pl.iui.ui.utils.MarkersUtils;*/
 
 import org.primefaces.model.map.Marker;
 
@@ -46,6 +46,9 @@ public class TopicEntity  implements Serializable  {
 	private double lat;
 	private double lng;
 	private String title;
+	
+	private double rate;
+	private long numberRate;
 	
 	@Column
 	@Type(type="date")
@@ -166,6 +169,22 @@ public class TopicEntity  implements Serializable  {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	public long getNumberRate() {
+		return numberRate;
+	}
+
+	public void setNumberRate(long numberRate) {
+		this.numberRate = numberRate;
 	}
 
 	public void setTitle(String title) {

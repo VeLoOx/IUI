@@ -11,6 +11,9 @@ drop table appuserdata_apphobbies cascade constraints;
 drop table TB_HOBBY_USER cascade constraints;
 drop table udatahobbies cascade constraints;
 drop table top_comm cascade constraints;
+drop table udatafavoritetopics cascade constraints;
+drop table udatafavoriteusers cascade constraints;
+drop table udataratedtopics cascade constraints;
 
 drop table appadress;
 

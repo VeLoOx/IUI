@@ -19,5 +19,11 @@ public interface TopicService {
 	
 	public TopicEntity getSelectedTopic();
 	public void setSelectedTopic(TopicEntity topic);
+	
+	public String getSelectedRate();
+	public void setSelectedRate(String val);
+	
+	public double getRate(TopicEntity top);
+	public void addRate(TopicEntity top, String rate, UserEntity ue);
 
 }
