@@ -1,6 +1,7 @@
 package pl.iui.services;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import pl.iui.domain.topic.TopicEntity;
 import pl.iui.domain.user.UserDataEntity;
 import pl.iui.domain.user.UserEntity;
 
@@ -39,6 +40,7 @@ public interface UserService {
     UserEntity loadUserEntityByUsername(String userName);
     
     public void addRatedTopic(long id, UserEntity ue);
+    public boolean allowToRate(TopicEntity top, UserEntity ue);
     	
 }
 

@@ -25,7 +25,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 
+
 import pl.iui.dao.user.UserDao;
+import pl.iui.domain.topic.TopicEntity;
 import pl.iui.domain.user.UserDataEntity;
 import pl.iui.domain.user.UserEntity;
 import pl.iui.services.UserService;
@@ -166,9 +168,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public void addRatedTopic(long id, UserEntity ue) {
 		// TODO Auto-generated method stub
 		
-		/*ue.getUserData().getRatedTopics().add(id);
-		userDao.update(ue);*/
+		ue.getUserData().getRatedTopics().add(id);
+		userDao.update(ue);
 		
+	}
+
+
+	@Override
+	public boolean allowToRate(TopicEntity top, UserEntity ue) {
+		// TODO Auto-generated method stub
+		System.out.println("ID!!!!!! = "+top.getId());
+		if(ue.getUserData().getRatedTopics().contains(top.getId()))
+		return false; else return true;
 	}
 
 }
