@@ -55,7 +55,7 @@
 								value="#{topicService.getRate(showTopic)} (#{showTopic.numberRate})" />
 						</h:panelGrid>
 						
-						<h:panelGrid rendered="#{userService.allowToRate(showTopic, flowScope.user)} eq false">
+						<h:panelGrid rendered="#{userService.allowToRate(showTopic, flowScope.user)}">
 							<h:outputLabel>Oceń temat</h:outputLabel>
 							<br />
 							<h:form>
