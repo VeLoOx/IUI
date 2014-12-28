@@ -11,7 +11,7 @@
 	<var name="adressTopic" class="pl.iui.domain.user.AdressEntity" />
 	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
 	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
-	<var name="rate" class="java.lang.String"/>
+	<var name="rate" class="java.lang.String" />
 
 	<on-start>
 		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
@@ -21,12 +21,23 @@
 	<view-state id="home" view="accountHome.xhtml">
 		<transition on="editUserData" to="editUserData" />
 		<transition on="editUserTopic" to="editUserTopic">
-		<evaluate expression="topicService.createMarker()" />
+			<evaluate expression="topicService.createMarker()" />
 		</transition>
-		<transition on="showTopicDetails" to="showTopic">
+		<transition on="showTopicDetails" to="showTopic" />
+		<transition on="goToMainPage" to="mainHome" />
+		<transition on="goToHome" to="home" />
 
 
+	</view-state>
+
+	<view-state id="mainHome" view="mainAccount.xhtml">
+		<transition on="goToMyAccount" to="home" />
+		<transition on="goToMainPage" to="mainHome" />
+		<transition on="goToHome" to="home" />
+		<transition on="editUserTopic" to="editUserTopic">
+			<evaluate expression="topicService.createMarker()" />
 		</transition>
+		<transition on="showTopicDetails" to="showTopic" />
 	</view-state>
 
 	<view-state id="editUserData" view="accountDetails.xhtml">
@@ -37,7 +48,11 @@
 			<evaluate expression="userService.updateUserData(flowScope.user,userData)" />
 		</transition>
 
-
+		<transition on="goToMainPage" to="mainHome" />
+		<transition on="goToHome" to="home" />
+		<transition on="editUserTopic" to="editUserTopic">
+			<evaluate expression="topicService.createMarker()" />
+		</transition>
 	</view-state>
 
 	<view-state id="editUserTopic" view="topicDetails.xhtml">
@@ -45,7 +60,12 @@
 		<transition on="confirmNewUserTopic" to="home">
 			<evaluate
 				expression="topicService.addTopic(newTopic,flowScope.user, adressTopic)" />
-			
+
+		</transition>
+		<transition on="goToMainPage" to="mainHome" />
+		<transition on="goToHome" to="home" />
+		<transition on="editUserTopic" to="editUserTopic">
+			<evaluate expression="topicService.createMarker()" />
 		</transition>
 	</view-state>
 
@@ -58,6 +78,11 @@
 		</transition>
 		<transition on="addRate" to="showTopic">
 			<evaluate expression="topicService.addRate(showTopic,rate,flowScope.user)" />
+		</transition>
+		<transition on="goToMainPage" to="mainHome" />
+		<transition on="goToHome" to="home" />
+		<transition on="editUserTopic" to="editUserTopic">
+			<evaluate expression="topicService.createMarker()" />
 		</transition>
 	</view-state>
 

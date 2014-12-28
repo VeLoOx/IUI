@@ -1,9 +1,10 @@
 #container {
-        width: 91%;
+        width: 100%;
         min-height: 450px;
-        margin: 50px auto;
+        margin:30px 5px auto;
         box-shadow: 2px 2px 10px #888;
-        background: url(images/noise3.png);
+       /*  background: url(images/noise3.png); */
+       background-color:activeborder;
         padding-bottom: 20px;
         font-family: Verdana;
         font-size: 12px;
@@ -23,6 +24,114 @@
         font-smooth: always;
         text-shadow: 0px 0px 2px white;
         border-radius: 7px 7px 0 0;
+       
+}
+
+#top {
+	width: 100%;
+	margin-left: 15px;
+	margin-right: auto; 
+	/* margin:0 auto; */
+	text-align: left;
+}
+
+#NAGLOWEK {
+	background-color: #888;
+}
+
+#MENU {
+	width: 150px;
+	float: left;
+	min-height: 450px;
+	overflow: hidden;
+	background-color: #ddd;
+}
+
+#TRESC {
+	width: 1100px;
+	float: left;
+	min-height: 450px;
+	overflow: hidden;
+	background-color: green;
+	margin:auto;
+	
+	
+}
+
+#TRESC11{
+	width: 340px;
+	float: left;
+	margin: 0 auto;
+	/* margin-left:10px;
+	margin-top:5px; */
+	min-height: 100px;
+	overflow: hidden;
+	background-color: #fff;
+	
+}
+
+#TRESC11WIDE{
+	width: 520px;
+	float: left;
+	
+	margin:auto;
+	margin-left:10px;
+	margin-top:5px;
+	min-height: 100px;
+	overflow: hidden;
+	background-color: #ddd;
+	
+}
+
+#TRESCMAPA{
+	width: 600 px;
+	float: left;
+	
+	/* margin: 0 auto; */
+	margin-left:10px;
+	margin-top:10px; 
+	min-height: 100px;
+	overflow: hidden;
+	background-color: #ddd;
+}
+
+#TRESCMAPA1{
+	/* width: 600 px; */
+	float: left;
+	
+	/* margin: 0 auto; */
+	margin-left:10px;
+	margin-top:10px; 
+	/* min-height: 100px; */
+	overflow: hidden;
+	background-color: #ddd;
+}
+
+#TRESCPELNASZEROKOSC{
+	width: 1090px;
+	margin-left:10px;
+	float: left;
+	margin: auto;
+}
+
+#TRESCTOPICDATA{
+	width: 460px;
+	float: left;
+	
+	margin:auto;
+	margin-left:10px;
+	margin-top:5px;
+	min-height: 100px;
+	overflow: hidden;
+	background-color: #ddd;
+}
+
+
+
+#STOPKA {
+	clear: both;
+	width: 100%;
+	background-color: #888;
 }
 
 #line {
@@ -95,8 +204,9 @@
         color: #272727;
         float: right;
         height: 25px;
+        width: 200px;
         margin: 0 auto;
-        margin-top: -33px;
+        margin-top: -30px;
 }
  
 #greeting a img {
@@ -114,3 +224,38 @@
         margin: 0 auto;
         margin-top: -33px;
 }
+
+/* ---  */
+
+       #map-canvas, #map_canvas {
+            height: 100%;
+        }
+
+        @media print {
+            html, body {
+                height: auto;
+            }
+
+            #map_canvas {
+                height: 650px;
+            }
+        }
+
+        #panel {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            margin-left: -180px;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+        }
+
+        input {
+            border: 1px solid  rgba(0, 0, 0, 0.5);
+        }
+        input.notfound {
+            border: 2px solid  rgba(255, 0, 0, 0.4);
+        }
+  

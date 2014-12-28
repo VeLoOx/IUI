@@ -11,7 +11,7 @@
 		<h:outputText value="Main Page" />
 	</ui:define>
 	<ui:define name="greeting">
-		
+		<c:if test="${empty currentUser.name}">
 					<h:form>
 						<h:commandLink action="login">Zaloguj
 						
@@ -19,6 +19,7 @@
 						|
 						<h:commandLink action="register">Zarejestruj</h:commandLink>
 					</h:form>
+					</c:if>
 							
 	</ui:define>
 	<ui:define name="header">
@@ -27,9 +28,17 @@
 
 	
 	<ui:define name="content">
-	<h:outputText>Co cię moze zainteresować</h:outputText>
 	
-	<h:outputText> Tematy </h:outputText>
+	<div id="top">
+	
+	<div id="MENU">MENU niezalogowany
+	
+	</div>
+	
+	<div id="TRESC">
+	
+	<div id="TRESC11WIDE">Najlepsze tematy
+	
 	<h:form id="topics">
 		<p:dataTable var="topic" value="#{topicService.getAllTopic()}" selectionMode="single" rowKey="#{topic.id}">
 			
@@ -51,6 +60,16 @@
 			</p:column>
 		</p:dataTable>
 		</h:form>
+	
+	</div>
+	
+	<div id="TRESC11WIDE">Nowe tematy</div>
+	
+	
+	
+		</div>
+	<div id="STOPKA">STOPKA</div>
+	</div>
 	</ui:define>
 
 </ui:composition>

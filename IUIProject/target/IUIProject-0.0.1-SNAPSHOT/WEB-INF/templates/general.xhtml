@@ -32,10 +32,18 @@
 		<div id="container">
 			<div id="greeting">
 				<c:if test="${not empty currentUser.name}">
-					<b>Welcome,</b> ${user.firstName} ${user.lastName} | <a
-						href="${request.contextPath}/app/logout">Logout</a>
+					<b>Welcome,</b> ${user.firstName} ${user.lastName} | 
+					<a  href="${request.contextPath}/app/logout">Wyloguj</a>
+					 
 				</c:if>
+				<c:otherwise>
+					<ui:insert name="greeting" />
+				</c:otherwise>
 			</div>
+
+<!-- 			<div id="goToMain"> -->
+<!-- 				<a href="${request.contextPath}">Main Page</a> -->
+<!-- 			</div> -->
 
 			<div id="header">
 				<h1>

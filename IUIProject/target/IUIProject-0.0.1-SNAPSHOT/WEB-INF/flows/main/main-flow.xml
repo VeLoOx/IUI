@@ -5,20 +5,43 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
         <var name="user" class="pl.iui.domain.user.UserEntity"/>
+        <var name="showTopic" class="pl.iui.domain.topic.TopicEntity" />
+       
+	
+	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
         
+        <view-state id="main" view="main.xhtml">
+                <transition on="login" to="login" />
+                <transition on="register" to="register"/>
+                
+                <transition on="showTopicDetails" to="topicDeails">
+                <evaluate expression="topicService.createMarker()" />
+                </transition>
+        </view-state>
 
-        <view-state id="welcome" view="welcome.xhtml" model="user">
+        <view-state id="login" view="login.xhtml" model="user">
                 <transition on="newUser" to="register" />
                 <transition on="confirmSignIn" to="finish">
                         <evaluate expression="userAuthenticationProviderService.processUserAuthentication(user)" />
                 </transition>
         </view-state>
+        
+       
 
         <view-state id="register" view="register.xhtml" model="user">
-                <transition on="backToSignIn" to="welcome" />
+                <transition on="backToLogIn" to="login" />
                 <transition on="confirmSignUp" to="authentication">
                         <evaluate expression="userService.createUser(user)" />
                 </transition>
+        </view-state>
+        
+        <view-state id="topicDeails" view="mainTopicDetails.xhtml">
+        <on-render>
+	 	<set name="showTopic" value="topicService.selectedTopic" ></set>
+	</on-render> 
+		<transition on="addComment" to="topicDeails">
+		 	<evaluate  expression="topicService.addComment(showTopic,newComm,flowScope.user)" />
+		 </transition>
         </view-state>
        
         <action-state id="authentication">

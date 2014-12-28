@@ -15,63 +15,94 @@
 
 	<ui:define name="content">
 
+		<div id="top">
 
-		<h:form id="userDataForm">
-			<p:fieldset styleClass="fieldset" legend="User Data Form">
-				<p:focus />
-				<p:messages id="messages" globalOnly="true" />
+			<div id="MENU">
+				MENU
 
-				<h:panelGrid id="dataPanelGrid" columns="2"
-					style="margin: 0 auto; margin-top: 25px; text-align: left"
-					cellspacing="3" cellpadding="3">
+				<h:form>
+					<h:commandLink value="Strona główna" action="goToMainPage" />
+					<br />
 
-					<h:outputText for="yearOfBirth" value="Year of birth:" />
-					<p:selectOneMenu id="yearOfBirth" value="#{userData.yearOfBirth}"
-						style="width:125px">
-						<f:selectItems value="#{uiUtils.years}" />
-					</p:selectOneMenu>
+					<h:commandLink value="Moje konto" action="goToHome" />
+					<br />
 
+					<h:commandLink value="Dodaj temat" action="editUserTopic"/> <br />
 
-					<p:outputLabel for="sex" value="Sex:" />
-					<p:selectOneRadio id="sex" value="#{userData.sex}"
-						style="width:125px">
-						<f:selectItem itemLabel="Male" itemValue="M" />
-						<f:selectItem itemLabel="Female" itemValue="F" />
-						<f:selectItem itemLabel="Do not know yet" itemValue="D" />
-					</p:selectOneRadio>
+					<h:commandLink value="Znajomi" />
+					<br />
+				</h:form>
 
 
-					<p:outputLabel for="city" value="City:" />
-					<p:selectOneMenu id="city" value="#{userData.adress.city}"
-						style="width:125px">
-						<f:selectItem itemLabel="Select City" itemValue="" />
-						<f:selectItem itemLabel="Kielce" itemValue="Kielce" />
-						<f:selectItem itemLabel="Kraków" itemValue="Kraków" />
-						<f:selectItem itemLabel="Łódź kurwa" itemValue="Łódz kurwa" />
-					</p:selectOneMenu>
+			</div>
 
-					<h:outputText for="hobbies" value="Hobbies:" />
-					<p:selectManyCheckbox id="hobbies" value="#{userData.hobbies}"
-						layout="grid" columns="2">
+			<div id="TRESC">
 
-						<f:selectItems itemLabel="#{hobbiesService.getAllHobbies()}"
-							value="#{hobbiesService.getAllHobbies()}" />
-					</p:selectManyCheckbox>
+				<h:form id="userDataForm">
+					<p:fieldset styleClass="fieldset" legend="Twoje dane">
+						<p:focus />
+						<p:messages id="messages" globalOnly="true" />
 
+						<h:panelGrid id="dataPanelGrid" columns="2"
+							style="margin: 0 auto; margin-top: 25px; text-align: left"
+							cellspacing="3" cellpadding="3">
 
-					<p:commandButton id="backToAccount" action="backToAccount"
-						immediate="true" icon="ui-icon-arrowreturnthick-1-w"
-						value="Back to Account" />
-					<p:commandButton id="submitButton" action="confirmUserData"
-						icon="ui-icon-check" value="Sava data" />
-
-				</h:panelGrid>
-			</p:fieldset>
-		</h:form>
+							<h:outputText for="yearOfBirth" value="Rok urodzenia:" />
+							<p:selectOneMenu id="yearOfBirth" value="#{userData.yearOfBirth}"
+								style="width:125px">
+								<f:selectItems value="#{uiUtils.years}" />
+							</p:selectOneMenu>
 
 
+							<p:outputLabel for="sex" value="Płeć:" />
+							<p:selectOneRadio id="sex" value="#{userData.sex}"
+								style="width:125px">
+								<f:selectItem itemLabel="Male" itemValue="M" />
+								<f:selectItem itemLabel="Female" itemValue="F" />
+								<f:selectItem itemLabel="Other" itemValue="D" />
+							</p:selectOneRadio>
 
-		
+							<h:outputText for="hobbies" value="Hobbies:" />
+							<p:selectManyCheckbox id="hobbies" value="#{userData.hobbies}"
+								layout="grid" columns="2">
+
+								<f:selectItems itemLabel="#{hobbiesService.getAllHobbies()}"
+									value="#{hobbiesService.getAllHobbies()}" />
+							</p:selectManyCheckbox>
+
+							<p:outputLabel for="city" value="Miasto:" />
+							<p:selectOneMenu id="city" value="#{userData.adress.city}"
+								style="width:125px">
+								<f:selectItem itemLabel="Select City" itemValue="" />
+								<f:selectItem itemLabel="Kielce" itemValue="Kielce" />
+								<f:selectItem itemLabel="Kraków" itemValue="Kraków" />
+								<f:selectItem itemLabel="Łódź kurwa" itemValue="Łódz kurwa" />
+							</p:selectOneMenu>
+
+							<p:outputLabel for="street" value="Ulica:" />
+							<h:inputText id="street" value="#{userData.adress.street}" />
+
+							<p:outputLabel for="post" value="Kod pocztowy:" />
+							<h:inputText id="post" value="#{userData.adress.postCode}" />
+
+							<p:outputLabel for="number" value="Numer:" />
+							<h:inputText id="number" value="#{userData.adress.numberPos}" />
+
+
+							<p:commandButton id="backToAccount" action="backToAccount"
+								immediate="true" icon="ui-icon-arrowreturnthick-1-w"
+								value="Powrót" />
+							<p:commandButton id="submitButton" action="confirmUserData"
+								icon="ui-icon-check" value="Zapisz" />
+
+						</h:panelGrid>
+					</p:fieldset>
+				</h:form>
+
+			</div>
+		</div>
+
+
 	</ui:define>
 
 </ui:composition>

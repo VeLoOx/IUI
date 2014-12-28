@@ -1,4 +1,5 @@
 pl\iui\domain\topic\TopicCategoryEntity.class
+pl\iui\services\GeocodeViewService.class
 pl\iui\domain\user\AdressEntity_.class
 pl\iui\domain\topic\TopicCategoryEntity_.class
 pl\iui\services\UserAuthenticationProviderService.class
@@ -25,12 +26,14 @@ pl\iui\domain\user\UserDataEntity.class
 pl\iui\services\impl\TopicServiceImpl.class
 pl\iui\domain\topic\TopicEntity_.class
 pl\iui\dao\topic\TopicCategoryDao.class
+pl\iui\ui\utils\MarkersUtils.class
 pl\iui\domain\user\CommentsEntity.class
 pl\iui\services\TopicService.class
 pl\iui\domain\user\UserDataEntity_.class
 pl\iui\dao\user\implementation\UserJpaDao.class
 pl\iui\dao\user\implementation\CommentsJpaDao.class
 pl\iui\services\impl\UserServiceImpl.class
+pl\iui\services\views\TopicServiceViews.class
 pl\iui\services\TopicCategoryService.class
 pl\iui\services\HobbiesService.class
 pl\iui\services\UserDataService.class
