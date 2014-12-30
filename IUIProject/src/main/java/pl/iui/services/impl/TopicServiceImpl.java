@@ -1,6 +1,8 @@
 package pl.iui.services.impl;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -139,8 +141,13 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 		topic.setLng(latLng.getLng());
 		topic.setAutor(user.getUserName());
 		topic.setAdress(adress);
+		Date dateobj = new Date();
+		topic.setData(dateobj);
 		topicDao.save(topic);
 
+		//DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		
+		
 		return true;
 	}
 
@@ -222,6 +229,34 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	@Override
+	public TopicEntity getNewTopic() {
+		// TODO Auto-generated method stub
+		return new TopicEntity();
+	}
+	
+	public AdressEntity getNewAdress(){
+		return new AdressEntity();
+		
+	}
+	
+	public String translateDate(TopicEntity t){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date d = t.getData();
+		if(d==null) return ""; else
+		return sdf.format(d);
+	}
+
+	@Override
+	public String translateCommentDate(CommentsEntity c) {
+		// TODO Auto-generated method stub
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy:HH:mm");
+		Date d = c.getData();
+		if(d==null) return ""; else
+		return sdf.format(d);
+		
 	}
 
 }

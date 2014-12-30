@@ -16,16 +16,14 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Proxy;
-import org.hibernate.annotations.Type;
 
 import pl.iui.domain.user.AdressEntity;
 import pl.iui.domain.user.CommentsEntity;
 /*import pl.iui.ui.utils.MarkersUtils;*/
-
-import org.primefaces.model.map.Marker;
 
 @Entity
 @Table(name="apptopic")
@@ -51,7 +49,7 @@ public class TopicEntity  implements Serializable  {
 	private long numberRate;
 	
 	@Column
-	@Type(type="date")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date data;
 	
 	@OneToOne(cascade={CascadeType.ALL}, fetch = FetchType.EAGER,  targetEntity=pl.iui.domain.user.AdressEntity.class)

@@ -38,6 +38,7 @@ public class UserEntity implements Serializable {
 	private String lastName;
 	private String userName;
 	private String password;
+	
 
 	@OneToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_ud")

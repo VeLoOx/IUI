@@ -46,6 +46,9 @@
 
 							<p:outputLabel value="Kategoria" />
 							<h:outputText value="#{showTopic.category}" />
+							
+							<p:outputLabel value="Data dodania" />
+							<h:outputText value="#{topicService.translateDate(showTopic)}" />
 
 							<p:outputLabel value="Opis:" />
 							<h:outputText value="#{showTopic.describe}" />

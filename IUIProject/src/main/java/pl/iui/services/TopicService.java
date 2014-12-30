@@ -25,5 +25,10 @@ public interface TopicService {
 	
 	public double getRate(TopicEntity top);
 	public void addRate(TopicEntity top, String rate, UserEntity ue);
+	
+	public TopicEntity getNewTopic();
+	public AdressEntity getNewAdress();
+	public String translateDate(TopicEntity t);
+	public String translateCommentDate(CommentsEntity c);
 
 }

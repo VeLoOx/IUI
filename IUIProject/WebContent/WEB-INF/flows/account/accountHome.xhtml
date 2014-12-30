@@ -106,6 +106,9 @@
 							<p:column width="200" headerText="Miasto">
 								<h:outputText value="#{topic.adress.city}" />
 							</p:column>
+							<p:column width="200" headerText="Data">
+								<h:outputText value="#{topicService.translateDate(topic)}" />
+							</p:column>
 						</p:dataTable>
 					</h:form>
 
