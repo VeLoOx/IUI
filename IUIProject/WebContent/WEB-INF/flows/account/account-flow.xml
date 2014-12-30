@@ -20,10 +20,12 @@
 
 	<view-state id="home" view="accountHome.xhtml">
 		<transition on="editUserData" to="editUserData" />
-		<transition on="editUserTopic" to="editUserTopic">
-			<evaluate expression="topicService.createMarker()" />
+		<transition on="createTopic" to="createTopic">
+		<evaluate expression="topicService.cleanTopicSelection()"></evaluate>
 		</transition>
-		<transition on="showTopicDetails" to="showTopic" />
+		<transition on="showTopicDetails" to="showTopic">
+		<evaluate expression="topicService.createMarker()"></evaluate>
+		</transition>
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
 
@@ -34,7 +36,7 @@
 		<transition on="goToMyAccount" to="home" />
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
-		<transition on="editUserTopic" to="editUserTopic">
+		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 			
 		</transition>
@@ -51,28 +53,34 @@
 
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
-		<transition on="editUserTopic" to="editUserTopic">
-			
-			<evaluate expression="topicService.createMarker()" />
-		</transition>
+
+		<transition on="editUserTopic" to="editUserTopic"/>
 	</view-state>
 	
 	
+
 
 	<view-state id="editUserTopic" view="topicDetails.xhtml">
 	<on-entry>
 		<set name="newTopic" value="topicService.getNewTopic()"></set>
 		<set name="adressTopic" value="topicService.getNewAdress()"></set>
 	</on-entry>
+	</view-state>
+
+	<view-state id="createTopic" view="createTopic.xhtml">
+
+		<on-entry>
+			<set name="newTopic" value="topicService.getNewTopic()"></set>
+			<set name="adressTopic" value="topicService.getNewAdress()"></set>
+		</on-entry>
 		<transition on="backToAccount" to="home" />
 		<transition on="confirmNewUserTopic" to="home">
 			<evaluate
 				expression="topicService.addTopic(newTopic,flowScope.user, adressTopic)" />
-
 		</transition>
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
-		<transition on="editUserTopic" to="editUserTopic">
+		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
 	</view-state>
@@ -89,7 +97,7 @@
 		</transition>
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
-		<transition on="editUserTopic" to="editUserTopic">
+		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
 	</view-state>

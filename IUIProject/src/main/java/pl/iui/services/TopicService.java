@@ -28,6 +28,7 @@ public interface TopicService {
 	
 	public TopicEntity getNewTopic();
 	public AdressEntity getNewAdress();
+	
 	public String translateDate(TopicEntity t);
 	public String translateCommentDate(CommentsEntity c);
 

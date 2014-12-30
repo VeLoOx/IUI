@@ -43,7 +43,12 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 	private double lng;
 
 	// ------------Map methods-------------------------------------
-
+	public void cleanTopicSelection(){
+		selectedTopic = null;
+		mapModel = new DefaultMapModel();
+		System.out.println("CZYSCI");
+	}
+	
 	public void createMarker() {
 		mapModel = new DefaultMapModel();
 

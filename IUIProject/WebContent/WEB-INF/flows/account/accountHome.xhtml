@@ -10,12 +10,12 @@
 		<h:outputText value="My Account Home" />
 	</ui:define>
 	<ui:define name="greeting">
-		<h:form>
-			<h:commandLink value="Strona główna" action="goToMainPage" />
-		</h:form>
+<!-- 		<h:form> -->
+<!-- 			<h:commandLink value="Main Page" action="goToMainPage" /> -->
+<!-- 		</h:form> -->
 	</ui:define>
 	<ui:define name="header">
-		<h:outputText value="Witaj #{user.firstName} #{user.lastName}" />
+		<h:outputText value="Welcome #{user.firstName} #{user.lastName}" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -28,18 +28,18 @@
 
 		<div id="top">
 			<div id="MENU">
-				mwnu
+				mwnu AccountHome
 
 				<h:form>
-					<h:commandLink value="Strona główna" action="goToMainPage" />
+					<h:commandLink value="Main Page" action="goToMainPage" />
 					<br />
 
-					<h:commandLink value="Moje konto" action="goToHome" />
+					<h:commandLink value="My account" action="goToHome" />
 					<br />
 
-					<h:commandLink value="Dodaj temat" action="editUserTopic"/> <br />
+					<h:commandLink value="New Topic" action="createTopic"/> <br />
 
-					<h:commandLink value="Znajomi" />
+					<h:commandLink value="Friends" />
 					<br />
 				</h:form>
 			</div>
@@ -78,7 +78,7 @@
 						</div>
 
 						<p:commandButton id="editUserData" action="editUserData"
-							icon="ui-icon-check" value="Edytuj dane" />
+							icon="ui-icon-check" value="Edit data" />
 					</h:form>
 				</div>
 
@@ -116,8 +116,8 @@
 
 					<h:form id="accountForm">
 
-						<p:commandButton id="editUserTopic" action="editUserTopic"
-							icon="ui-icon-check" value="Nowy temat" />
+						<p:commandButton id="createTopic" action="createTopic"
+							icon="ui-icon-check" value="New Topic" />
 					</h:form>
 				</div>
 			</div>

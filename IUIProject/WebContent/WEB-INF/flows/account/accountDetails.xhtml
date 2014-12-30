@@ -17,29 +17,29 @@
 
 		<div id="top">
 
+			<
 			<div id="MENU">
-				MENU
+				mwnu
 
 				<h:form>
-					<h:commandLink value="Strona główna" action="goToMainPage" />
+					<h:commandLink value="Main Page" action="goToMainPage" />
 					<br />
 
-					<h:commandLink value="Moje konto" action="goToHome" />
+					<h:commandLink value="My account" action="goToHome" />
 					<br />
 
-					<h:commandLink value="Dodaj temat" action="editUserTopic"/> <br />
+					<h:commandLink value="New Topic" action="createTopic" />
+					<br />
 
-					<h:commandLink value="Znajomi" />
+					<h:commandLink value="Friends" />
 					<br />
 				</h:form>
-
-
 			</div>
 
 			<div id="TRESC">
 
 				<h:form id="userDataForm">
-					<p:fieldset styleClass="fieldset" legend="Twoje dane">
+					<p:fieldset styleClass="fieldset" legend="User data">
 						<p:focus />
 						<p:messages id="messages" globalOnly="true" />
 
@@ -47,14 +47,14 @@
 							style="margin: 0 auto; margin-top: 25px; text-align: left"
 							cellspacing="3" cellpadding="3">
 
-							<h:outputText for="yearOfBirth" value="Rok urodzenia:" />
+							<h:outputText for="yearOfBirth" value="Year of birth:" />
 							<p:selectOneMenu id="yearOfBirth" value="#{userData.yearOfBirth}"
 								style="width:125px">
 								<f:selectItems value="#{uiUtils.years}" />
 							</p:selectOneMenu>
 
 
-							<p:outputLabel for="sex" value="Płeć:" />
+							<p:outputLabel for="sex" value="Sex:" />
 							<p:selectOneRadio id="sex" value="#{userData.sex}"
 								style="width:125px">
 								<f:selectItem itemLabel="Male" itemValue="M" />
@@ -70,30 +70,30 @@
 									value="#{hobbiesService.getAllHobbies()}" />
 							</p:selectManyCheckbox>
 
-							<p:outputLabel for="city" value="Miasto:" />
+							<p:outputLabel for="city" value="City:" />
 							<p:selectOneMenu id="city" value="#{userData.adress.city}"
 								style="width:125px">
 								<f:selectItem itemLabel="Select City" itemValue="" />
 								<f:selectItem itemLabel="Kielce" itemValue="Kielce" />
 								<f:selectItem itemLabel="Kraków" itemValue="Kraków" />
-								<f:selectItem itemLabel="Łódź kurwa" itemValue="Łódz kurwa" />
+								<f:selectItem itemLabel="Łódź" itemValue="Łódz" />
 							</p:selectOneMenu>
 
-							<p:outputLabel for="street" value="Ulica:" />
+							<p:outputLabel for="street" value="Street:" />
 							<h:inputText id="street" value="#{userData.adress.street}" />
 
-							<p:outputLabel for="post" value="Kod pocztowy:" />
+							<p:outputLabel for="post" value="Postal code:" />
 							<h:inputText id="post" value="#{userData.adress.postCode}" />
 
-							<p:outputLabel for="number" value="Numer:" />
+							<p:outputLabel for="number" value="Number:" />
 							<h:inputText id="number" value="#{userData.adress.numberPos}" />
 
 
 							<p:commandButton id="backToAccount" action="backToAccount"
 								immediate="true" icon="ui-icon-arrowreturnthick-1-w"
-								value="Powrót" />
+								value="Back" />
 							<p:commandButton id="submitButton" action="confirmUserData"
-								icon="ui-icon-check" value="Zapisz" />
+								icon="ui-icon-check" value="Save" />
 
 						</h:panelGrid>
 					</p:fieldset>

@@ -13,17 +13,17 @@
 	<ui:define name="greeting">
 		<c:if test="${empty currentUser.name}">
 					<h:form>
-						<h:commandLink action="login">Zaloguj
+						<h:commandLink action="login">Login
 						
 						</h:commandLink>
 						|
-						<h:commandLink action="register">Zarejestruj</h:commandLink>
+						<h:commandLink action="register">Register</h:commandLink>
 					</h:form>
 					</c:if>
 							
 	</ui:define>
 	<ui:define name="header">
-		<h:outputText value="Strona główna" />
+		<h:outputText value="Main page" />
 	</ui:define>
 
 	
@@ -31,13 +31,15 @@
 	
 	<div id="top">
 	
-	<div id="MENU">MENU niezalogowany
-	
+	<div id="MENU">MENU not logged in
+	<h:form>
+	<h:commandLink value="geocode" action="geocode"/> <br />
+	</h:form>
 	</div>
 	
 	<div id="TRESC">
 	
-	<div id="TRESC11WIDE">Najlepsze tematy
+	<div id="TRESC11WIDE">Best topics
 	
 	<h:form id="topics">
 		<p:dataTable var="topic" value="#{topicService.getAllTopic()}" selectionMode="single" rowKey="#{topic.id}">
@@ -63,12 +65,14 @@
 	
 	</div>
 	
-	<div id="TRESC11WIDE">Nowe tematy</div>
+	<div id="TRESC11WIDE">New Topics</div>
 	
 	
 	
 		</div>
-	<div id="STOPKA">STOPKA</div>
+		
+		
+	<div id="STOPKA">FOOTER</div>
 	</div>
 	</ui:define>
 
