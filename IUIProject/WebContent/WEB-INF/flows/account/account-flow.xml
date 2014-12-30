@@ -28,9 +28,12 @@
 		</transition>
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
+		<transition on="goToMap" to="map" />
 
 
 	</view-state>
+	
+	<view-state id="map" view="map.xhtml"></view-state>
 
 	<view-state id="mainHome" view="mainAccount.xhtml">
 		<transition on="goToMyAccount" to="home" />
