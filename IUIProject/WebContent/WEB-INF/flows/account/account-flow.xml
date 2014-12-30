@@ -54,10 +54,17 @@
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
 
+
 		<transition on="editUserTopic" to="editUserTopic"/>
+
+		<transition on="createTopic" to="createTopic">
+			<evaluate expression="topicService.createMarker()" />
+		</transition>
+
 	</view-state>
 	
 	
+
 
 
 	<view-state id="editUserTopic" view="topicDetails.xhtml">
@@ -73,6 +80,7 @@
 			<set name="newTopic" value="topicService.getNewTopic()"></set>
 			<set name="adressTopic" value="topicService.getNewAdress()"></set>
 		</on-entry>
+
 		<transition on="backToAccount" to="home" />
 		<transition on="confirmNewUserTopic" to="home">
 			<evaluate
