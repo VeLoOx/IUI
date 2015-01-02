@@ -264,4 +264,13 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 		
 	}
 
+	@Override
+	public List<TopicEntity> getLastTopics(int n) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		return topicDao.findLastTopics(n);
+	}
+
 }

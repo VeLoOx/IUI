@@ -62,8 +62,9 @@
 	width: 340px;
 	float: left;
 	margin: 0 auto;
-	/* margin-left:10px;
-	margin-top:5px; */
+	margin-top: 10px;
+	margin-left:10px;
+	
 	min-height: 100px;
 	overflow: hidden;
 	background-color: #fff;
@@ -110,6 +111,7 @@
 #TRESCPELNASZEROKOSC{
 	width: 1090px;
 	margin-left:10px;
+	margin-top: 20px;
 	float: left;
 	margin: auto;
 }

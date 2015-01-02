@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,7 +30,10 @@ import pl.iui.domain.user.CommentsEntity;
 @Entity
 @Table(name="apptopic")
 @Proxy(lazy=false)
+
 public class TopicEntity  implements Serializable  {
+	
+	public static String FINDLAST = "TOPIC.FINDLAST";
 
 	@Id
 	@GeneratedValue

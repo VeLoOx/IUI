@@ -34,4 +34,23 @@ public class TopicJpaDao extends GenericJpaDao<TopicEntity, Long> implements Top
 		// TODO Auto-generated method stub
 		return lista;
 	}
+
+	@Override
+	public List<TopicEntity> findLastTopics(int n) {
+		// TODO Auto-generated method stub
+		
+		
+		Query query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+                + " u order by u.id DESC");
+		 
+		 List<TopicEntity> lista = new ArrayList<TopicEntity>();
+		 try {
+            lista = (List<TopicEntity>) query.getResultList();
+    } catch(NoResultException e) {
+            //do nothing
+    }
+		
+		// TODO Auto-generated method stub
+		return lista.subList(0, n);
+	}
 }

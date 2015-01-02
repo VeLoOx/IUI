@@ -6,6 +6,7 @@
 
 	<secured attributes="ROLE_USER,ROLE_ADMIN" />
 	<var name="userData" class="pl.iui.domain.user.UserDataEntity" />
+	<var name="showUser" class="pl.iui.domain.user.UserEntity" />
 	<var name="newTopic" class="pl.iui.domain.topic.TopicEntity"/>
 	<var name="showTopic" class="pl.iui.domain.topic.TopicEntity" />
 	<var name="adressTopic" class="pl.iui.domain.user.AdressEntity" />
@@ -44,6 +45,7 @@
 			
 		</transition>
 		<transition on="showTopicDetails" to="showTopic" />
+		<transition on="showUserDetails" to="showUser" />
 	</view-state>
 
 	<view-state id="editUserData" view="accountDetails.xhtml">
@@ -111,6 +113,18 @@
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
+	</view-state>
+	
+	<view-state id="showUser" view="showUserDetails.xhtml">
+		<on-render>
+			<set name="showUser" value="userService.selectedUser"></set>
+		</on-render>
+		<transition on="goToMainPage" to="mainHome" />
+		<transition on="goToHome" to="home" />
+		<transition on="createTopic" to="createTopic">
+			<evaluate expression="topicService.createMarker()" />
+		</transition>
+		<transition on="showTopicDetails" to="showTopic" />
 	</view-state>
 
 </flow>

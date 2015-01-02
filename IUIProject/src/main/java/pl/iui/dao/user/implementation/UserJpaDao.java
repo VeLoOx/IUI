@@ -1,5 +1,8 @@
 package pl.iui.dao.user.implementation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -7,6 +10,7 @@ import org.springframework.util.Assert;
 
 import pl.iui.commons.dao.GenericJpaDao;
 import pl.iui.dao.user.UserDao;
+import pl.iui.domain.topic.TopicEntity;
 import pl.iui.domain.user.UserEntity;
 
 /**
@@ -60,6 +64,24 @@ public class UserJpaDao extends GenericJpaDao<UserEntity, Long> implements UserD
                
                 return user;
         }
+
+		@Override
+		public List<UserEntity> findLastUsers(int n) {
+			// TODO Auto-generated method stub
+			Query query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+	                + " u order by u.id DESC");
+			 
+			 List<UserEntity> lista = new ArrayList<UserEntity>();
+			 try {
+	            lista = (List<UserEntity>) query.getResultList();
+	    } catch(NoResultException e) {
+	            //do nothing
+	    }
+			
+			// TODO Auto-generated method stub
+			 
+			 if(lista.size()>n) return lista.subList(0, n); else return lista;
+		}
 
 }
 

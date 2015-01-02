@@ -41,6 +41,32 @@
 	
 	<div id="TRESC">
 	
+	<div id="TRESC11PELNASZEROKOSC">
+	Best topicsssssssssssssssssssssssssssssssssssssssssssssssssss
+	<h:form id="usersLasdt">
+		<p:dataTable var="userL" value="#{userService.getLastUsers(5)}" selectionMode="single" rowKey="#{userL.id}">
+			
+
+			<p:column  width="200" headerText="Name">
+				
+				<h:commandLink id="top" value="#{userL.userName}" action="showTopicDetails" >
+					 	<f:setPropertyActionListener value="#{userL}" target="#{userService.selectedUser}"></f:setPropertyActionListener>			  
+				</h:commandLink>
+				
+			</p:column>
+			
+			<p:column width="200" headerText="City">
+				<h:outputText value="#{userL.userData.adress.city}" />
+			</p:column>
+
+			<p:column  width="200" headerText="Polubiony?">
+				<h:outputText value="polubiony?" />
+			</p:column>
+		</p:dataTable>
+		</h:form>
+	
+		</div>
+	
 	<div id="TRESC11">Zainteresowany?
 	
 	<h:form id="topics">
@@ -67,15 +93,58 @@
 	
 	</div>
 	
-	<div id="TRESC11">Nowe tematy</div>
+	<div id="TRESC11">New topics
 	
-	<div id="TRESC11">Nowe osoby</div>
+		<h:form id="topicsLast">
+		<p:dataTable var="topicLast" value="#{topicService.getLastTopics(5)}" selectionMode="single" rowKey="#{topicLast.id}">
+			
+
+			<p:column  width="200" headerText="Name">
+				
+				<h:commandLink id="top" value="#{topicLast.name}" action="showTopicDetails" >
+					 	<f:setPropertyActionListener value="#{topicLast}" target="#{topicService.selectedTopic}"></f:setPropertyActionListener>			  
+				</h:commandLink>
+				
+			</p:column>
+			
+			<p:column width="200" headerText="Category">
+				<h:outputText value="#{topicLast.category}" />
+			</p:column>
+
+			<p:column  width="200" headerText="City">
+				<h:outputText value="#{topicLast.adress.city}" />
+			</p:column>
+		</p:dataTable>
+		</h:form>
 	
-	<div id="TRESC11">Njalepiej oceniane</div>
+	</div>
 	
+	<div id="TRESC11">New users
+	<h:form id="usersLast">
+		<p:dataTable var="userL" value="#{userService.getLastUsers(5)}" selectionMode="single" rowKey="#{userL.id}">
+			
+
+			<p:column  width="200" headerText="Name">
+				
+				<h:commandLink id="top" value="#{userL.userName}" action="showUserDetails" >
+					 	<f:setPropertyActionListener value="#{userL}" target="#{userService.selectedUser}"></f:setPropertyActionListener>			  
+				</h:commandLink>
+				
+			</p:column>
+			
+			<p:column width="200" headerText="City">
+				<h:outputText value="#{userL.userData.adress.city}" />
+			</p:column>
+
+			<p:column  width="200" headerText="Polubiony?">
+				<h:outputText value="polubiony?" />
+			</p:column>
+		</p:dataTable>
+		</h:form>
+	</div>
 	
-		</div>
-	
+
+	</div>
 	</div>
 	<div id="STOPKA">STOPKA</div>
 	</ui:define>

@@ -2,6 +2,7 @@ package pl.iui.services.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
@@ -26,6 +27,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 
+
 import pl.iui.dao.user.UserDao;
 import pl.iui.domain.topic.TopicEntity;
 import pl.iui.domain.user.UserDataEntity;
@@ -35,6 +37,7 @@ import pl.iui.services.UserService;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserDao userDao;
+    private UserEntity selectedUser;
    
     /**
      * Create user - persist to database
@@ -180,6 +183,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		System.out.println("ID!!!!!! = "+top.getId());
 		if(ue.getUserData().getRatedTopics().contains(top.getId()))
 		return false; else return true;
+	}
+
+
+	public UserEntity getSelectedUser() {
+		return selectedUser;
+	}
+
+
+	public void setSelectedUser(UserEntity selectedUser) {
+		this.selectedUser = selectedUser;
+	}
+
+
+	@Override
+	public List<UserEntity> getLastUsers(int n) {
+		// TODO Auto-generated method stub
+		return userDao.findLastUsers(n);
 	}
 
 }

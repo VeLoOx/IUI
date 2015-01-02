@@ -8,5 +8,5 @@ import pl.iui.domain.topic.TopicEntity;
 public interface TopicDao extends GenericDao<TopicEntity, Long> {
 	
 	public List<TopicEntity> findUserTopic(String name);
-
+	public List<TopicEntity> findLastTopics(int n);
 }

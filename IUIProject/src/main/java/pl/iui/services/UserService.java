@@ -1,4 +1,6 @@
 package pl.iui.services;
+import java.util.List;
+
 import javax.faces.event.AjaxBehaviorEvent;
 
 import pl.iui.domain.topic.TopicEntity;
@@ -41,6 +43,7 @@ public interface UserService {
     
     public void addRatedTopic(long id, UserEntity ue);
     public boolean allowToRate(TopicEntity top, UserEntity ue);
+    public List<UserEntity> getLastUsers(int n);
     	
 }
 

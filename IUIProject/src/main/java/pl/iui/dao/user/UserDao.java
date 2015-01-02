@@ -1,5 +1,7 @@
 package pl.iui.dao.user;
 
+import java.util.List;
+
 import pl.iui.commons.dao.GenericDao;
 import pl.iui.domain.user.UserEntity;
 
@@ -26,5 +28,6 @@ public interface UserDao extends GenericDao<UserEntity, Long> {
          * @return User entity
          */
         UserEntity loadUserByUserName(String userName);
+        List<UserEntity> findLastUsers(int n);
 }
 

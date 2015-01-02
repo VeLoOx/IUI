@@ -31,5 +31,7 @@ public interface TopicService {
 	
 	public String translateDate(TopicEntity t);
 	public String translateCommentDate(CommentsEntity c);
+	
+	public List<TopicEntity> getLastTopics(int n);
 
 }
