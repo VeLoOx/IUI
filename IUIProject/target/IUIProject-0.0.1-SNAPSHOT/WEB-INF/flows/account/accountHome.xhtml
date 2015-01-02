@@ -10,12 +10,12 @@
 		<h:outputText value="My Account Home" />
 	</ui:define>
 	<ui:define name="greeting">
-		<h:form>
-			<h:commandLink value="Strona główna" action="goToMainPage" />
-		</h:form>
+<!-- 		<h:form> -->
+<!-- 			<h:commandLink value="Main Page" action="goToMainPage" /> -->
+<!-- 		</h:form> -->
 	</ui:define>
 	<ui:define name="header">
-		<h:outputText value="Witaj #{user.firstName} #{user.lastName}" />
+		<h:outputText value="Welcome #{user.firstName} #{user.lastName}" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -27,34 +27,60 @@
 		<!--                 </f:metadata> -->
 
 		<div id="top">
-			<div id="MENU">mwnu</div>
+			<div id="MENU">
+				mwnu AccountHome
+
+				<h:form>
+					<h:commandLink value="Main Page" action="goToMainPage" />
+					<br />
+
+					<h:commandLink value="My account" action="goToHome" />
+					<br />
+
+					<h:commandLink value="New Topic" action="createTopic"/> <br />
+
+					<h:commandLink value="Friends" />
+					<h:commandLink value="Map"  action="goToMap"/>
+					<br />
+				</h:form>
+			</div>
 
 			<div id="TRESC">
 				<div id="TRESC11WIDE">
-				<h:form>
-					<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="2">
-						<p:outputLabel value="Year of birth:" />
-						<h:outputText value="#{user.userData.yearOfBirth}" />
+					<h:form>
+						<h:panelGrid columns="2" style="margin-bottom:10px"
+							cellpadding="2">
+							<p:outputLabel value="Year of birth:" />
+							<h:outputText value="#{user.userData.yearOfBirth}" />
 
-						<p:outputLabel value="Sex:" />
-						<h:outputText value="#{user.userData.sex}" />
+							<p:outputLabel value="Sex:" />
+							<h:outputText value="#{user.userData.sex}" />
 
-						<p:outputLabel value="City:" />
-						<h:outputText value="#{user.userData.adress.city}" />
+							<p:outputLabel value="Hobbies:" />
+							<h:outputText value="#{user.userData.hobbies}" />
 
-						<p:outputLabel value="Hobbies:" />
-						<h:outputText value="#{user.userData.hobbies}" />
+							<p:outputLabel value="City:" />
+							<h:outputText value="#{user.userData.adress.city}" />
+
+							<p:outputLabel  value="Ulica:" />
+							<h:outputText  value="#{user.userData.adress.street}" />
+
+							<p:outputLabel  value="Kod pocztowy:" />
+							<h:outputText  value="#{user.userData.adress.postCode}" />
+
+							<p:outputLabel  value="Numer:" />
+							<h:outputText  value="#{user.userData.adress.numberPos}" />
 
 
-					</h:panelGrid>
-					<div style="margin-left: auto; margin-right: auto">
-						<p:gmap center="50.86607, 20.628567" zoom="25" type="terrain"
-							style="margin-left: auto; margin-right: auto;width:600px;height:400px" />
-					</div>
-					
-					<p:commandButton id="editUserData" action="editUserData"
-							icon="ui-icon-check" value="Edytuj dane" />
-				</h:form>
+						</h:panelGrid>
+						<div style="margin-left: auto; margin-right: auto">
+							<p:gmap center="50.86607, 20.628567" zoom="25" type="terrain"
+								style="margin-left: auto; margin-right: auto; margin-top:10px; width:420px;height:400px" />
+						</div>
+
+						<p:commandButton id="editUserData" action="editUserData"
+							icon="ui-icon-check" value="Edit data" />
+					</h:form>
 				</div>
 
 				<div id="TRESC11WIDE">
@@ -81,21 +107,24 @@
 							<p:column width="200" headerText="Miasto">
 								<h:outputText value="#{topic.adress.city}" />
 							</p:column>
+							<p:column width="200" headerText="Data">
+								<h:outputText value="#{topicService.translateDate(topic)}" />
+							</p:column>
 						</p:dataTable>
 					</h:form>
 
-					
+
 
 					<h:form id="accountForm">
-						
-						<p:commandButton id="editUserTopic" action="editUserTopic"
-							icon="ui-icon-check"
-							value="Nowy temat" />
+
+						<p:commandButton id="createTopic" action="createTopic"
+							icon="ui-icon-check" value="New Topic" />
 					</h:form>
 				</div>
 			</div>
-			<div id="STOPKA"></div>
 		</div>
+		<div id="STOPKA"></div>
+
 	</ui:define>
 
 </ui:composition>

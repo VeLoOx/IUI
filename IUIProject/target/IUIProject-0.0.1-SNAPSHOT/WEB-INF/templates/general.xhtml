@@ -33,7 +33,7 @@
 			<div id="greeting">
 				<c:if test="${not empty currentUser.name}">
 					<b>Welcome,</b> ${user.firstName} ${user.lastName} | 
-					<a  href="${request.contextPath}/app/logout">Wyloguj</a>
+					<a  href="${request.contextPath}/app/logout">Logout</a>
 					 
 				</c:if>
 				<c:otherwise>
@@ -46,7 +46,9 @@
 <!-- 			</div> -->
 
 			<div id="header">
+			<h:outputText styleClass="mainTitle" value="My World"/>
 				<h1>
+				
 					<ui:insert name="header" />
 				</h1>
 			</div>

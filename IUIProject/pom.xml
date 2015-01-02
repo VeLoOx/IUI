@@ -40,13 +40,22 @@
 
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.3.5.Final</hibernate.version>
-<!-- 		<hibernate.version>3.6.9.Final</hibernate.version> -->
+		<!-- <hibernate.version>3.6.9.Final</hibernate.version> -->
 
 		<!-- Logging -->
 		<logback.version>1.0.13</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
 
 	</properties>
+	
+	<repositories>
+    <repository>
+        <id>prime-repo</id>
+        <name>PrimeFaces Maven Repository</name>
+        <url>http://repository.primefaces.org</url>
+        <layout>default</layout>
+    </repository>
+</repositories>
 
 	<dependencies>
 		<!-- JAVA EE7 API -->
@@ -108,6 +117,11 @@
 			<version>4.0</version>
 		</dependency>
 
+		<dependency>  
+    <groupId>org.primefaces.themes</groupId>  
+    <artifactId>all-themes</artifactId>  
+    <version>1.0.10</version>  
+</dependency>  
 
 		<!-- Spring ORM i HIBERNATE support -->
 		<dependency>
@@ -117,10 +131,10 @@
 		</dependency>
 
 		<dependency>
-                <groupId>com.oracle</groupId>
-                <artifactId>ojdbc6</artifactId>
-                <version>11.2.0</version>
-        </dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -137,11 +151,11 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-<dependency>
-    <groupId>org.hibernate.javax.persistence</groupId>
-    <artifactId>hibernate-jpa-2.1-api</artifactId>
-    <version>1.0.0.Final</version>
-</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
 
 	</dependencies>
 </project>

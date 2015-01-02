@@ -93,10 +93,10 @@
 	
 	</div>
 	
-	<div id="TRESC11">New topics
+	<div id="TRESC11"><h:outputText styleClass="title" value="New Topics"/>
 	
 		<h:form id="topicsLast">
-		<p:dataTable var="topicLast" value="#{topicService.getLastTopics(5)}" selectionMode="single" rowKey="#{topicLast.id}">
+		<p:dataTable styleClass="table2" var="topicLast" value="#{topicService.getLastTopics(5)}" selectionMode="single" rowKey="#{topicLast.id}">
 			
 
 			<p:column  width="200" headerText="Name">

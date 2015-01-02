@@ -17,7 +17,10 @@
                 <transition on="showTopicDetails" to="topicDeails">
                 <evaluate expression="topicService.createMarker()" />
                 </transition>
+                <transition on="geocode" to="geo"/>
         </view-state>
+        
+        <view-state id="geo" view="geo.xhtml"></view-state>
 
         <view-state id="login" view="login.xhtml" model="user">
                 <transition on="newUser" to="register" />
