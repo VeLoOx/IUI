@@ -53,4 +53,27 @@ public class TopicJpaDao extends GenericJpaDao<TopicEntity, Long> implements Top
 		// TODO Auto-generated method stub
 		return lista.subList(0, n);
 	}
+	
+	public List<TopicEntity> findTopicForUser(UserEntity user){
+		 Query query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+                 + " u where u.category IN :cat AND u.adress.city = :cit")
+                 .setParameter("cat",user.getUserData().getHobbies())
+                 .setParameter("cit", user.getUserData().getAdress().getCity());
+		 
+		Query query2 = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+                + " u where u.id IN :ids")
+                .setParameter("ids", user.getUserData().getRatedTopics());
+		 
+		 
+		 List<TopicEntity> lista = new ArrayList<TopicEntity>();
+		 try {
+            lista = (List<TopicEntity>) query.getResultList();
+            if(!user.getUserData().getRatedTopics().isEmpty())
+            lista.removeAll(query2.getResultList());
+            
+    } catch(NoResultException e) {
+            //do nothing
+    }
+		 return lista;
+	}
 }

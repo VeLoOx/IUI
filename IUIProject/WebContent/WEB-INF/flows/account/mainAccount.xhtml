@@ -70,7 +70,7 @@
 	<div id="TRESC11">Zainteresowany?
 	
 	<h:form id="topics">
-		<p:dataTable var="topic" value="#{topicService.getAllTopic()}" selectionMode="single" rowKey="#{topic.id}">
+		<p:dataTable var="topic" value="#{topicService.findTopicForUser(flowScope.user)}" selectionMode="single" rowKey="#{topic.id}">
 			
 
 			<p:column  width="200" headerText="Name">

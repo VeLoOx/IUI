@@ -3,43 +3,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" 
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
 
 <h:head>
 
     <title>Places Autocomplete</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"></meta>
     <meta charset="utf-8"></meta>
+    <h:outputStylesheet library="css" name="style.css" />
     <link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet"></link>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
 
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #map-canvas, #map_canvas {
-            height: 100%;
-        }
-
-        @media print {
-            html, body {
-                height: auto;
-            }
-
-            #map_canvas {
-                height: 650px;
-            }
-        }
-
+     
+               
         #panel {
-            position: absolute;
+           
             top: 5px;
-            left: 50%;
-            margin-left: -180px;
-            z-index: 5;
+           
+            margin-left: 100px;
+            /* z-index: 5; */
             background-color: #fff;
             padding: 5px;
             border: 1px solid #999;
@@ -103,15 +88,26 @@
             marker.setVisible(true);
 
             var address = '';
+            var adr1;
+            var adr2;
             if (place.address_components) {
               address = [
                 (place.address_components[0] && place.address_components[0].short_name || ''),
                 (place.address_components[1] && place.address_components[1].short_name || ''),
                 (place.address_components[2] && place.address_components[2].short_name || '')
               ].join(' ');
+              adr1 = [
+                      (place.address_components[0] && place.address_components[0].short_name || '')
+                      
+                    ].join(' ');
+
+              var adr2 = [
+                          (place.address_components[1] && place.address_components[1].short_name || '')
+                      ].join(' ');
             }
 
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+            document.getElementById("miasto").innerHTML = address;
             infowindow.open(map, marker);
           });
 
@@ -135,7 +131,51 @@
 </h:head>
 
 <h:body>
-    <div id="panel" style="margin-left: -260px">
+<div id="container">
+<div id="greeting">
+				<c:if test="${not empty currentUser.name}">
+					<b>Welcome,</b> ${user.firstName} ${user.lastName} | 
+					<a  href="${request.contextPath}/app/logout">Logout</a>
+					 
+				</c:if>
+				<c:otherwise>
+					<ui:insert name="greeting" />
+				</c:otherwise>
+			</div>
+
+<!-- 			<div id="goToMain"> -->
+<!-- 				<a href="${request.contextPath}">Main Page</a> -->
+<!-- 			</div> -->
+
+			<div id="header">
+			<h:outputText value="My World"/>
+				<h1>
+				
+					<ui:insert name="header" />
+				</h1>
+			</div>
+<div id="top" >
+<div id="MENU">
+				mwnu
+
+				<h:form>
+					<h:commandLink value="Main Page" action="goToMainPage" />
+					<br />
+
+					<h:commandLink value="My account" action="goToHome" />
+					<br />
+
+					<h:commandLink value="New Topic" action="createTopic" />
+					<br />
+
+					<h:commandLink value="Friends" />
+					<br />
+				</h:form>
+			</div>
+	<div id="TRESC">
+	
+	<div id="TRESCWIDEPANELMAP">
+    <div id="panel">
       <input id="searchTextField" type="text" size="50"></input>
       <input type="radio" name="type" id="changetype-all" checked="checked"></input>
       <label for="changetype-all">All</label>
@@ -146,7 +186,15 @@
       <input type="radio" name="type" id="changetype-geocode"></input>
       <label for="changetype-geocode">Geocodes</label>
     </div>
-    <div id="map-canvas"></div>
-
+    </div>
+    <div id="TRESCMAP">
+    	<div id="map-canvas"></div>
+    </div>
+    <div id="TRESC11WIDE">
+    	<h:outputLabel id="miasto" value="miasto"/>
+    </div>
+   </div> 
+   </div>
+</div>
 </h:body>
 </html>

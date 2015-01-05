@@ -33,5 +33,6 @@ public interface TopicService {
 	public String translateCommentDate(CommentsEntity c);
 	
 	public List<TopicEntity> getLastTopics(int n);
+	public List<TopicEntity> findTopicForUser(UserEntity user);
 
 }

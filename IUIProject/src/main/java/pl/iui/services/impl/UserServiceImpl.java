@@ -172,6 +172,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		// TODO Auto-generated method stub
 		
 		ue.getUserData().getRatedTopics().add(id);
+		
+		//ue.getUserData().getHobbies().clear();
 		userDao.update(ue);
 		
 	}

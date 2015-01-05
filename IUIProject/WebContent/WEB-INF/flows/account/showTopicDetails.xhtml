@@ -76,6 +76,8 @@
 								</table>
 							</h:form>
 						</h:panelGrid>
+						
+						<h:outputText rendered="#{!userService.allowToRate(showTopic, flowScope.user)}" value="You already rated this topic!"/>
 					</p:fieldset>
 				</div>
 

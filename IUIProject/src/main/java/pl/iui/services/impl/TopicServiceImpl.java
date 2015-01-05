@@ -272,5 +272,9 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 		
 		return topicDao.findLastTopics(n);
 	}
+	
+	public List<TopicEntity> findTopicForUser(UserEntity user){
+		return topicDao.findTopicForUser(user);
+	}
 
 }
