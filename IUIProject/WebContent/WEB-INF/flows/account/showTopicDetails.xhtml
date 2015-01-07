@@ -18,20 +18,19 @@
 		<script src="http://maps.google.com/maps/api/js?sensor=true" />
 		<div id="top">
 			<div id="MENU">
-				mwnu
+				<p:panel header="MENU" footer=" - My World - ">
+					<h:form>
+						<p:menu>
+							<p:menuitem value="Main Page" action="goToMainPage" />
+							<p:menuitem value="My Account" action="goToHome" />
+							<p:menuitem value="Search" action="search" />
+						</p:menu>
+						<p:menu style="margin-top:10px;">
+							<p:menuitem value="Look on map" action="map" />
 
-				<h:form>
-					<h:commandLink value="Main Page" action="goToMainPage" />
-					<br />
-
-					<h:commandLink value="My account" action="goToHome" />
-					<br />
-
-					<h:commandLink value="New Topic" action="createTopic"/> <br />
-
-					<h:commandLink value="Friends" />
-					<br />
-				</h:form>
+						</p:menu>
+					</h:form>
+				</p:panel>
 			</div>
 
 			<div id="TRESC">
@@ -116,40 +115,38 @@
 				</div>
 
 				<div id="TRESCPELNASZEROKOSC">
+				<p:panel header="Comments">
 					<h:form>
 
 						<h:panelGrid>
 							<p:focus />
-							<h:outputLabel>Comments</h:outputLabel>
-							<h:inputTextarea cols="140" rows="5" value="#{newComm.text}" />
-
-
-
-
+							<h:outputLabel>Your Comment </h:outputLabel>
+							<h:inputTextarea cols="135" rows="5" value="#{newComm.text}" />
 							<p:commandButton id="addComment" value="Add comment"
 								action="addComment" />
-
-
 						</h:panelGrid>
 
 					</h:form>
 
-					<p:dataTable var="comm"
-						value="#{topicService.getAllCommentsForTopic(showTopic.id)}">
+					<p:dataTable var="comm" value="#{topicService.getAllCommentsForTopic(showTopic.id)}" styleClass="fixed-size">
 
 
 						<p:column width="55" headerText="Author">
 							<h:outputText value="#{comm.autor}" />
 						</p:column>
 
-						<p:column width="200" headerText="Tekst">
+						<p:column width="200" headerText="Tekst" >
 							<h:outputText value="#{comm.text}" />
 						</p:column>
 					</p:dataTable>
+				</p:panel>
+				
 				</div>
 			</div>
-			<div id="STOPKA"></div>
+			
 		</div>
 	</ui:define>
-
+<ui:define name="footer">
+		<div id="STOPKA">FOOTER</div>
+	</ui:define>
 </ui:composition>

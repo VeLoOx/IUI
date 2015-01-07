@@ -10,9 +10,9 @@
 		<h:outputText value="My Account Home" />
 	</ui:define>
 	<ui:define name="greeting">
-<!-- 		<h:form> -->
-<!-- 			<h:commandLink value="Main Page" action="goToMainPage" /> -->
-<!-- 		</h:form> -->
+		<!-- 		<h:form> -->
+		<!-- 			<h:commandLink value="Main Page" action="goToMainPage" /> -->
+		<!-- 		</h:form> -->
 	</ui:define>
 	<ui:define name="header">
 		<h:outputText value="Welcome #{user.firstName} #{user.lastName}" />
@@ -28,103 +28,110 @@
 
 		<div id="top">
 			<div id="MENU">
-				mwnu AccountHome
+				<p:panel header="MENU" footer=" - My World - ">
+					<h:form>
+						<p:menu>
+							<p:menuitem value="Main Page" action="goToMainPage" />
+							<p:menuitem value="Add Topic" action="createTopic" />
+							<p:menuitem value="Search" action="search" />
+						</p:menu>
+						<p:menu style="margin-top:10px;">
+							<p:menuitem value="Look on map" action="map" />
 
-				<h:form>
-					<h:commandLink value="Main Page" action="goToMainPage" />
-					<br />
-
-					<h:commandLink value="My account" action="goToHome" />
-					<br />
-
-					<h:commandLink value="New Topic" action="createTopic"/> <br />
-
-					<h:commandLink value="Friends" />
-					<h:commandLink value="Map"  action="goToMap"/>
-					<br />
-				</h:form>
+						</p:menu>
+					</h:form>
+				</p:panel>
 			</div>
 
 			<div id="TRESC">
+
 				<div id="TRESC11WIDE">
-					<h:form>
-						<h:panelGrid columns="2" style="margin-bottom:10px"
-							cellpadding="2">
-							<p:outputLabel value="Year of birth:" />
-							<h:outputText value="#{user.userData.yearOfBirth}" />
+					<p:fieldset legend="Your Data">
+						<h:form>
+							<h:panelGrid columns="2" style="margin-bottom:10px"
+								cellpadding="2">
+								<p:outputLabel value="Year of birth:" />
+								<h:outputText value="#{user.userData.yearOfBirth}" />
 
-							<p:outputLabel value="Sex:" />
-							<h:outputText value="#{user.userData.sex}" />
+								<p:outputLabel value="Sex:" />
+								<h:outputText value="#{user.userData.sex}" />
 
-							<p:outputLabel value="Hobbies:" />
-							<h:outputText value="#{user.userData.hobbies}" />
+								<p:outputLabel value="Hobbies:" />
+								<h:outputText value="#{user.userData.hobbies}" />
 
-							<p:outputLabel value="City:" />
-							<h:outputText value="#{user.userData.adress.city}" />
+								<p:outputLabel value="City:" />
+								<h:outputText value="#{user.userData.adress.city}" />
 
-							<p:outputLabel  value="Ulica:" />
-							<h:outputText  value="#{user.userData.adress.street}" />
+								<p:outputLabel value="Ulica:" />
+								<h:outputText value="#{user.userData.adress.street}" />
 
-							<p:outputLabel  value="Kod pocztowy:" />
-							<h:outputText  value="#{user.userData.adress.postCode}" />
+								<p:outputLabel value="Kod pocztowy:" />
+								<h:outputText value="#{user.userData.adress.postCode}" />
 
-							<p:outputLabel  value="Numer:" />
-							<h:outputText  value="#{user.userData.adress.numberPos}" />
+								<p:outputLabel value="Numer:" />
+								<h:outputText value="#{user.userData.adress.numberPos}" />
 
 
-						</h:panelGrid>
-						<div style="margin-left: auto; margin-right: auto">
-							<p:gmap center="50.86607, 20.628567" zoom="25" type="terrain"
-								style="margin-left: auto; margin-right: auto; margin-top:10px; width:420px;height:400px" />
-						</div>
-
-						<p:commandButton id="editUserData" action="editUserData"
-							icon="ui-icon-check" value="Edit data" />
-					</h:form>
+							</h:panelGrid>
+							<div style="margin-left: auto; margin-right: auto">
+								<p:gmap center="50.86607, 20.628567" zoom="25" type="terrain"
+									style="margin-left: auto; margin-right: auto; margin-top:10px; width:420px;height:400px" />
+							</div>
+							<p:panel>
+							<p:commandButton id="editUserData" action="editUserData"
+								icon="ui-icon-check" style="width:440px;height:30px;" value="Edit data" />
+								</p:panel>
+						</h:form>
+					</p:fieldset>
 				</div>
 
+
 				<div id="TRESC11WIDE">
-					<h:form id="topics">
-						<p:dataTable var="topic"
-							value="#{topicService.getAllTopicForUser(flowScope.user.userName)}"
-							selectionMode="single" rowKey="#{topic.id}">
+					<p:fieldset legend="Your Topics">
+						<h:form id="topics">
+							<p:dataTable var="topic"
+								value="#{topicService.getAllTopicForUser(flowScope.user.userName)}"
+								selectionMode="single" rowKey="#{topic.id}">
 
 
-							<p:column width="200" headerText="Name">
+								<p:column width="200" headerText="Name">
 
-								<h:commandLink id="top" value="#{topic.name}"
-									action="showTopicDetails">
-									<f:setPropertyActionListener value="#{topic}"
-										target="#{topicService.selectedTopic}"></f:setPropertyActionListener>
-								</h:commandLink>
+									<h:commandLink id="top" value="#{topic.name}"
+										action="showTopicDetails">
+										<f:setPropertyActionListener value="#{topic}"
+											target="#{topicService.selectedTopic}"></f:setPropertyActionListener>
+									</h:commandLink>
 
-							</p:column>
+								</p:column>
 
-							<p:column width="200" headerText="Category">
-								<h:outputText value="#{topic.category}" />
-							</p:column>
+								<p:column width="200" headerText="Category">
+									<h:outputText value="#{topic.category}" />
+								</p:column>
 
-							<p:column width="200" headerText="Miasto">
-								<h:outputText value="#{topic.adress.city}" />
-							</p:column>
-							<p:column width="200" headerText="Data">
-								<h:outputText value="#{topicService.translateDate(topic)}" />
-							</p:column>
-						</p:dataTable>
-					</h:form>
+								<p:column width="200" headerText="Miasto">
+									<h:outputText value="#{topic.adress.city}" />
+								</p:column>
+								<p:column width="200" headerText="Data">
+									<h:outputText value="#{topicService.translateDate(topic)}" />
+								</p:column>
+							</p:dataTable>
+						</h:form>
 
 
 
-					<h:form id="accountForm">
-
-						<p:commandButton id="createTopic" action="createTopic"
-							icon="ui-icon-check" value="New Topic" />
-					</h:form>
+						<h:form id="accountForm">
+							<p:panel>
+								<p:commandButton  id="createTopic" action="createTopic"
+									icon="ui-icon-check" style="width:440px;height:30px;" value="New Topic" />
+							</p:panel>
+						</h:form>
+					</p:fieldset>
 				</div>
 			</div>
 		</div>
-		<div id="STOPKA"></div>
 
 	</ui:define>
-
+	<ui:define name="footer">
+		<div id="STOPKA">FOOTER</div>
+	</ui:define>
 </ui:composition>

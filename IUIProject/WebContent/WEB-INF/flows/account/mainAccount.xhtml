@@ -11,9 +11,7 @@
 		<h:outputText value="Main Page" />
 	</ui:define>
 	<ui:define name="greeting">
-		<h:form>
-					<h:commandLink value="Moje konto" action="goToMyAccount"/>
-		</h:form>					
+						
 	</ui:define>
 	<ui:define name="header">
 		<h:outputText value="Strona główna" />
@@ -24,25 +22,27 @@
 	
 	<div id="top">
 	
-	<div id="MENU">MENU
-	
-	<h:form>
-			<h:commandLink value="Strona główna" action="goToMainPage"/> <br />
-			
-			<h:commandLink value="Moje konto" action="goToHome"/> <br />
-			
-			<h:commandLink value="Dodaj temat" action="createTopic"/> <br />
-			
-			<h:commandLink value="Znajomi"/> <br />
-			</h:form>
-	
-	
-	</div>
+	<div id="MENU">
+				<p:panel header="MENU" footer=" - My World - ">
+					<h:form>
+						<p:menu>
+							<p:menuitem value="Main Page" action="goToMainPage" />
+							<p:menuitem value="Main Account" action="goToMyAccount" />
+							<p:menuitem value="Add Topic" action="createTopic" />
+							<p:menuitem value="Search" action="search" />
+						</p:menu>
+						<p:menu style="margin-top:10px;">
+							<p:menuitem value="Look on map" action="map" />
+
+						</p:menu>
+					</h:form>
+				</p:panel>
+			</div>
 	
 	<div id="TRESC">
 	
 	<div id="TRESC11PELNASZEROKOSC">
-	Best topicsssssssssssssssssssssssssssssssssssssssssssssssssss
+	<p:panel header="Best Topics /sztuka">
 	<h:form id="usersLasdt">
 		<p:dataTable var="userL" value="#{userService.getLastUsers(5)}" selectionMode="single" rowKey="#{userL.id}">
 			
@@ -64,11 +64,11 @@
 			</p:column>
 		</p:dataTable>
 		</h:form>
-	
+	</p:panel>
 		</div>
 	
-	<div id="TRESC11">Zainteresowany?
-	
+	<div id="TRESC11">
+	<p:fieldset legend="Choosen for You">
 	<h:form id="topics">
 		<p:dataTable var="topic" value="#{topicService.findTopicForUser(flowScope.user)}" selectionMode="single" rowKey="#{topic.id}">
 			
@@ -90,11 +90,11 @@
 			</p:column>
 		</p:dataTable>
 		</h:form>
-	
+	</p:fieldset>
 	</div>
 	
-	<div id="TRESC11"><h:outputText styleClass="title" value="New Topics"/>
-	
+	<div id="TRESC11">
+	<p:fieldset legend="New Topics">
 		<h:form id="topicsLast">
 		<p:dataTable styleClass="table2" var="topicLast" value="#{topicService.getLastTopics(5)}" selectionMode="single" rowKey="#{topicLast.id}">
 			
@@ -116,10 +116,11 @@
 			</p:column>
 		</p:dataTable>
 		</h:form>
-	
+	</p:fieldset>
 	</div>
 	
-	<div id="TRESC11">New users
+	<div id="TRESC11">
+	<p:fieldset legend="New User">
 	<h:form id="usersLast">
 		<p:dataTable var="userL" value="#{userService.getLastUsers(5)}" selectionMode="single" rowKey="#{userL.id}">
 			
@@ -141,6 +142,7 @@
 			</p:column>
 		</p:dataTable>
 		</h:form>
+		</p:fieldset>
 	</div>
 	
 

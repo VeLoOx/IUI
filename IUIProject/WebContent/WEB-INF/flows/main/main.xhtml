@@ -32,21 +32,30 @@
 	<div id="top">
 	
 	<div id="MENU">
-	<p:panel header="MENU">
+	<p:panel header="MENU" footer=" - My World - ">
 	<h:form>
 	<p:menu>
-		<p:menuitem value="geocode" action="geocode"/>
+		<p:menuitem value="Welcome" action="main"/>
+		<p:menuitem value="Geocode" action="geo"/>
+		<p:menuitem value="Search" action="search"/>
+	</p:menu>
+	<p:menu style="margin-top:10px;">
+		<p:menuitem value="Login" action="login"/>
+		<p:menuitem value="Register" action="register"/>
 	</p:menu>
 	
-	<h:commandLink value="geocode" action="geocode"/> <br />
 	</h:form>
 	</p:panel>
 	</div>
 	
 	<div id="TRESC">
 	
-	<div id="TRESC11WIDE">Best topics
+	<p:panel header="Welcome" style="margin-left:5px;">
+	<p:outputLabel value="Welcome to our site"/>
+	</p:panel>
 	
+	<div id="TRESC11WIDE">
+	<p:fieldset legend="Best Topics">
 	<h:form id="topics">
 		<p:dataTable var="topic" value="#{topicService.getAllTopic()}" selectionMode="single" rowKey="#{topic.id}">
 			
@@ -68,18 +77,48 @@
 			</p:column>
 		</p:dataTable>
 		</h:form>
-	
+	</p:fieldset>
 	</div>
 	
-	<div id="TRESC11WIDE">New Topics</div>
+	
+	<div id="TRESC11WIDE">
+	<p:fieldset legend="New Topics">
+	<h:form id="topics2">
+		<p:dataTable var="topic" value="#{topicService.getLastTopics(10)}" selectionMode="single" rowKey="#{topic.id}">
+			
+
+			<p:column  width="200" headerText="Name">
+				
+				<h:commandLink id="top" value="#{topic.name}" action="showTopicDetails" >
+					 	<f:setPropertyActionListener value="#{topic}" target="#{topicService.selectedTopic}"></f:setPropertyActionListener>			  
+				</h:commandLink>
+				
+			</p:column>
+			
+			<p:column width="200" headerText="Category">
+				<h:outputText value="#{topic.category}" />
+			</p:column>
+
+			<p:column  width="200" headerText="City">
+				<h:outputText value="#{topic.adress.city}" />
+			</p:column>
+		</p:dataTable>
+		</h:form>
+	</p:fieldset>
+	</div>
 	
 	
+	</div>
 	
 		</div>
 		
 		
-	<div id="STOPKA">FOOTER</div>
-	</div>
+	
+	
+	
 	</ui:define>
-
+	
+	<ui:define name="footer">
+	<div id="STOPKA">FOOTER</div>
+	</ui:define>
 </ui:composition>

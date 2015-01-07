@@ -13,105 +13,138 @@
 		<h:outputText value="New topic" />
 	</ui:define>
 
-	<ui:define  name="content">
-	
+	<ui:define name="content">
+
 		<script src="http://maps.google.com/maps/api/js?sensor=true"
 			type="text/javascript"></script>
-			
+
 		<div id="top">
 			<div id="MENU">
-				mwnu
+				<p:panel header="MENU" footer=" - My World - ">
+					<h:form>
+						<p:menu>
+							<p:menuitem value="Main Page" action="goToMainPage" />
+							<p:menuitem value="My Account" action="backToAccount" />
+							<p:menuitem value="Search" action="search" />
+						</p:menu>
+						<p:menu style="margin-top:10px;">
+							<p:menuitem value="Look on map" action="map" />
 
-				<h:form>
-					<h:commandLink value="Main Page" action="goToMainPage" />
-					<br />
-
-					<h:commandLink value="My account" action="goToHome" />
-					<br />
-
-					<h:commandLink value="New Topic" action="createTopic"/> <br />
-
-					<h:commandLink value="Friends" />
-					<br />
-				</h:form>
+						</p:menu>
+					</h:form>
+				</p:panel>
 			</div>
 
 			<div id="TRESC">
-		<p:growl id="growl" showDetail="true" />
-		
-		<h:form id="userTopicAddForm">
-			<p:fieldset styleClass="fieldset" legend="New topic">
-				<p:focus />
-				<p:messages id="messages" globalOnly="true" />
+				<p:growl id="growl" showDetail="true" />
+
+				<p:fieldset legend="New Topic">
 
 
-				<h:panelGrid id="dataPanelGrid" columns="2"
-					style="margin: 0 auto; margin-top: 25px; text-align: left"
-					cellspacing="3" cellpadding="3">
+					<div id="TRESC11WIDE">
+
+						<p:fieldset legend="Topic">
+							<p:focus />
+							<p:messages id="messages" globalOnly="true" />
 
 
-					<h:outputText for="topicCat" value="Categories:" />
-					<p:selectOneMenu id="topicCat" value="#{newTopic.category}">
+							<h:panelGrid id="dataPanelGrid" columns="2"
+								style="margin: 0 auto; margin-top: 25px; text-align: left"
+								cellspacing="3" cellpadding="3">
 
-						<f:selectItems
-							itemLabel="#{topicCategoryService.getAllTopicCategory()}"
-							value="#{topicCategoryService.getAllTopicCategory()}" />
-					</p:selectOneMenu>
 
-					<h:outputText for="topicTitle" value="Title:" />
-					<h:inputText id="topicTitle" value="#{newTopic.name}" />
+								<h:outputText for="topicCat" value="Categories:" />
+								<p:selectOneMenu id="topicCat" value="#{newTopic.category}">
 
-					<h:outputText for="topicArea" value="Description:" />
-					<h:inputTextarea id="topicArea" value="#{newTopic.describe}" />
+									<f:selectItems
+										itemLabel="#{topicCategoryService.getAllTopicCategory()}"
+										value="#{topicCategoryService.getAllTopicCategory()}" />
+								</p:selectOneMenu>
 
-					<p:outputLabel for="city" value="City:" />
-					<p:selectOneMenu id="city" value="#{adressTopic.city}"
-						style="width:125px">
-						<f:selectItem itemLabel="Select City" itemValue="" />
-						<f:selectItem itemLabel="Kielce" itemValue="Kielce" />
-						<f:selectItem itemLabel="Kraków" itemValue="Kraków" />
-						<f:selectItem itemLabel="Łódź" itemValue="Łódz" />
-					</p:selectOneMenu>
+								<h:outputText for="topicTitle" value="Title:" />
+								<h:inputText id="topicTitle" value="#{newTopic.name}" />
+
+								<h:outputText for="topicArea" value="Description:" />
+								<h:inputTextarea id="topicArea" value="#{newTopic.describe}"
+									cols="35" rows="4" />
+							</h:panelGrid>
+						</p:fieldset>
+					</div>
+					<div id="TRESC11WIDE">
+						<p:fieldset legend="Topic Adress">
+						<h:form>
+							<h:panelGrid columns="2"
+								style="margin: 0 auto; margin-top: 25px; text-align: left"
+								cellspacing="3" cellpadding="3">
+
+								<p:outputLabel for="city" value="City:" />
+								<p:selectOneMenu id="city" value="#{adressTopic.city}"
+									style="width:125px">
+									<f:selectItem itemLabel="Select City" itemValue="" />
+									<f:selectItem itemLabel="Kielce" itemValue="Kielce" />
+									<f:selectItem itemLabel="Kraków" itemValue="Kraków" />
+									<f:selectItem itemLabel="Łódź" itemValue="Łódz" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="street" value="Street:" />
+								<h:inputText id="street" value="#{adressTopic.street}" />
+
+								<p:outputLabel for="post" value="Postal code:" />
+								<h:inputText id="post" value="#{adressTopic.postCode}" />
+
+								<p:outputLabel for="number" value="Number:" />
+								<h:inputText id="number" value="#{adressTopic.numberPos}" />
+								
+								<p:outputLabel value="Add Marker:" />
+								<p:commandButton id="btn" type="button" icon="ui-icon-pin-s" value="Show map" onclick="PF('dlg0').show();" />
+
+							</h:panelGrid>
+							</h:form>
+						</p:fieldset>
+					</div>
 					
-					<p:outputLabel for="street" value="Street:" />
-					<h:inputText id="street" value="#{adressTopic.street}" />
-					
-					<p:outputLabel for="post" value="Postal code:" />
-					<h:inputText id="post" value="#{adressTopic.postCode}" />
-					
-					<p:outputLabel for="number" value="Number:" />
-					<h:inputText id="number" value="#{adressTopic.numberPos}" />
-					
-					
-					
-					<p:outputLabel value="Add Marker:" />
-					<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
-						value="Show map" onclick="PF('dlg0').show();" />
-				</h:panelGrid>
-			</p:fieldset>
-			<p:commandButton id="backToAccount" action="backToAccount"
-				immediate="true" icon="ui-icon-arrowreturnthick-1-w"
-				value="Back to Account" />
-			<p:commandButton id="confirmNewUserTopic"
-				action="confirmNewUserTopic" icon="ui-icon-check" value="Sava topic" />
-		</h:form>
-<!-- 		<p:commandButton id="btn" type="button" icon="ui-icon-pin-s" -->
-<!-- 			value="Show Map" onclick="dlg0.show();" /> -->
+					<div id="TRESCPELNASZEROKOSC" style="margin-left: 3px;">
+					<p:panel header="Other way" style="margin-left:3px;">
+					ss
+					</p:panel>
+					</div >
+
+					<div id="TRESCPELNASZEROKOSC" style="margin-left: 3px;">
+						
+						<p:panel header="Operation" style="margin-left:3px;">
+
+							<h:form id="userTopicAddForm">
+								
+
+
+								<p:commandButton id="backToAccount" action="backToAccount"
+									immediate="true" icon="ui-icon-arrowreturnthick-1-w"
+									value="Back to Account" />
+								<p:commandButton id="confirmNewUserTopic"
+									action="confirmNewUserTopic" icon="ui-icon-check"
+									value="Sava topic" />
+							</h:form>
+						</p:panel>
+					</div>
+
+				</p:fieldset>
+				<!-- 		<p:commandButton id="btn" type="button" icon="ui-icon-pin-s" -->
+				<!-- 			value="Show Map" onclick="dlg0.show();" /> -->
 
 
 
-		<p:dialog id="gmapDialog" widgetVar="dlg0" width="625" height="400"
-			modal="true">
-			<!-- 			<p:gmap id="gmap" center="41.381542, 2.122893" zoom="15" -->
-			<!-- 				type="HYBRID" style="width:100%;height:400px" /> -->
-			<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
-				type="HYBRID" style="width:100%;height:400px"
-				model="#{topicService.mapModel}"
-				onPointClick="handlePointClick(event);" widgetVar="map">
-				<p:ajax event="markerDrag" listener="#{topicService.onMarkerDrag}"
-					update="growl" />
-			</p:gmap>
-		</p:dialog>
+				<p:dialog id="gmapDialog" widgetVar="dlg0" width="625" height="400"
+					modal="true">
+					<!-- 			<p:gmap id="gmap" center="41.381542, 2.122893" zoom="15" -->
+					<!-- 				type="HYBRID" style="width:100%;height:400px" /> -->
+					<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
+						type="HYBRID" style="width:100%;height:400px"
+						model="#{topicService.mapModel}"
+						onPointClick="handlePointClick(event);" widgetVar="map">
+						<p:ajax event="markerDrag" listener="#{topicService.onMarkerDrag}"
+							update="growl" />
+					</p:gmap>
+				</p:dialog>
 
 
 
@@ -119,30 +152,30 @@
 
 
 
-		<p:dialog widgetVar="dlg" showEffect="fade">
-			<h:form prependId="false">
+				<p:dialog widgetVar="dlg" showEffect="fade">
+					<h:form prependId="false">
 
-				<h:panelGrid columns="2">
-					<h:outputLabel for="title" value="Title:" />
-						<p:inputText id="title" value="#{topicService.title}" />
-						<h:inputHidden id="title1" value="#{newTopic.title}" />
-					<f:facet name="footer">
-						<p:commandButton value="Add"
-							actionListener="#{topicService.addMarker}" update=":growl,:gmap"
-							oncomplete="markerAddComplete()" />
-						<p:commandButton value="Cancel" onclick="return cancel()" />
-					</f:facet>
-				</h:panelGrid>
+						<h:panelGrid columns="2">
+							<h:outputLabel for="title" value="Title:" />
+							<p:inputText id="title" value="#{topicService.title}" />
+							<h:inputHidden id="title1" value="#{newTopic.title}" />
+							<f:facet name="footer">
+								<p:commandButton value="Add"
+									actionListener="#{topicService.addMarker}"
+									update=":growl,:gmap" oncomplete="markerAddComplete()" />
+								<p:commandButton value="Cancel" onclick="return cancel()" />
+							</f:facet>
+						</h:panelGrid>
 
-				<h:inputHidden id="lat" value="#{topicService.lat}" />
-				<h:inputHidden id="lat1" value="#{newTopic.lat}" />
-				<h:inputHidden id="lng" value="#{topicService.lng}" />
-				<h:inputHidden id="lng1" value="#{newTopic.lng}" />
-				
-			</h:form>
-		</p:dialog>
+						<h:inputHidden id="lat" value="#{topicService.lat}" />
+						<h:inputHidden id="lat1" value="#{newTopic.lat}" />
+						<h:inputHidden id="lng" value="#{topicService.lng}" />
+						<h:inputHidden id="lng1" value="#{newTopic.lng}" />
 
-		<script type="text/javascript">
+					</h:form>
+				</p:dialog>
+
+				<script type="text/javascript">
 			var currentMarker = null;
 
 			function handlePointClick(event) {
@@ -182,15 +215,15 @@
 		        PF('geoMap').geocode(document.getElementById('address').value);
 		    }
 		</script>
-	</div>
-	
-	
+			</div>
 
-  
-	
-	
-	<div id="STOPKA">ss</div>
-	</div>
+
+
+
+
+
+			<div id="STOPKA">ss</div>
+		</div>
 	</ui:define>
 
 </ui:composition>
