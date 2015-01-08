@@ -39,7 +39,7 @@
 				<p:growl id="growl" showDetail="true" />
 
 				<p:fieldset legend="New Topic">
-
+<h:form id="userTopicAddForm">
 
 					<div id="TRESC11WIDE">
 
@@ -72,7 +72,7 @@
 					</div>
 					<div id="TRESC11WIDE">
 						<p:fieldset legend="Topic Adress">
-						<h:form>
+						
 							<h:panelGrid columns="2"
 								style="margin: 0 auto; margin-top: 25px; text-align: left"
 								cellspacing="3" cellpadding="3">
@@ -99,13 +99,13 @@
 								<p:commandButton id="btn" type="button" icon="ui-icon-pin-s" value="Show map" onclick="PF('dlg0').show();" />
 
 							</h:panelGrid>
-							</h:form>
+							
 						</p:fieldset>
 					</div>
 					
 					<div id="TRESCPELNASZEROKOSC" style="margin-left: 3px;">
 					<p:panel header="Other way" style="margin-left:3px;">
-					ss
+					<p:commandButton value="Find your place" action="geo"/>
 					</p:panel>
 					</div >
 
@@ -113,7 +113,7 @@
 						
 						<p:panel header="Operation" style="margin-left:3px;">
 
-							<h:form id="userTopicAddForm">
+							
 								
 
 
@@ -123,10 +123,10 @@
 								<p:commandButton id="confirmNewUserTopic"
 									action="confirmNewUserTopic" icon="ui-icon-check"
 									value="Sava topic" />
-							</h:form>
+							
 						</p:panel>
 					</div>
-
+</h:form>
 				</p:fieldset>
 				<!-- 		<p:commandButton id="btn" type="button" icon="ui-icon-pin-s" -->
 				<!-- 			value="Show Map" onclick="dlg0.show();" /> -->
@@ -222,8 +222,10 @@
 
 
 
-			<div id="STOPKA">ss</div>
+			
 		</div>
 	</ui:define>
-
+<ui:define name="footer">
+		<div id="STOPKA">FOOTER</div>
+	</ui:define>
 </ui:composition>

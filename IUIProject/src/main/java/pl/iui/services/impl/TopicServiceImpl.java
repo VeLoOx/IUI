@@ -41,6 +41,8 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 	private double lat;
 
 	private double lng;
+	
+	private String adresstext;
 
 	// ------------Map methods-------------------------------------
 	public void cleanTopicSelection(){
@@ -155,6 +157,21 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 		
 		return true;
 	}
+	
+	public boolean addAutoTopic(TopicEntity topic, UserEntity user, AdressEntity adress){
+		topic.setTitle("Auto");
+		topic.setLat(lat);
+		topic.setLng(lng);
+		
+		topic.setAutor(user.getUserName());
+		topic.setAdress(adress);
+		Date dateobj = new Date();
+		topic.setData(dateobj);
+		topicDao.save(topic);
+		
+		
+		return true;
+	}
 
 	@Override
 	public List<TopicEntity> getAllTopic() {
@@ -211,6 +228,14 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 
 	public void setSelectedRate(String selectedRate) {
 		this.selectedRate = selectedRate;
+	}
+
+	public String getAdresstext() {
+		return adresstext;
+	}
+
+	public void setAdresstext(String adresstext) {
+		this.adresstext = adresstext;
 	}
 
 	@Override

@@ -4,7 +4,8 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html" 
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui">
     
 
 <h:head>
@@ -23,9 +24,9 @@
            
             top: 5px;
            
-            margin-left: 100px;
+            margin-left: 120px;
             /* z-index: 5; */
-            background-color: #fff;
+            background-color:white;
             padding: 5px;
             border: 1px solid #999;
         }
@@ -41,6 +42,43 @@
     <script>
     // <![CDATA[
         function initialize() {
+
+		//-----
+		var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+		//----
+		
+		//----
+		// [START region_fillform]
+function fillInAddress(place) {
+  // Get the place details from the autocomplete object.
+  //var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
+// [END region_fillform]
+		//----
+            
           var mapOptions = {
             center: new google.maps.LatLng(-33.8688, 151.2195),
             zoom: 13,
@@ -87,6 +125,9 @@
             marker.setPosition(place.geometry.location);
             marker.setVisible(true);
 
+            document.getElementById('lat').value = marker.getPosition().lat();
+			document.getElementById('lng').value =  marker.getPosition().lng();
+
             var address = '';
             var adr1;
             var adr2;
@@ -96,18 +137,18 @@
                 (place.address_components[1] && place.address_components[1].short_name || ''),
                 (place.address_components[2] && place.address_components[2].short_name || '')
               ].join(' ');
-              adr1 = [
-                      (place.address_components[0] && place.address_components[0].short_name || '')
-                      
-                    ].join(' ');
-
-              var adr2 = [
-                          (place.address_components[1] && place.address_components[1].short_name || '')
-                      ].join(' ');
+             
             }
 
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-            document.getElementById("miasto").innerHTML = address;
+
+            fillInAddress(place);
+            
+           var form = document.forms['topicform'];
+           var setel = form.elements['miasto'];
+            document.getElementById("miasto").innerHTML = document.getElementById("searchTextField").value;
+           setel.innerHTML = document.getElementById("searchTextField").value;
+           document.getElementById("adrestext").value = document.getElementById("searchTextField").value;
             infowindow.open(map, marker);
           });
 
@@ -123,9 +164,18 @@
           setupClickListener('changetype-all', []);
           setupClickListener('changetype-establishment', ['establishment']);
           setupClickListener('changetype-geocode', ['geocode']);
+
+         // document.getElementById("miasto").innerHTML ='Ustawiam';
+
+       
+          
+
         }
 
+       
+
         google.maps.event.addDomListener(window, 'load', initialize);
+       
     // ]]>
     </script>
 </h:head>
@@ -156,21 +206,19 @@
 			</div>
 <div id="top" >
 <div id="MENU">
-				mwnu
+				<p:panel header="MENU" footer=" - My World - ">
+					<h:form>
+						<p:menu>
+							<p:menuitem value="Main Page" action="goToMainPage" />
+							<p:menuitem value="My Account" action="backToAccount" />
+							<p:menuitem value="Search" action="search" />
+						</p:menu>
+						<p:menu style="margin-top:10px;">
+							<p:menuitem value="Look on map" action="map" />
 
-				<h:form>
-					<h:commandLink value="Main Page" action="goToMainPage" />
-					<br />
-
-					<h:commandLink value="My account" action="goToHome" />
-					<br />
-
-					<h:commandLink value="New Topic" action="createTopic" />
-					<br />
-
-					<h:commandLink value="Friends" />
-					<br />
-				</h:form>
+						</p:menu>
+					</h:form>
+				</p:panel>
 			</div>
 	<div id="TRESC">
 	
@@ -190,10 +238,86 @@
     <div id="TRESCMAP">
     	<div id="map-canvas"></div>
     </div>
-    <div id="TRESC11WIDE">
-    	<h:outputLabel id="miasto" value="miasto"/>
+    <div id="TRESCPELNASZEROKOSC">
+    <p:panel header="What are you found?" style="margin-top:10px; margin-left:3px;">
+   
+   <h:form  prependId="false" id="topicform">	
+    	<p:outputLabel value="Your Place: "/>
+    	<p:outputLabel id="miasto" value="miasto"/>
+    	
+    	<p:fieldset id="address">
+    	
+    	<h:panelGrid columns="2">
+    	
+    	<h:outputLabel value="City"/>
+    	<h:inputText id="locality" value="#{adressTopic.city}"/>
+    	
+    	
+    	<h:outputLabel value="Zip code"/>
+    	<h:inputText id="postal_code" value="#{adressTopic.postCode}"/>
+    	
+    	<h:outputLabel value="Street"/>
+    	<h:inputText id="route" value="#{adressTopic.street}"/>
+    	
+    	<h:outputLabel value="Street number"/>
+    	<h:inputText id="street_number" value="#{adressTopic.numberPos}"/>
+    	
+    	<h:outputLabel value="State"/>
+    	<h:inputText id="administrative_area_level_1"/>
+    	
+    	<h:outputLabel value="Country"/>
+    	<h:inputText id="country"/>
+    	
+     </h:panelGrid>
+    </p:fieldset>
+    	
+    	<h:inputHidden id="adrestext" value="#{topicService.adresstext}" />
+    	<h:inputHidden id="lat" value="#{topicService.lat}" />
+		<h:inputHidden id="lat1" value="#{newTopic.lat}" />
+		<h:inputHidden id="lng" value="#{topicService.lng}" />
+		<h:inputHidden id="lng1" value="#{newTopic.lng}" />
+     
+   
+    <p:fieldset legend="Topic">
+							<p:focus />
+							<p:messages id="messages" globalOnly="true" />
+
+
+							<h:panelGrid id="dataPanelGrid" columns="2"
+								style="margin: 0 auto; margin-top: 25px; text-align: left"
+								cellspacing="3" cellpadding="3">
+
+
+								<h:outputText for="topicCat" value="Categories:" />
+								<p:selectOneMenu id="topicCat" value="#{newTopic.category}">
+
+									<f:selectItems
+										itemLabel="#{topicCategoryService.getAllTopicCategory()}"
+										value="#{topicCategoryService.getAllTopicCategory()}" />
+								</p:selectOneMenu>
+
+								<h:outputText for="topicTitle" value="Title:" />
+								<h:inputText id="topicTitle" value="#{newTopic.name}" />
+
+								<h:outputText for="topicArea" value="Description:" />
+								<h:inputTextarea id="topicArea" value="#{newTopic.describe}"
+									cols="35" rows="4" />
+							</h:panelGrid>
+						</p:fieldset>
+		<p:commandButton value="Save place" action="confirmNewUserTopic"/>
+    	<p:commandButton value="Back"/>
+    	
+    	
+    	
+    	
+    	
+    	</h:form>
+    </p:panel>
     </div>
    </div> 
+   </div>
+   <div id="footer">
+   <div id="STOPKA">ss</div>
    </div>
 </div>
 </h:body>

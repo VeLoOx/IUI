@@ -7,7 +7,7 @@
 	<secured attributes="ROLE_USER,ROLE_ADMIN" />
 	<var name="userData" class="pl.iui.domain.user.UserDataEntity" />
 	<var name="showUser" class="pl.iui.domain.user.UserEntity" />
-	<var name="newTopic" class="pl.iui.domain.topic.TopicEntity"/>
+	<var name="newTopic" class="pl.iui.domain.topic.TopicEntity" />
 	<var name="showTopic" class="pl.iui.domain.topic.TopicEntity" />
 	<var name="adressTopic" class="pl.iui.domain.user.AdressEntity" />
 	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
@@ -22,10 +22,10 @@
 	<view-state id="home" view="accountHome.xhtml">
 		<transition on="editUserData" to="editUserData" />
 		<transition on="createTopic" to="createTopic">
-		<evaluate expression="topicService.cleanTopicSelection()"></evaluate>
+			<evaluate expression="topicService.cleanTopicSelection()"></evaluate>
 		</transition>
 		<transition on="showTopicDetails" to="showTopic">
-		<evaluate expression="topicService.createMarker()"></evaluate>
+			<evaluate expression="topicService.createMarker()"></evaluate>
 		</transition>
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
@@ -33,8 +33,17 @@
 
 
 	</view-state>
-	
-	<view-state id="map" view="map.xhtml"></view-state>
+
+	<view-state id="map" view="map.xhtml">
+	<on-entry>
+			<set name="newTopic" value="topicService.getNewTopic()"></set>
+			<set name="adressTopic" value="topicService.getNewAdress()"></set>
+		</on-entry>
+		<transition on="confirmNewUserTopic" to="home">
+			<evaluate
+				expression="topicService.addAutoTopic(newTopic,flowScope.user, adressTopic)" />
+		</transition>
+	</view-state>
 
 	<view-state id="mainHome" view="mainAccount.xhtml">
 		<transition on="goToMyAccount" to="home" />
@@ -42,7 +51,7 @@
 		<transition on="goToHome" to="home" />
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
-			
+
 		</transition>
 		<transition on="showTopicDetails" to="showTopic" />
 		<transition on="showUserDetails" to="showUser" />
@@ -60,23 +69,24 @@
 		<transition on="goToHome" to="home" />
 
 
-		<transition on="editUserTopic" to="editUserTopic"/>
+
+		<transition on="editUserTopic" to="editUserTopic" />
 
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
 
 	</view-state>
-	
-	
+
+
 
 
 
 	<view-state id="editUserTopic" view="topicDetails.xhtml">
-	<on-entry>
-		<set name="newTopic" value="topicService.getNewTopic()"></set>
-		<set name="adressTopic" value="topicService.getNewAdress()"></set>
-	</on-entry>
+		<on-entry>
+			<set name="newTopic" value="topicService.getNewTopic()"></set>
+			<set name="adressTopic" value="topicService.getNewAdress()"></set>
+		</on-entry>
 	</view-state>
 
 	<view-state id="createTopic" view="createTopic.xhtml">
@@ -85,7 +95,7 @@
 			<set name="newTopic" value="topicService.getNewTopic()"></set>
 			<set name="adressTopic" value="topicService.getNewAdress()"></set>
 		</on-entry>
-
+		<transition on="geo" to="map" />
 		<transition on="backToAccount" to="home" />
 		<transition on="confirmNewUserTopic" to="home">
 			<evaluate
@@ -97,6 +107,8 @@
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
 	</view-state>
+
+	
 
 	<view-state id="showTopic" view="showTopicDetails.xhtml">
 		<on-render>
@@ -114,7 +126,7 @@
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
 	</view-state>
-	
+
 	<view-state id="showUser" view="showUserDetails.xhtml">
 		<on-render>
 			<set name="showUser" value="userService.selectedUser"></set>
