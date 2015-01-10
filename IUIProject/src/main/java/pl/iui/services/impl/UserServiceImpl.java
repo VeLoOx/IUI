@@ -28,6 +28,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 
+
 import pl.iui.dao.user.UserDao;
 import pl.iui.domain.topic.TopicEntity;
 import pl.iui.domain.user.UserDataEntity;
@@ -177,6 +178,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		userDao.update(ue);
 		
 	}
+	
+	public void addFavoriteTopic(long id, UserEntity ue) {
+		// TODO Auto-generated method stub
+		
+		ue.getUserData().getFavoriteTopics().add(id);
+		
+		//ue.getUserData().getHobbies().clear();
+		userDao.update(ue);
+		
+	}
+	
+	public void addFavoriteUser(long id, UserEntity ue) {
+		// TODO Auto-generated method stub
+		
+		ue.getUserData().getFavoriteUsers().add(id);
+		
+		//ue.getUserData().getHobbies().clear();
+		userDao.update(ue);
+		
+	}
 
 
 	@Override
@@ -184,6 +205,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		// TODO Auto-generated method stub
 		System.out.println("ID!!!!!! = "+top.getId());
 		if(ue.getUserData().getRatedTopics().contains(top.getId()))
+		return false; else return true;
+	}
+	
+	public boolean allowToFavoriteTopic(TopicEntity top, UserEntity ue) {
+		// TODO Auto-generated method stub
+		System.out.println("ID!!!!!! = "+top.getId());
+		if(ue.getUserData().getFavoriteTopics().contains(top.getId()))
+		return false; else return true;
+	}
+	
+	public boolean allowToFavoriteUser(UserEntity fav, UserEntity ue) {
+		// TODO Auto-generated method stub
+		System.out.println("ID!!!!!! = "+fav.getId());
+		if(ue.getUserData().getFavoriteUsers().contains(fav.getId()))
 		return false; else return true;
 	}
 
@@ -202,6 +237,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public List<UserEntity> getLastUsers(int n) {
 		// TODO Auto-generated method stub
 		return userDao.findLastUsers(n);
+	}
+	
+	public List<UserEntity> getFavoriteUsers(UserEntity u) {
+		// TODO Auto-generated method stub
+		return userDao.findFavoriteUsers(u);
+	}
+	
+	public List<UserEntity> getUserSearch(String text){
+		return userDao.findByString(text);
 	}
 
 }

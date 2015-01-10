@@ -51,7 +51,8 @@ public class TopicJpaDao extends GenericJpaDao<TopicEntity, Long> implements Top
     }
 		
 		// TODO Auto-generated method stub
-		return lista.subList(0, n);
+		 if(n<lista.size())
+		return lista.subList(0, n); else return lista;
 	}
 	
 	public List<TopicEntity> findTopicForUser(UserEntity user){
@@ -76,4 +77,37 @@ public class TopicJpaDao extends GenericJpaDao<TopicEntity, Long> implements Top
     }
 		 return lista;
 	}
+	
+	public List<TopicEntity> findMostPopularTopic(int n){
+		Query query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+                + " u order by u.numberRate DESC");
+		 
+		 List<TopicEntity> lista = new ArrayList<TopicEntity>();
+		 try {
+            lista = (List<TopicEntity>) query.getResultList();
+    } catch(NoResultException e) {
+            //do nothing
+    }
+		
+		// TODO Auto-generated method stub
+		 if(n<lista.size())
+		return lista.subList(0, n); else return lista;
+	}
+	
+	public List<TopicEntity> findByString(String text){
+		
+		Query query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+                + " u where u.name LIKE CONCAT('%', :txt, '%') OR u.adress.city LIKE :txt").setParameter("txt", text);
+		
+		 List<TopicEntity> lista = new ArrayList<TopicEntity>();
+		 try {
+            lista = (List<TopicEntity>) query.getResultList();
+    } catch(NoResultException e) {
+            //do nothing
+    }
+		 
+		 return lista;
+	}
+	
+	
 }

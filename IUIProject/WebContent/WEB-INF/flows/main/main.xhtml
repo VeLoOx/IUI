@@ -55,9 +55,9 @@
 	</p:panel>
 	
 	<div id="TRESC11WIDE">
-	<p:fieldset legend="Best Topics">
+	<p:fieldset legend="Most Popular Topics">
 	<h:form id="topics">
-		<p:dataTable var="topic" value="#{topicService.getAllTopic()}" selectionMode="single" rowKey="#{topic.id}">
+		<p:dataTable var="topic" value="#{topicService.getMostPopularTopics()}" selectionMode="single" rowKey="#{topic.id}">
 			
 
 			<p:column  width="200" headerText="Name">
@@ -74,6 +74,10 @@
 
 			<p:column  width="200" headerText="City">
 				<h:outputText value="#{topic.adress.city}" />
+			</p:column>
+			
+			<p:column  width="200" headerText="Votes">
+				<h:outputText value="#{topic.numberRate}" />
 			</p:column>
 		</p:dataTable>
 		</h:form>

@@ -301,5 +301,13 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 	public List<TopicEntity> findTopicForUser(UserEntity user){
 		return topicDao.findTopicForUser(user);
 	}
+	
+	public List<TopicEntity> getMostPopularTopics(){
+		return topicDao.findMostPopularTopic(5);
+	}
+	
+	public List<TopicEntity> getTopicSearch(String text){
+		return topicDao.findByString(text);
+	}
 
 }

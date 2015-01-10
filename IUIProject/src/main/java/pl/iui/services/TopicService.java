@@ -34,5 +34,6 @@ public interface TopicService {
 	
 	public List<TopicEntity> getLastTopics(int n);
 	public List<TopicEntity> findTopicForUser(UserEntity user);
+	public List<TopicEntity> getMostPopularTopics();
 
 }

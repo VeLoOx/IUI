@@ -16,6 +16,8 @@ public class UiUtils implements Serializable {
 	 
 	 private ArrayList<String> rates=new ArrayList<String>();
 	 
+	 private String searchText;
+	 
 	 public UiUtils (){
 		 for(int i=1900;i<1995;i++){
 			 years.add(Integer.toString(i));
@@ -43,6 +45,14 @@ public class UiUtils implements Serializable {
 
 	public void setRates(ArrayList<String> rates) {
 		this.rates = rates;
+	}
+
+	public String getSearchText() {
+		return ""+searchText;
+	}
+
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
 	}
 
 }

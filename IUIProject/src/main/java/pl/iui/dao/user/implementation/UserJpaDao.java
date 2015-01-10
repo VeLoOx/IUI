@@ -82,6 +82,37 @@ public class UserJpaDao extends GenericJpaDao<UserEntity, Long> implements UserD
 			 
 			 if(lista.size()>n) return lista.subList(0, n); else return lista;
 		}
+		
+		public List<UserEntity> findFavoriteUsers(UserEntity user){
+			
+			Query query2 = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+	                + " u where u.id IN :ids")
+	                .setParameter("ids", user.getUserData().getFavoriteUsers());
+			
+			 List<UserEntity> lista = new ArrayList<UserEntity>();
+			 if(!user.getUserData().getFavoriteUsers().isEmpty()){
+				 
+				 lista = (List<UserEntity>) query2.getResultList();
+				 
+			 }
+			 
+			 return lista;
+		}
+		
+		public List<UserEntity> findByString(String text){
+			
+			Query query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+	                + " u where u.userName LIKE CONCAT('%', :txt, '%') OR u.userData.adress.city LIKE :txt").setParameter("txt", text);
+			
+			 List<UserEntity> lista = new ArrayList<UserEntity>();
+			 try {
+	            lista = (List<UserEntity>) query.getResultList();
+	    } catch(NoResultException e) {
+	            //do nothing
+	    }
+			 
+			 return lista;
+		}
 
 }
 

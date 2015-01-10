@@ -29,5 +29,7 @@ public interface UserDao extends GenericDao<UserEntity, Long> {
          */
         UserEntity loadUserByUserName(String userName);
         List<UserEntity> findLastUsers(int n);
+        public List<UserEntity> findFavoriteUsers(UserEntity user);
+        public List<UserEntity> findByString(String text);
 }
 

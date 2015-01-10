@@ -44,6 +44,10 @@ public interface UserService {
     public void addRatedTopic(long id, UserEntity ue);
     public boolean allowToRate(TopicEntity top, UserEntity ue);
     public List<UserEntity> getLastUsers(int n);
+    public void addFavoriteUser(long id, UserEntity ue);
+    public void addFavoriteTopic(long id, UserEntity ue);
+    public boolean allowToFavoriteTopic(TopicEntity top, UserEntity ue);
+    public boolean allowToFavoriteUser(UserEntity fav, UserEntity ue);
     	
 }
 

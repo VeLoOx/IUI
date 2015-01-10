@@ -11,7 +11,8 @@
 		<h:outputText value="Selected topic" />
 	</ui:define>
 	<ui:define name="header">
-		<h:outputText value="Selected topict: #{topicService.selectedTopic.name}" />
+		<h:outputText
+			value="Selected topict: #{topicService.selectedTopic.name}" />
 	</ui:define>
 
 	<ui:define name="content">
@@ -43,7 +44,7 @@
 
 							<p:outputLabel value="Category:" />
 							<h:outputText value="#{showTopic.category}" />
-							
+
 							<p:outputLabel value="Data dodania" />
 							<h:outputText value="#{topicService.translateDate(showTopic)}" />
 
@@ -54,8 +55,9 @@
 							<h:outputText
 								value="#{topicService.getRate(showTopic)} (#{showTopic.numberRate})" />
 						</h:panelGrid>
-						
-						<h:panelGrid rendered="#{userService.allowToRate(showTopic, flowScope.user)}">
+
+						<h:panelGrid
+							rendered="#{userService.allowToRate(showTopic, flowScope.user)}">
 							<h:outputLabel>Rate topic</h:outputLabel>
 							<br />
 							<h:form>
@@ -75,8 +77,21 @@
 								</table>
 							</h:form>
 						</h:panelGrid>
-						
-						<h:outputText rendered="#{!userService.allowToRate(showTopic, flowScope.user)}" value="You already rated this topic!"/>
+
+						<p:fieldset>
+							<h:panelGrid columns="1">
+								<h:outputText
+									rendered="#{!userService.allowToRate(showTopic, flowScope.user)}"
+									value="You already rated this topic!" />
+
+								<p:commandButton
+									rendered="#{userService.allowToFavoriteTopic(showTopic, flowScope.user)}"
+									action="addtopictofav" value="Add to Top List" />
+								<h:outputText
+									rendered="#{!userService.allowToFavoriteTopic(showTopic, flowScope.user)}"
+									value="This Topic is on Your Top List" />
+							</h:panelGrid>
+						</p:fieldset>
 					</p:fieldset>
 				</div>
 
@@ -105,8 +120,8 @@
 
 				<div id="TRESCPELNASZEROKOSC">
 
-					<p:gmap id="gmap" center="#{showTopic.lat},#{showTopic.lng}" zoom="13"
-						type="HYBRID"
+					<p:gmap id="gmap" center="#{showTopic.lat},#{showTopic.lng}"
+						zoom="13" type="HYBRID"
 						style="width:600;  height:400px; margin-left:5px; margin-top:5px;"
 						model="#{topicService.mapModel}" widgetVar="map">
 
@@ -115,38 +130,40 @@
 				</div>
 
 				<div id="TRESCPELNASZEROKOSC">
-				<p:panel header="Comments">
-					<h:form>
+					<p:panel header="Comments">
+						<h:form>
 
-						<h:panelGrid>
-							<p:focus />
-							<h:outputLabel>Your Comment </h:outputLabel>
-							<h:inputTextarea cols="135" rows="5" value="#{newComm.text}" />
-							<p:commandButton id="addComment" value="Add comment"
-								action="addComment" />
-						</h:panelGrid>
+							<h:panelGrid>
+								<p:focus />
+								<h:outputLabel>Your Comment </h:outputLabel>
+								<h:inputTextarea cols="135" rows="5" value="#{newComm.text}" />
+								<p:commandButton id="addComment" value="Add comment"
+									action="addComment" />
+							</h:panelGrid>
 
-					</h:form>
+						</h:form>
 
-					<p:dataTable var="comm" value="#{topicService.getAllCommentsForTopic(showTopic.id)}" styleClass="fixed-size">
+						<p:dataTable var="comm"
+							value="#{topicService.getAllCommentsForTopic(showTopic.id)}"
+							styleClass="fixed-size">
 
 
-						<p:column width="55" headerText="Author">
-							<h:outputText value="#{comm.autor}" />
-						</p:column>
+							<p:column width="55" headerText="Author">
+								<h:outputText value="#{comm.autor}" />
+							</p:column>
 
-						<p:column width="200" headerText="Tekst" >
-							<h:outputText value="#{comm.text}" />
-						</p:column>
-					</p:dataTable>
-				</p:panel>
-				
+							<p:column width="200" headerText="Tekst">
+								<h:outputText value="#{comm.text}" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+
 				</div>
 			</div>
-			
+
 		</div>
 	</ui:define>
-<ui:define name="footer">
+	<ui:define name="footer">
 		<div id="STOPKA">FOOTER</div>
 	</ui:define>
 </ui:composition>

@@ -11,27 +11,27 @@
 		<h:outputText value="Selected topic" />
 	</ui:define>
 	<ui:define name="header">
-		<h:outputText value="Selected topict: #{topicService.selectedTopic.name}" />
+		<h:outputText value="Selected user: #{showUser.userName}" />
 	</ui:define>
 
 	<ui:define name="content">
 		<script src="http://maps.google.com/maps/api/js?sensor=true" />
 		<div id="top">
 			<div id="MENU">
-				mwnu
+				<p:panel header="MENU" footer=" - My World - ">
+					<h:form>
+						<p:menu>
+							<p:menuitem value="Main Page" action="goToMainPage" />
+							<p:menuitem value="My Account" action="goToHome" />
+							<p:menuitem value="Add Topic" action="createTopic" />
+							<p:menuitem value="Search" action="search" />
+						</p:menu>
+						<p:menu style="margin-top:10px;">
+							<p:menuitem value="Look on map" action="map" />
 
-				<h:form>
-					<h:commandLink value="Main Page" action="goToMainPage" />
-					<br />
-
-					<h:commandLink value="My account" action="goToHome" />
-					<br />
-
-					<h:commandLink value="New Topic" action="createTopic"/> <br />
-
-					<h:commandLink value="Friends" />
-					<br />
-				</h:form>
+						</p:menu>
+					</h:form>
+				</p:panel>
 			</div>
 
 			<div id="TRESC">
@@ -59,9 +59,14 @@
 
 							<p:outputLabel  value="Numer:" />
 							<h:outputText  value="#{showUser.userData.adress.numberPos}" />
-
+							
+							
 
 						</h:panelGrid>
+						<p:fieldset>
+							<p:commandButton rendered="#{userService.allowToFavoriteUser(showUser, flowScope.user)}" value="Add to your Top List" action="addusertofav"/>
+							<h:outputText rendered="#{!userService.allowToFavoriteUser(showUser, flowScope.user)}" value="This user is on Your Top List"/>
+						</p:fieldset>
 						<div style="margin-left: auto; margin-right: auto">
 							<p:gmap center="50.86607, 20.628567" zoom="25" type="terrain"
 								style="margin-left: auto; margin-right: auto; margin-top:10px; width:420px;height:400px" />
@@ -102,8 +107,10 @@
 				
 				</div>
 			</div>
-			<div id="STOPKA"></div>
+			
 		</div>
 	</ui:define>
-
+<ui:define name="footer">
+		<div id="STOPKA">FOOTER</div>
+	</ui:define>
 </ui:composition>

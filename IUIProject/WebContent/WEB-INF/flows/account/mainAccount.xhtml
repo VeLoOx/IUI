@@ -42,25 +42,35 @@
 	<div id="TRESC">
 	
 	<div id="TRESC11PELNASZEROKOSC">
-	<p:panel header="Best Topics /sztuka">
+	<p:panel header="Most Popular Topics">
 	<h:form id="usersLasdt">
-		<p:dataTable var="userL" value="#{userService.getLastUsers(5)}" selectionMode="single" rowKey="#{userL.id}">
+		<p:dataTable var="topicLL" value="#{topicService.getMostPopularTopics()}" selectionMode="single" rowKey="#{topicLL.id}"
+		rows="15"
+								paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 			
 
 			<p:column  width="200" headerText="Name">
 				
-				<h:commandLink id="top" value="#{userL.userName}" action="showTopicDetails" >
-					 	<f:setPropertyActionListener value="#{userL}" target="#{userService.selectedUser}"></f:setPropertyActionListener>			  
+				<h:commandLink id="top" value="#{topicLL.name}" action="showTopicDetails" >
+					 	<f:setPropertyActionListener value="#{topicLL}" target="#{topicService.selectedTopic}"></f:setPropertyActionListener>			  
 				</h:commandLink>
 				
 			</p:column>
 			
-			<p:column width="200" headerText="City">
-				<h:outputText value="#{userL.userData.adress.city}" />
+			<p:column width="200" headerText="Category">
+				<h:outputText value="#{topicLL.category}" />
 			</p:column>
 
-			<p:column  width="200" headerText="Polubiony?">
-				<h:outputText value="polubiony?" />
+			<p:column  width="200" headerText="City">
+				<h:outputText value="#{topicLL.adress.city}" />
+			</p:column>
+			
+			<p:column  width="200" headerText="Votes">
+				<h:outputText value="#{topicLL.numberRate}" />
+			</p:column>
+			
+			<p:column  width="75" headerText="On Your Top List" style="text-align: center">
+				<p:graphicImage rendered="#{!userService.allowToFavoriteTopic(topicLL, flowScope.user)}" width="16px" height="16px" value="#{resource['images:accept-icon.gif']}"/>
 			</p:column>
 		</p:dataTable>
 		</h:form>
@@ -70,7 +80,9 @@
 	<div id="TRESC11">
 	<p:fieldset legend="Choosen for You">
 	<h:form id="topics">
-		<p:dataTable var="topic" value="#{topicService.findTopicForUser(flowScope.user)}" selectionMode="single" rowKey="#{topic.id}">
+		<p:dataTable var="topic" value="#{topicService.findTopicForUser(flowScope.user)}" selectionMode="single" rowKey="#{topic.id}"
+		rows="5"
+								paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 			
 
 			<p:column  width="200" headerText="Name">
