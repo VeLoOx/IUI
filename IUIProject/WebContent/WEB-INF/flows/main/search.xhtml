@@ -23,15 +23,14 @@
 				<p:panel header="MENU" footer=" - My World - ">
 					<h:form>
 						<p:menu>
-							<p:menuitem value="Main Page" action="goToMainPage" icon="ui-icon ui-icon-home" />
-							<p:menuitem value="Main Account" action="goToMyAccount" icon="ui-icon ui-icon-person"/>
-							<p:menuitem value="Add Topic" action="createTopic" icon="ui-icon ui-icon-script" />
-							<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search" />
-						</p:menu>
-						<p:menu style="margin-top:10px;">
-							<p:menuitem value="Look on map" action="map" icon="ui-icon ui-icon-flag" />
-
-						</p:menu>
+		<p:menuitem value="Welcome" action="main" icon="ui-icon ui-icon-home"/>
+		<p:menuitem value="Geocode" action="goToGeo" icon="ui-icon ui-icon-flag"/>
+		<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search"/>
+	</p:menu>
+	<p:menu style="margin-top:10px;">
+		<p:menuitem value="Login" action="login" icon="ui-icon ui-icon-pencil"/>
+		<p:menuitem value="Register" action="register" icon="ui-icon ui-icon-circle-plus"/>
+	</p:menu>
 					</h:form>
 				</p:panel>
 			</div>
@@ -85,45 +84,8 @@
 					</p:panel>
 				</div>
 				
-				<div id="TRESCPELNASZEROKOSC">
-					<p:panel header="Found Users">
-					<h:form>
-					<p:dataTable var="userL" value="#{userService.getUserSearch(uiUtils.searchText)}"
-								selectionMode="single" rowKey="#{userL.id}"
-								rows="10"
-								paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-
-
-								<p:column width="200" headerText="Name">
-
-									<h:commandLink id="top" value="#{userL.userName}"
-										action="showUserDetails">
-										<f:setPropertyActionListener value="#{userL}"
-											target="#{userService.selectedUser}"></f:setPropertyActionListener>
-									</h:commandLink>
-
-								</p:column>
-
-								<p:column width="200" headerText="City">
-									<h:outputText value="#{userL.userData.adress.city}" />
-								</p:column>
-
-								<p:column width="200" headerText="Polubiony?">
-									<h:outputText value="polubiony?" />
-								</p:column>
-							</p:dataTable>
-					</h:form>
-					</p:panel>
-				</div>
-
-
+				
 			</div>
-
-
-
-
-
-
 			
 		</div>
 	</ui:define>

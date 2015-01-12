@@ -29,8 +29,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 
+
+
 import pl.iui.dao.user.UserDao;
+import pl.iui.dao.user.UserDataDao;
 import pl.iui.domain.topic.TopicEntity;
+import pl.iui.domain.user.AdressEntity;
 import pl.iui.domain.user.UserDataEntity;
 import pl.iui.domain.user.UserEntity;
 import pl.iui.services.UserService;
@@ -38,6 +42,7 @@ import pl.iui.services.UserService;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private UserDao userDao;
+    private UserDataDao dataDao;
     private UserEntity selectedUser;
    
     /**
@@ -56,6 +61,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             }
            
             try {
+            		AdressEntity adress = new AdressEntity();
+            		UserDataEntity data = new UserDataEntity();
+            		data.setAdress(adress);
+            		
+            		userEntity.setUserData(data);
                     userDao.save(userEntity);
             } catch(Exception e) {
                     FacesMessage message = constructFatalMessage(e.getMessage(), null);
@@ -73,8 +83,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     	 
     
      try {
-    	 	 userEntity.setUserData(udataEntity);
-             userDao.update(userEntity);
+    	 userEntity.getUserData().setAdress(udataEntity.getAdress());
+    	 userEntity.getUserData().setHobbies(udataEntity.getHobbies());
+    	 userEntity.getUserData().setSex(udataEntity.getSex());
+    	 userEntity.getUserData().setYearOfBirth(udataEntity.getYearOfBirth());
+    	 	//userEntity.setUserData(udataEntity);
+           userDao.update(userEntity);
+    	 //dataDao.update(udataEntity);
      } catch(Exception e) {
              FacesMessage message = constructFatalMessage(e.getMessage(), null);
              getFacesContext().addMessage(null, message);
@@ -84,6 +99,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     	
     	return true;
     }
+    
+    public boolean updateUserData (UserDataEntity userDataEntity){
+        try {
+       	 		System.out.println("Uaktualniam");
+               // userDao.update(userEntity);
+       	 		dataDao.update(userDataEntity);
+        } catch(Exception e) {
+                FacesMessage message = constructFatalMessage(e.getMessage(), null);
+                getFacesContext().addMessage(null, message);
+               
+                return false;
+        }
+       	
+       	return true;
+       }
     
    
     /**
@@ -246,6 +276,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	
 	public List<UserEntity> getUserSearch(String text){
 		return userDao.findByString(text);
+	}
+
+
+	public UserDataDao getDataDao() {
+		return dataDao;
+	}
+
+
+	public void setDataDao(UserDataDao dataDao) {
+		this.dataDao = dataDao;
 	}
 
 }

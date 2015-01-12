@@ -31,12 +31,12 @@
 				<p:panel header="MENU" footer=" - My World - ">
 					<h:form>
 						<p:menu>
-							<p:menuitem value="Main Page" action="goToMainPage" />
-							<p:menuitem value="Add Topic" action="createTopic" />
-							<p:menuitem value="Search" action="goToSearch" />
+							<p:menuitem value="Main Page" action="goToMainPage" icon="ui-icon ui-icon-home" />
+							<p:menuitem value="Add Topic" action="createTopic" icon="ui-icon ui-icon-script" />
+							<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search" />
 						</p:menu>
 						<p:menu style="margin-top:10px;">
-							<p:menuitem value="Look on map" action="map" />
+							<p:menuitem value="Look on map" action="map" icon="ui-icon ui-icon-flag" />
 
 						</p:menu>
 					</h:form>
@@ -57,7 +57,7 @@
 								<h:outputText value="#{user.userData.sex}" />
 
 								<p:outputLabel value="Hobbies:" />
-								<h:outputText value="#{user.userData.hobbies}" />
+								<h:outputText value="#{flowScope.user.userData.hobbies}" />
 
 								<p:outputLabel value="City:" />
 								<h:outputText value="#{user.userData.adress.city}" />
@@ -167,6 +167,8 @@
 
 	</ui:define>
 	<ui:define name="footer">
-		<div id="STOPKA">FOOTER</div>
+		<div id="STOPKA">
+	<div id="line"></div>
+	Inteligentne usługi informacyjne - 2015</div>
 	</ui:define>
 </ui:composition>

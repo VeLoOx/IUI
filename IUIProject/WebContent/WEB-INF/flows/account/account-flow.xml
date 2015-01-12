@@ -53,12 +53,14 @@
 			<evaluate
 				expression="topicService.addAutoTopic(newTopic,flowScope.user, adressTopic)" />
 		</transition>
+		<transition on="goToSearch" to="search" />
 	</view-state>
 
 	<view-state id="mainHome" view="mainAccount.xhtml">
 		<transition on="goToMyAccount" to="home" />
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
+		<transition on="goToSearch" to="search" />
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 
@@ -68,9 +70,13 @@
 	</view-state>
 
 	<view-state id="editUserData" view="accountDetails.xhtml">
+	<!-- <on-entry>
+	<set name="userData" value="flowScope.user.userData"></set>
+	</on-entry> -->
 		<transition on="backToAccount" to="home">
 
 		</transition>
+		
 		<transition on="confirmUserData" to="home">
 			<evaluate expression="userService.updateUserData(flowScope.user,userData)" />
 		</transition>
@@ -85,7 +91,7 @@
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
-
+<transition on="goToSearch" to="search" />
 	</view-state>
 
 
@@ -97,6 +103,7 @@
 			<set name="newTopic" value="topicService.getNewTopic()"></set>
 			<set name="adressTopic" value="topicService.getNewAdress()"></set>
 		</on-entry>
+		<transition on="goToSearch" to="search" />
 	</view-state>
 
 	<view-state id="createTopic" view="createTopic.xhtml">
@@ -116,6 +123,7 @@
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
+		<transition on="goToSearch" to="search" />
 	</view-state>
 
 	
@@ -138,6 +146,7 @@
 		<transition on="addtopictofav" to="showTopic">
 		<evaluate expression="userService.addFavoriteTopic(showTopic.id,flowScope.user)" />
 		</transition>
+		<transition on="goToSearch" to="search" />
 	</view-state>
 
 	<view-state id="showUser" view="showUserDetails.xhtml">
@@ -147,12 +156,13 @@
 		<transition on="goToMainPage" to="mainHome" />
 		<transition on="goToHome" to="home" />
 		<transition on="createTopic" to="createTopic">
-			<evaluate expression="topicService.createMarker()" />
-		</transition>
+	<evaluate expression="topicService.createMarker()" />
+</transition>
 		<transition on="showTopicDetails" to="showTopic" />
 		<transition on="addusertofav" to="showUser">
 		<evaluate expression="userService.addFavoriteUser(showUser.id,flowScope.user)" />
 		</transition>
+		<transition on="goToSearch" to="search" />
 	</view-state>
 
 </flow>

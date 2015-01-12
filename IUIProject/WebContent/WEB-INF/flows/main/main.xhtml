@@ -35,13 +35,13 @@
 	<p:panel header="MENU" footer=" - My World - ">
 	<h:form>
 	<p:menu>
-		<p:menuitem value="Welcome" action="main"/>
-		<p:menuitem value="Geocode" action="geo"/>
-		<p:menuitem value="Search" action="search"/>
+		<p:menuitem value="Welcome" action="main" icon="ui-icon ui-icon-home"/>
+		<p:menuitem value="Geocode" action="goToGeo" icon="ui-icon ui-icon-flag"/>
+		<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search"/>
 	</p:menu>
 	<p:menu style="margin-top:10px;">
-		<p:menuitem value="Login" action="login"/>
-		<p:menuitem value="Register" action="register"/>
+		<p:menuitem value="Login" action="login" icon="ui-icon ui-icon-pencil"/>
+		<p:menuitem value="Register" action="register" icon="ui-icon ui-icon-circle-plus"/>
 	</p:menu>
 	
 	</h:form>
@@ -123,6 +123,9 @@
 	</ui:define>
 	
 	<ui:define name="footer">
-	<div id="STOPKA">FOOTER</div>
+	
+	<div id="STOPKA">
+	<div id="line"></div>
+	Inteligentne usługi informacyjne - 2015</div>
 	</ui:define>
 </ui:composition>

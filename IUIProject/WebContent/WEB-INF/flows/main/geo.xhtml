@@ -1,49 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/general.xhtml">
+<!DOCTYPE html>
 
-	<ui:define name="title">
-		<h:outputText value="Please login" />
-	</ui:define>
-	<ui:define name="header">
-		<h:outputText value="Please login" />
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"></meta>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+
+<h:head>
+
+    <title>Places Autocomplete</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"></meta>
     <meta charset="utf-8"></meta>
-<!--     <link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet"></link> -->
+    <h:outputStylesheet library="css" name="style.css" />
+    <link href="/maps/documentation/javascript/examples/default.css" rel="stylesheet"></link>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places"></script>
 
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #map-canvas, #map_canvas {
-            height: 100%;
-        }
-
-        @media print {
-            html, body {
-                height: auto;
-            }
-
-            #map_canvas {
-                height: 650px;
-            }
-        }
-
+     
+               
         #panel {
-            position: absolute;
+           
             top: 5px;
-            left: 50%;
-            margin-left: -180px;
-            z-index: 5;
-            background-color: #fff;
+           
+            margin-left: 120px;
+            /* z-index: 5; */
+            background-color:white;
             padding: 5px;
             border: 1px solid #999;
         }
@@ -59,6 +42,43 @@
     <script>
     // <![CDATA[
         function initialize() {
+
+		//-----
+		var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+		//----
+		
+		//----
+		// [START region_fillform]
+function fillInAddress(place) {
+  // Get the place details from the autocomplete object.
+  //var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }
+}
+// [END region_fillform]
+		//----
+            
           var mapOptions = {
             center: new google.maps.LatLng(-33.8688, 151.2195),
             zoom: 13,
@@ -105,16 +125,30 @@
             marker.setPosition(place.geometry.location);
             marker.setVisible(true);
 
+            document.getElementById('lat').value = marker.getPosition().lat();
+			document.getElementById('lng').value =  marker.getPosition().lng();
+
             var address = '';
+            var adr1;
+            var adr2;
             if (place.address_components) {
               address = [
                 (place.address_components[0] && place.address_components[0].short_name || ''),
                 (place.address_components[1] && place.address_components[1].short_name || ''),
                 (place.address_components[2] && place.address_components[2].short_name || '')
               ].join(' ');
+             
             }
 
             infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+
+            fillInAddress(place);
+            
+           var form = document.forms['topicform'];
+           var setel = form.elements['miasto'];
+            document.getElementById("miasto").innerHTML = document.getElementById("searchTextField").value;
+           setel.innerHTML = document.getElementById("searchTextField").value;
+           document.getElementById("adrestext").value = document.getElementById("searchTextField").value;
             infowindow.open(map, marker);
           });
 
@@ -130,16 +164,61 @@
           setupClickListener('changetype-all', []);
           setupClickListener('changetype-establishment', ['establishment']);
           setupClickListener('changetype-geocode', ['geocode']);
-        }
 
+         // document.getElementById("miasto").innerHTML ='Ustawiam';
+
+       
+          
+
+        }
         google.maps.event.addDomListener(window, 'load', initialize);
+       
     // ]]>
     </script>
-		
-	</ui:define>
+</h:head>
 
-	<ui:define name="content">
-	<div id="panel" style="margin-left: -260px">
+<h:body>
+<div id="container">
+<div id="greeting">
+				<c:if test="${not empty currentUser.name}">
+					<b>Welcome,</b> ${user.firstName} ${user.lastName} | 
+					<a  href="${request.contextPath}/app/logout">Logout</a>
+					 
+				</c:if>
+				<c:otherwise>
+					<ui:insert name="greeting" />
+				</c:otherwise>
+			</div>
+
+			
+
+			<div id="header">
+			<h:outputText value="My World"/>
+				<h1>
+				
+					<ui:insert name="header" />
+				</h1>
+			</div>
+<div id="top" >
+<div id="MENU">
+				<p:panel header="MENU" footer=" - My World - ">
+					<h:form>
+						<p:menu>
+		<p:menuitem value="Welcome" action="main" icon="ui-icon ui-icon-home"/>
+		<p:menuitem value="Geocode" action="goToGeo" icon="ui-icon ui-icon-flag"/>
+		<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search"/>
+	</p:menu>
+	<p:menu style="margin-top:10px;">
+		<p:menuitem value="Login" action="login" icon="ui-icon ui-icon-pencil"/>
+		<p:menuitem value="Register" action="register" icon="ui-icon ui-icon-circle-plus"/>
+	</p:menu>
+					</h:form>
+				</p:panel>
+			</div>
+	<div id="TRESC">
+	
+	<div id="TRESCWIDEPANELMAP">
+    <div id="panel">
       <input id="searchTextField" type="text" size="50"></input>
       <input type="radio" name="type" id="changetype-all" checked="checked"></input>
       <label for="changetype-all">All</label>
@@ -150,10 +229,18 @@
       <input type="radio" name="type" id="changetype-geocode"></input>
       <label for="changetype-geocode">Geocodes</label>
     </div>
-    <div id="map-canvas">
-    
     </div>
-	
-	</ui:define>
-
-</ui:composition>
+    <div id="TRESCMAP">
+    	<div id="map-canvas"></div>
+    </div>
+ 
+   </div> 
+   </div>
+   <div id="footer">
+   <div id="STOPKA">
+	<div id="line"></div>
+	Inteligentne usługi informacyjne - 2015</div>
+   </div>
+</div>
+</h:body>
+</html>

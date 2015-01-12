@@ -22,12 +22,13 @@
 				<p:panel header="MENU" footer=" - My World - ">
 					<h:form>
 						<p:menu>
-							<p:menuitem value="Main Page" action="goToMainPage" />
-							<p:menuitem value="My Account" action="goToHome" />
-							<p:menuitem value="Search" action="search" />
+							<p:menuitem value="Main Page" action="goToMainPage" icon="ui-icon ui-icon-home" />
+							<p:menuitem value="Main Account" action="goToMyAccount" icon="ui-icon ui-icon-person"/>
+							<p:menuitem value="Add Topic" action="createTopic" icon="ui-icon ui-icon-script" />
+							<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search" />
 						</p:menu>
 						<p:menu style="margin-top:10px;">
-							<p:menuitem value="Look on map" action="map" />
+							<p:menuitem value="Look on map" action="map" icon="ui-icon ui-icon-flag" />
 
 						</p:menu>
 					</h:form>
@@ -164,6 +165,8 @@
 		</div>
 	</ui:define>
 	<ui:define name="footer">
-		<div id="STOPKA">FOOTER</div>
+		<div id="STOPKA">
+	<div id="line"></div>
+	Inteligentne usługi informacyjne - 2015</div>
 	</ui:define>
 </ui:composition>

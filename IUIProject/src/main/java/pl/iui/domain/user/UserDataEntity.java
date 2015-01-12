@@ -49,7 +49,7 @@ public class UserDataEntity implements Serializable {
 	@JoinColumn(name = "idadress")
 	private AdressEntity adress = new AdressEntity();
 	
-	@ElementCollection (fetch = FetchType.EAGER)
+	@ElementCollection ( fetch = FetchType.EAGER)
 	@CollectionTable(name="udatahobbies", joinColumns=@JoinColumn(name="userdataid"))
 	@Column(name="hobby")
 	private List<String> hobbies = new ArrayList<String>();

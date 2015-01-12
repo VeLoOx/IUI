@@ -17,6 +17,7 @@
 <!-- 	Services declarations -->
 	<bean id="userService" class="pl.iui.services.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
+		<property name="dataDao" ref="userDataDao" />
 	</bean>
 
 	<bean id="userAuthenticationProviderService"

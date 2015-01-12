@@ -6,6 +6,8 @@
 
 	<var name="user" class="pl.iui.domain.user.UserEntity" />
 	<var name="showTopic" class="pl.iui.domain.topic.TopicEntity" />
+	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
+	<var name="adressTopic" class="pl.iui.domain.user.AdressEntity" />
 
 
 	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
@@ -17,11 +19,22 @@
 		<transition on="showTopicDetails" to="topicDeails">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
-		<transition on="Geocode" to="geo" />
+		<transition on="goToGeo" to="geo" />
+		<transition on="goToSearch" to="search"/>
 		<transition on="main" to="main" />
 	</view-state>
 
-	<view-state id="geo" view="geo.xhtml"></view-state>
+	<view-state id="geo" view="geo.xhtml">
+	<transition on="login" to="login" />
+		<transition on="register" to="register" />
+
+		<transition on="showTopicDetails" to="topicDeails">
+			<evaluate expression="topicService.createMarker()" />
+		</transition>
+		<transition on="goToGeo" to="geo" />
+		<transition on="goToSearch" to="search"/>
+		<transition on="main" to="main" />
+	</view-state>
 
 	<view-state id="login" view="login.xhtml" model="user">
 		<transition on="newUser" to="register" />
@@ -31,6 +44,18 @@
 		</transition>
 	</view-state>
 
+<view-state id="search" view="search.xhtml">
+<transition on="login" to="login" />
+		<transition on="register" to="register" />
+
+		<transition on="showTopicDetails" to="topicDeails">
+			<evaluate expression="topicService.createMarker()" />
+		</transition>
+		<transition on="goToGeo" to="geo" />
+		<transition on="goToSearch" to="search"/>
+		<transition on="main" to="main" />
+		<transition on="gosearch" to="search"/>
+</view-state>
 
 
 	<view-state id="register" view="register.xhtml" model="user">
@@ -55,6 +80,7 @@
 		</transition>
 		<transition on="Geocode" to="geo" />
 		<transition on="main" to="main" />
+		<transition on="goToSearch" to="search"/>
 	</view-state>
 
 	<action-state id="authentication">

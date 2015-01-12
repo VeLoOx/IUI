@@ -23,10 +23,12 @@ html, body,  {
 }
 
 #header {
-        height: 60px;
+        height: 76px;
         text-align: center;
-        background: url(images/bank.png) 10px 10px no-repeat #272727;
-        background-size: 58px;
+       background: url(images/header2.gif) 10px 10px no-repeat #272727; 
+       /*  background-image: url('#{resource['images:accept-icon.gif']}'); */
+        background-color: #272727;
+        
         color: white;
         padding: 5px;
         font-smooth: always;
@@ -120,6 +122,7 @@ html, body,  {
 	/* background-color: #ddd; */
 	border-color: black;
 	border-style:solid 1px; 
+	font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 	
 }
 
@@ -132,7 +135,7 @@ html, body,  {
 	margin-top:5px;
 	min-height: 25px;
 	overflow: hidden;
-	background-color: #ddd;
+	background-color: white;
 	
 }
 
@@ -145,7 +148,7 @@ html, body,  {
 	margin-top:10px; 
 	min-height: 100px;
 	overflow: hidden;
-	background-color: #ddd;
+	background-color: white;
 }
 
 #TRESCMAPA1{
@@ -157,7 +160,7 @@ html, body,  {
 	margin-top:10px; 
 	/* min-height: 100px; */
 	overflow: hidden;
-	background-color: #ddd;
+	background-color: white;
 }
 
 #TRESCPELNASZEROKOSC{
@@ -187,17 +190,30 @@ html, body,  {
 
 #STOPKA {
 	clear: both;
-	width: 100%;
-	background-color: #888;
+	width:  1260px;
+	height: 30px;
+	margin-left:5px;
+	background-color: white;
+	
+	
+	
+	font-weight: normal;
+    font-size: 1.0em;
+	letter-spacing: .2em;
+	line-height: 1.1em;
+	
+	text-align: center;
+	text-transform: uppercase;
 }
 
 #line {
         width: 100%;
-        height: 10px;
-        background: #272727;    
+        height: 3px;
+        background: orange;    
 }
 
 .fieldset {
+	
         margin: 0 auto;
         width: auto;
         margin-top: 10px;
@@ -313,6 +329,19 @@ html, body,  {
     table-layout: fixed;
     word-wrap: break-word;
 }
+
+.look{
+    background: url(images/accept-icon.gif) no-repeat !important; 
+    height:16px;
+    width:16px;
+}
+
+.ui-menu .ui-menu-parent .ui-menu-child 
+        {
+            white-space: nowrap;
+            height: 100px !important;
+            width: 350px;
+        }
 
 
 
