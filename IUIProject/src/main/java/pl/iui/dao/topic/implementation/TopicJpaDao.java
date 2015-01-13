@@ -56,10 +56,19 @@ public class TopicJpaDao extends GenericJpaDao<TopicEntity, Long> implements Top
 	}
 	
 	public List<TopicEntity> findTopicForUser(UserEntity user){
-		 Query query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
-                 + " u where u.category IN :cat AND u.adress.city = :cit")
-                 .setParameter("cat",user.getUserData().getHobbies())
+	    Query query=null;
+		if(user.getUserData().getHobbies().isEmpty()){
+		
+		  query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+                 + " u where u.category = :cat AND u.adress.city = :cit")
+                 .setParameter("cat","Inne")
                  .setParameter("cit", user.getUserData().getAdress().getCity());
+		} else {
+			query = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
+	                 + " u where u.category IN :cat AND u.adress.city = :cit")
+	                 .setParameter("cat",user.getUserData().getHobbies())
+	                 .setParameter("cit", user.getUserData().getAdress().getCity());
+		}
 		 
 		Query query2 = getEntityManager().createQuery("select u from " + getPersistentClass().getSimpleName()
                 + " u where u.id IN :ids")

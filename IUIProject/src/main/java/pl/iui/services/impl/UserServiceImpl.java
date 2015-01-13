@@ -287,6 +287,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public void setDataDao(UserDataDao dataDao) {
 		this.dataDao = dataDao;
 	}
+	
+	/*public String transalteLatLang(UserDataEntity ude){
+		String val = "";
+		
+		if(ude.getAdress().getLat()==null || ude.getAdress().getLng()==null ){
+			
+		}
+			
+		
+		return val;
+	}*/
 
 }
 
