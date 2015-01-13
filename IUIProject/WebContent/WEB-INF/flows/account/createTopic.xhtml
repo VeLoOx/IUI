@@ -39,7 +39,7 @@
 				<p:growl id="growl" showDetail="true" />
 
 				<p:fieldset legend="New Topic">
-<h:form id="userTopicAddForm">
+<h:form prependId="false" id="topicform">
 
 					<div id="TRESC11WIDE">
 
@@ -67,6 +67,9 @@
 								<h:outputText for="topicArea" value="Description:" />
 								<h:inputTextarea id="topicArea" value="#{newTopic.describe}"
 									cols="35" rows="4" />
+									
+								<h:outputLabel id="tr"/>
+								<h:outputLabel>ss</h:outputLabel>
 							</h:panelGrid>
 						</p:fieldset>
 					</div>
@@ -84,8 +87,9 @@
 									<f:selectItem itemLabel="Kielce" itemValue="Kielce" />
 									<f:selectItem itemLabel="Kraków" itemValue="Kraków" />
 									<f:selectItem itemLabel="Łódź" itemValue="Łódz" />
+									<f:selectItem itemLabel="Lublin" itemValue="Lublin" />
 								</p:selectOneMenu>
-
+								
 								<p:outputLabel for="street" value="Street:" />
 								<h:inputText id="street" value="#{adressTopic.street}" />
 
@@ -97,8 +101,21 @@
 								
 								<p:outputLabel value="Add Marker:" />
 								<p:commandButton id="btn" type="button" icon="ui-icon-pin-s" value="Show map" onclick="PF('dlg0').show();" />
-
+								
+								
 							</h:panelGrid>
+							
+							<p:fieldset legend="Helper">
+								<h:panelGrid columns="2">
+								<p:commandButton value="Calculate City LatLang" onclick="codeAddress();" update=":growl,:gmap"/>
+								<p:commandButton value="Center map on City" onclick="PF('dlg0').getMap().setCenter(30, 20);"/>
+								
+								<p:outputLabel for = "lattmp" value="LATITUDE"/>
+								<h:inputText id="lattmp" value="#{topicService.ll}" />
+								<p:outputLabel for = "lngtmp" value="LONGITUDE"/>
+								<h:inputText id="lngtmp" value="#{topicService.ll2}" />
+								</h:panelGrid>
+							</p:fieldset>
 							
 						</p:fieldset>
 					</div>
@@ -126,6 +143,7 @@
 							
 						</p:panel>
 					</div>
+					
 </h:form>
 				</p:fieldset>
 				<!-- 		<p:commandButton id="btn" type="button" icon="ui-icon-pin-s" -->
@@ -137,7 +155,7 @@
 					modal="true">
 					<!-- 			<p:gmap id="gmap" center="41.381542, 2.122893" zoom="15" -->
 					<!-- 				type="HYBRID" style="width:100%;height:400px" /> -->
-					<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
+					<p:gmap id="gmap" center="#{topicService.ll}, #{topicService.ll2}" zoom="13"
 						type="HYBRID" style="width:100%;height:400px"
 						model="#{topicService.mapModel}"
 						onPointClick="handlePointClick(event);" widgetVar="map">
@@ -171,11 +189,54 @@
 						<h:inputHidden id="lat1" value="#{newTopic.lat}" />
 						<h:inputHidden id="lng" value="#{topicService.lng}" />
 						<h:inputHidden id="lng1" value="#{newTopic.lng}" />
-
+						
+						
+						
 					</h:form>
 				</p:dialog>
 
 				<script type="text/javascript">
+
+				var n = "test";
+
+				
+				
+				function codeAddress() {
+					  var form = document.forms['topicform'];
+			           var setel = form.elements['city']; 
+
+			          var e = document.getElementById('city_input');
+			           var strUser = e.options[e.selectedIndex].value; 
+			           
+					var geocoder = new google.maps.Geocoder();
+					var address = strUser;
+					 // address = document.getElementById('city');
+					  geocoder.geocode( { 'address': address}, function(results, status) {
+					    if (status == google.maps.GeocoderStatus.OK) {
+					      //map.setCenter(results[0].geometry.location);
+					      n=results[0].geometry.location;
+					      document.getElementById("lattmp").value = results[0].geometry.location.lat();
+					      document.getElementById("lngtmp").value = results[0].geometry.location.lng();
+					      
+					      
+					      
+					     // document.getElementById("number").value = results[0].geometry.location.lng();
+					      return true;
+					     // alert(document.getElementById("lattmp").value+" "+document.getElementById("lngtmp").value);
+					    } else {
+					      alert('Geocode was not successful for the following reason: ' + status + address);
+					    }
+					  });
+					}
+
+				function checkPasswords() {
+					codeAddress();
+					  // alert(n);
+					   return true;
+					}
+
+
+				
 			var currentMarker = null;
 
 			function handlePointClick(event) {

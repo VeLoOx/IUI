@@ -13,6 +13,7 @@
 	<var name="newComm" class="pl.iui.domain.user.CommentsEntity" />
 	<var name="uiUtils" class="pl.iui.ui.utils.UiUtils" />
 	<var name="rate" class="java.lang.String" />
+	
 
 	<on-start>
 		<evaluate expression="userService.loadUserEntityByUsername(currentUser.name)"
@@ -49,11 +50,16 @@
 			<set name="newTopic" value="topicService.getNewTopic()"></set>
 			<set name="adressTopic" value="topicService.getNewAdress()"></set>
 		</on-entry>
+		
 		<transition on="confirmNewUserTopic" to="home">
 			<evaluate
 				expression="topicService.addAutoTopic(newTopic,flowScope.user, adressTopic)" />
 		</transition>
+		
 		<transition on="goToSearch" to="search" />
+		<transition on="goToMainPage" to="mainHome" />
+		<transition on="goToHome" to="home" />
+		<transition on="goToMap" to="map" />
 	</view-state>
 
 	<view-state id="mainHome" view="mainAccount.xhtml">
@@ -67,6 +73,7 @@
 		</transition>
 		<transition on="showTopicDetails" to="showTopic" />
 		<transition on="showUserDetails" to="showUser" />
+		
 	</view-state>
 
 	<view-state id="editUserData" view="accountDetails.xhtml">
@@ -124,6 +131,10 @@
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
 		<transition on="goToSearch" to="search" />
+		<transition on="refresh" to="createTopic">
+			<set name="flowScope.ll" value="topicService.ll" />
+			<set name="flowScope.ll2" value="topicService.ll2" />
+		</transition>
 	</view-state>
 
 	

@@ -57,7 +57,7 @@
 								<h:outputText value="#{user.userData.sex}" />
 
 								<p:outputLabel value="Hobbies:" />
-								<h:outputText value="#{flowScope.user.userData.hobbies}" />
+								<h:outputText value="#{uiUtils.uniqueList(user.userData.hobbies)}" />
 
 								<p:outputLabel value="City:" />
 								<h:outputText value="#{user.userData.adress.city}" />

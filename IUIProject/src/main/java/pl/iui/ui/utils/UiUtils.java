@@ -18,7 +18,19 @@ public class UiUtils implements Serializable {
 	 
 	 private String searchText;
 	 
-	 public UiUtils (){
+	 private String ll = "50,19";
+	 
+	 public String getLl() {
+		 System.out.println("!!!!!!!!!!!!!"+ll);
+		return ll;
+	}
+
+	public void setLl(String ll) {
+	
+		this.ll = ll;
+	}
+
+	public UiUtils (){
 		 for(int i=1900;i<1995;i++){
 			 years.add(Integer.toString(i));
 			 //System.out.println(years.get(i-1900));
@@ -53,6 +65,16 @@ public class UiUtils implements Serializable {
 
 	public void setSearchText(String searchText) {
 		this.searchText = searchText;
+	}
+	
+	public List<String> uniqueList(List<String> list){
+		List<String> l = new ArrayList<>();
+		
+		for(String s : list){
+			if(!l.contains(s))l.add(s);
+		}
+		
+		return l;
 	}
 
 }

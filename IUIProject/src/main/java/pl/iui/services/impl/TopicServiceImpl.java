@@ -43,6 +43,17 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 	private double lng;
 	
 	private String adresstext;
+	
+	private double ll;
+	private double ll2;
+
+	public double getLl2() {
+		return ll2;
+	}
+
+	public void setLl2(double ll2) {
+		this.ll2 = ll2;
+	}
 
 	// ------------Map methods-------------------------------------
 	public void cleanTopicSelection(){
@@ -111,6 +122,7 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 		marker = new Marker(new LatLng(lat, lng), title);
 		marker.setDraggable(true);
 		mapModel.addOverlay(marker);
+		
 		// updateMarkers();
 		FacesContext.getCurrentInstance().addMessage(
 				null,
@@ -135,6 +147,7 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 	}
 
 	public void setMapModel(MapModel mapModel) {
+		//mapModel.addOverlay(new Marker(new LatLng(lat, lng)));
 		this.mapModel = mapModel;
 	}
 
@@ -308,6 +321,16 @@ public class TopicServiceImpl extends FacesMessagesProvider implements
 	
 	public List<TopicEntity> getTopicSearch(String text){
 		return topicDao.findByString(text);
+	}
+
+	public double getLl() {
+		System.out.println("!!!!!! "+ll);
+		return ll;
+	}
+
+	public void setLl(double ll) {
+		System.out.println("!!!SETETE  "+ll);
+		this.ll = ll;
 	}
 
 }
