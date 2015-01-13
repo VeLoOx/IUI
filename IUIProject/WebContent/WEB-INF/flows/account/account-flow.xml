@@ -43,6 +43,9 @@
 		<transition on="goToHome" to="home" />
 		<transition on="goToMap" to="map" />
 		<transition on="goToSearch" to="search" />
+		<transition on="createTopic" to="createTopic">
+			<evaluate expression="topicService.cleanTopicSelection()"></evaluate>
+		</transition>
 	</view-state>
 
 	<view-state id="map" view="map.xhtml">
@@ -54,6 +57,10 @@
 		<transition on="confirmNewUserTopic" to="home">
 			<evaluate
 				expression="topicService.addAutoTopic(newTopic,flowScope.user, adressTopic)" />
+		</transition>
+		
+		<transition on="createTopic" to="createTopic">
+			<evaluate expression="topicService.cleanTopicSelection()"></evaluate>
 		</transition>
 		
 		<transition on="goToSearch" to="search" />

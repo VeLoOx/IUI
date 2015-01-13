@@ -41,6 +41,11 @@
 
     <script>
     // <![CDATA[
+    var panorama;
+    var astorPlace = new google.maps.LatLng(40.729884, -73.990988);
+   
+    var marker;
+    var ss;
         function initialize() {
 
 		//-----
@@ -53,6 +58,8 @@ var componentForm = {
   country: 'long_name',
   postal_code: 'short_name'
 };
+
+
 		//----
 		
 		//----
@@ -82,18 +89,20 @@ function fillInAddress(place) {
           var mapOptions = {
             center: new google.maps.LatLng(-33.8688, 151.2195),
             zoom: 13,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            streetViewControl: false
           };
+          
           var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
 
+       
           var input = /** @type {HTMLInputElement} */(document.getElementById('searchTextField'));
           var autocomplete = new google.maps.places.Autocomplete(input);
 
           autocomplete.bindTo('bounds', map);
 
           var infowindow = new google.maps.InfoWindow();
-          var marker = new google.maps.Marker({
+          marker = new google.maps.Marker({
             map: map
           });
 
@@ -112,6 +121,8 @@ function fillInAddress(place) {
             if (place.geometry.viewport) {
               map.fitBounds(place.geometry.viewport);
             } else {
+                ss = place.geometry.location;
+                panorama.setPosition(ss);
               map.setCenter(place.geometry.location);
               map.setZoom(17);  // Why 17? Because it looks good.
             }
@@ -167,10 +178,26 @@ function fillInAddress(place) {
 
          // document.getElementById("miasto").innerHTML ='Ustawiam';
 
-       
+          panorama = map.getStreetView();
+          panorama.setPosition(ss);
+          panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+            heading: 265,
+            pitch: 0
+          }));
+        
           
 
         }
+
+        function toggleStreetView() {
+        	  var toggle = panorama.getVisible();
+        	  if (toggle == false) {
+        	    panorama.setVisible(true);
+        	  } else {
+        	    panorama.setVisible(false);
+        	  }
+        	}
+    	
         google.maps.event.addDomListener(window, 'load', initialize);
        
     // ]]>
@@ -228,6 +255,11 @@ function fillInAddress(place) {
 
       <input type="radio" name="type" id="changetype-geocode"></input>
       <label for="changetype-geocode">Geocodes</label>
+      <p:fieldset>
+      <h:form>
+ 		 <p:commandButton type="button" value="Toggle Street View (Beta - find astor place)" onclick="toggleStreetView();"></p:commandButton>
+ 	  </h:form>
+ 	  </p:fieldset>
     </div>
     </div>
     <div id="TRESCMAP">

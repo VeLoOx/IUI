@@ -41,6 +41,9 @@
 
     <script>
     // <![CDATA[
+     var directionsDisplay = new google.maps.DirectionsRenderer();
+     var directionsService = new google.maps.DirectionsService();
+    
         function initialize() {
 
 		//-----
@@ -86,6 +89,9 @@ function fillInAddress(place) {
           };
           var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
+
+         
+          directionsDisplay.setMap(map);
 
           var input = /** @type {HTMLInputElement} */(document.getElementById('searchTextField'));
           var autocomplete = new google.maps.places.Autocomplete(input);
@@ -161,6 +167,8 @@ function fillInAddress(place) {
             });
           }
 
+         
+
           setupClickListener('changetype-all', []);
           setupClickListener('changetype-establishment', ['establishment']);
           setupClickListener('changetype-geocode', ['geocode']);
@@ -168,10 +176,32 @@ function fillInAddress(place) {
          // document.getElementById("miasto").innerHTML ='Ustawiam';
 
        
-          
 
         }
 
+        function calcRoute() {
+           
+      	  var start = document.getElementById('locality').value;
+      	  var end = document.getElementById('mycity').value;
+
+      	var startlat = document.getElementById('lat').value;
+    	  var startlng= document.getElementById('lng').value;
+
+    	  var endlat = document.getElementById('ulat').value;
+      	  var endlng = document.getElementById('ulng').value;
+      	  
+      	 alert("Route from "+start+" to Your adress in "+end);
+      	  var request = {
+      	      origin:new google.maps.LatLng(startlat, startlng),
+      	      destination:new google.maps.LatLng(endlat, endlng),
+      	      travelMode: google.maps.TravelMode.DRIVING
+      	  };
+      	  directionsService.route(request, function(response, status) {
+      	    if (status == google.maps.DirectionsStatus.OK) {
+      	      directionsDisplay.setDirections(response);
+      	    }
+      	  });
+      	}
        
 
         google.maps.event.addDomListener(window, 'load', initialize);
@@ -211,10 +241,10 @@ function fillInAddress(place) {
 						<p:menu>
 							<p:menuitem value="Main Page" action="goToMainPage" icon="ui-icon ui-icon-home" />
 							<p:menuitem value="Add Topic" action="createTopic" icon="ui-icon ui-icon-script" />
-							<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search" />
+							
 						</p:menu>
 						<p:menu style="margin-top:10px;">
-							<p:menuitem value="Look on map" action="map" icon="ui-icon ui-icon-flag" />
+							<p:menuitem value="Search" action="goToSearch" icon="ui-icon ui-icon-search" />
 
 						</p:menu>
 					</h:form>
@@ -276,6 +306,10 @@ function fillInAddress(place) {
 		<h:inputHidden id="lat1" value="#{newTopic.lat}" />
 		<h:inputHidden id="lng" value="#{topicService.lng}" />
 		<h:inputHidden id="lng1" value="#{newTopic.lng}" />
+		<h:inputHidden id="mycity" value="#{flowScope.user.userData.adress.city}"/>
+		
+		<h:inputHidden id="ulat" value="#{flowScope.user.userData.adress.lat}"/>
+		<h:inputHidden id="ulng" value="#{flowScope.user.userData.adress.lng}"/>
      
    
     <p:fieldset legend="Topic">
@@ -305,7 +339,8 @@ function fillInAddress(place) {
 							</h:panelGrid>
 						</p:fieldset>
 		<p:commandButton value="Save place" action="confirmNewUserTopic"/>
-    	<p:commandButton value="Back"/>
+		<p:commandButton value="Show route (Beta)" onclick="calcRoute()"/>
+    	<p:commandButton value="Back" action="createTopic"/>
     	
     	
     	
