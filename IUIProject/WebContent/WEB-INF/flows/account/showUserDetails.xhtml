@@ -51,13 +51,13 @@
 							<p:outputLabel value="City:" />
 							<h:outputText value="#{showUser.userData.adress.city}" />
 
-							<p:outputLabel  value="Ulica:" />
+							<p:outputLabel  value="Street:" />
 							<h:outputText  value="#{showUser.userData.adress.street}" />
 
-							<p:outputLabel  value="Kod pocztowy:" />
+							<p:outputLabel  value="Postal code:" />
 							<h:outputText  value="#{showUser.userData.adress.postCode}" />
 
-							<p:outputLabel  value="Numer:" />
+							<p:outputLabel  value="Number:" />
 							<h:outputText  value="#{showUser.userData.adress.numberPos}" />
 							
 							
@@ -96,10 +96,10 @@
 								<h:outputText value="#{topic.category}" />
 							</p:column>
 
-							<p:column width="200" headerText="Miasto">
+							<p:column width="200" headerText="City">
 								<h:outputText value="#{topic.adress.city}" />
 							</p:column>
-							<p:column width="200" headerText="Data">
+							<p:column width="200" headerText="Date">
 								<h:outputText value="#{topicService.translateDate(topic)}" />
 							</p:column>
 						</p:dataTable>

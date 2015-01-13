@@ -45,3 +45,23 @@ insert into apptopiccategory (id,name) values (6,'Sport');
 insert into apptopiccategory (id,name) values (7,'Kultura');
 insert into apptopiccategory (id,name) values (8,'Sztuka');
 insert into apptopiccategory (id,name) values (9,'Inne');
+
+insert into apphobbies (id,name) values (1,'Games');
+insert into apphobbies (id,name) values (2,'Movies');
+insert into apphobbies (id,name) values (3,'Food');
+insert into apphobbies (id,name) values (4,'Shoping');
+insert into apphobbies (id,name) values (5,'Music');
+insert into apphobbies (id,name) values (6,'Sport');
+insert into apphobbies (id,name) values (7,'Culture');
+insert into apphobbies (id,name) values (8,'Art');
+insert into apphobbies (id,name) values (9,'Others');
+
+insert into apptopiccategory (id,name) values (1,'Games');
+insert into apptopiccategory (id,name) values (2,'Movies');
+insert into apptopiccategory (id,name) values (3,'Food');
+insert into apptopiccategory (id,name) values (4,'Shoping');
+insert into apptopiccategory (id,name) values (5,'Music');
+insert into apptopiccategory (id,name) values (6,'Sport');
+insert into apptopiccategory (id,name) values (7,'Culture');
+insert into apptopiccategory (id,name) values (8,'Art');
+insert into apptopiccategory (id,name) values (9,'Others');

@@ -14,7 +14,7 @@
 						
 	</ui:define>
 	<ui:define name="header">
-		<h:outputText value="Strona główna" />
+		<h:outputText value="Main Page" />
 	</ui:define>
 
 	
@@ -150,7 +150,7 @@
 				<h:outputText value="#{userL.userData.adress.city}" />
 			</p:column>
 
-			<p:column  width="200" headerText="Polubiony?">
+			<p:column  width="200" headerText="Favorite?">
 				<p:graphicImage rendered="#{!userService.allowToFavoriteUser(userL, flowScope.user)}" width="16px" height="16px" value="#{resource['images:accept-icon.gif']}"/>
 			</p:column>
 		</p:dataTable>
