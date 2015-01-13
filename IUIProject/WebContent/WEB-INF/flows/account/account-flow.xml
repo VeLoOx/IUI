@@ -96,7 +96,7 @@
 		</transition>
 
 		<transition on="goToMainPage" to="mainHome" />
-		<transition on="goToHome" to="home" />
+		<transition on="goToMyAccount" to="home" />
 
 
 
@@ -118,6 +118,7 @@
 			<set name="adressTopic" value="topicService.getNewAdress()"></set>
 		</on-entry>
 		<transition on="goToSearch" to="search" />
+		<transition on="goToMyAccount" to="home" />
 	</view-state>
 
 	<view-state id="createTopic" view="createTopic.xhtml">
@@ -157,7 +158,7 @@
 			<evaluate expression="topicService.addRate(showTopic,rate,flowScope.user)" />
 		</transition>
 		<transition on="goToMainPage" to="mainHome" />
-		<transition on="goToHome" to="home" />
+		<transition on="goToMyAccount" to="home" />
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>

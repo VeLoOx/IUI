@@ -154,7 +154,7 @@
 								</p:column>
 
 								<p:column width="200" headerText="Favorite?">
-									<h:outputText value="polubiony?" />
+									<p:graphicImage rendered="#{!userService.allowToFavoriteUser(userL, flowScope.user)}" width="16px" height="16px" value="#{resource['images:accept-icon.gif']}"/>
 								</p:column>
 							</p:dataTable>
 
