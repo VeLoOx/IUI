@@ -40,7 +40,7 @@
 			<evaluate expression="topicService.createMarker()"></evaluate>
 		</transition>
 		<transition on="goToMainPage" to="mainHome" />
-		<transition on="goToHome" to="home" />
+		<transition on="goToMyAccount" to="home" />
 		<transition on="goToMap" to="map" />
 		<transition on="goToSearch" to="search" />
 		<transition on="createTopic" to="createTopic">
@@ -65,7 +65,7 @@
 		
 		<transition on="goToSearch" to="search" />
 		<transition on="goToMainPage" to="mainHome" />
-		<transition on="goToHome" to="home" />
+		<transition on="goToMyAccount" to="home" />
 		<transition on="goToMap" to="map" />
 	</view-state>
 
@@ -133,7 +133,7 @@
 				expression="topicService.addTopic(newTopic,flowScope.user, adressTopic)" />
 		</transition>
 		<transition on="goToMainPage" to="mainHome" />
-		<transition on="goToHome" to="home" />
+		<transition on="goToMyAccount" to="home" />
 		<transition on="createTopic" to="createTopic">
 			<evaluate expression="topicService.createMarker()" />
 		</transition>
